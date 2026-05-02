@@ -58,7 +58,7 @@ function Counter({ label, target, suffix }: { label: string; target: number; suf
       <p className="text-sm tracking-wider opacity-70 mb-3">{label}</p>
       <p className="font-display font-black text-5xl md:text-6xl">
         {n.toLocaleString()}
-        <span className="text-[#0a0a0a] ml-1">{suffix}</span>
+        <span className="text-white/50 ml-1">{suffix}</span>
       </p>
     </div>
   );

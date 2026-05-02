@@ -2,25 +2,26 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import AboutStats from "@/components/AboutStats";
 import { Store, Laptop, Tools } from "@/components/icons";
+import FlagBadge from "@/components/FlagBadge";
 
 export const metadata: Metadata = {
   title: "회사 소개 · 우리투컷 | 포토부스·포토키오스크 제작·대여",
   description: "포토부스·포토카드·게임·DID 키오스크의 새로운 기준 우리투컷",
 };
 
-const COUNTRIES = [
-  ["🇦🇺", "Australia"], ["🇦🇹", "Austria"], ["🇧🇪", "Belgium"], ["🇧🇷", "Brazil"],
-  ["🇧🇬", "Bulgaria"], ["🇨🇦", "Canada"], ["🇭🇷", "Croatia"], ["🇨🇾", "Cyprus"],
-  ["🇨🇿", "Czech Republic"], ["🇩🇰", "Denmark"], ["🇪🇪", "Estonia"], ["🇫🇮", "Finland"],
-  ["🇫🇷", "France"], ["🇩🇪", "Germany"], ["🇬🇮", "Gibraltar"], ["🇬🇷", "Greece"],
-  ["🇭🇰", "Hong Kong"], ["🇭🇺", "Hungary"], ["🇮🇳", "India"], ["🇮🇩", "Indonesia"],
-  ["🇮🇪", "Ireland"], ["🇮🇹", "Italy"], ["🇯🇵", "Japan"], ["🇱🇻", "Latvia"],
-  ["🇱🇮", "Liechtenstein"], ["🇱🇹", "Lithuania"], ["🇱🇺", "Luxembourg"], ["🇲🇾", "Malaysia"],
-  ["🇲🇹", "Malta"], ["🇲🇽", "Mexico"], ["🇳🇱", "Netherlands"], ["🇳🇿", "New Zealand"],
-  ["🇳🇴", "Norway"], ["🇵🇱", "Poland"], ["🇵🇹", "Portugal"], ["🇷🇴", "Romania"],
-  ["🇸🇬", "Singapore"], ["🇸🇰", "Slovakia"], ["🇸🇮", "Slovenia"], ["🇪🇸", "Spain"],
-  ["🇸🇪", "Sweden"], ["🇨🇭", "Switzerland"], ["🇹🇭", "Thailand"], ["🇦🇪", "United Arab Emirates"],
-  ["🇬🇧", "United Kingdom"], ["🇺🇸", "United States"],
+const COUNTRIES: { code: string; name: string }[] = [
+  { code: "AU", name: "Australia" }, { code: "AT", name: "Austria" }, { code: "BE", name: "Belgium" }, { code: "BR", name: "Brazil" },
+  { code: "BG", name: "Bulgaria" }, { code: "CA", name: "Canada" }, { code: "HR", name: "Croatia" }, { code: "CY", name: "Cyprus" },
+  { code: "CZ", name: "Czech Republic" }, { code: "DK", name: "Denmark" }, { code: "EE", name: "Estonia" }, { code: "FI", name: "Finland" },
+  { code: "FR", name: "France" }, { code: "DE", name: "Germany" }, { code: "GI", name: "Gibraltar" }, { code: "GR", name: "Greece" },
+  { code: "HK", name: "Hong Kong" }, { code: "HU", name: "Hungary" }, { code: "IN", name: "India" }, { code: "ID", name: "Indonesia" },
+  { code: "IE", name: "Ireland" }, { code: "IT", name: "Italy" }, { code: "JP", name: "Japan" }, { code: "LV", name: "Latvia" },
+  { code: "LI", name: "Liechtenstein" }, { code: "LT", name: "Lithuania" }, { code: "LU", name: "Luxembourg" }, { code: "MY", name: "Malaysia" },
+  { code: "MT", name: "Malta" }, { code: "MX", name: "Mexico" }, { code: "NL", name: "Netherlands" }, { code: "NZ", name: "New Zealand" },
+  { code: "NO", name: "Norway" }, { code: "PL", name: "Poland" }, { code: "PT", name: "Portugal" }, { code: "RO", name: "Romania" },
+  { code: "SG", name: "Singapore" }, { code: "SK", name: "Slovakia" }, { code: "SI", name: "Slovenia" }, { code: "ES", name: "Spain" },
+  { code: "SE", name: "Sweden" }, { code: "CH", name: "Switzerland" }, { code: "TH", name: "Thailand" }, { code: "AE", name: "United Arab Emirates" },
+  { code: "GB", name: "United Kingdom" }, { code: "US", name: "United States" },
 ];
 
 const CERTS = [
@@ -146,10 +147,10 @@ export default function AboutPage() {
           </p>
 
           <div className="mt-12 rounded-3xl border border-neutral-200 p-8 md:p-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-4">
-            {COUNTRIES.map(([flag, name]) => (
-              <div key={name} className="flex items-center gap-3 text-sm">
-                <span className="text-xl">{flag}</span>
-                <span className="text-neutral-700">{name}</span>
+            {COUNTRIES.map((c) => (
+              <div key={c.name} className="flex items-center gap-3 text-sm">
+                <FlagBadge code={c.code} className="w-6 h-4" />
+                <span className="text-neutral-700">{c.name}</span>
               </div>
             ))}
           </div>

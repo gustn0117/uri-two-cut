@@ -76,8 +76,8 @@ export default function Header() {
               <div key={n.href} className="relative group h-full flex items-center">
                 <Link
                   href={n.href}
-                  className={`hover:text-[#0a0a0a] transition-colors ${
-                    active ? "text-[#0a0a0a]" : ""
+                  className={`hover:opacity-70 transition-opacity ${
+                    active ? "font-bold" : ""
                   }`}
                 >
                   {n.label}
@@ -105,8 +105,8 @@ export default function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-5 text-sm">
-          <Link href="#login" className="hover:text-[#0a0a0a]">Login</Link>
-          <Link href="#register" className="hover:text-[#0a0a0a]">Register</Link>
+          <Link href="#login" className="hover:opacity-70 transition-opacity">Login</Link>
+          <Link href="#register" className="hover:opacity-70 transition-opacity">Register</Link>
           <span aria-hidden className="w-px h-4 bg-current opacity-30" />
           <button aria-label="Language" className="inline-flex items-center gap-1">
             <Globe className="w-4 h-4" />
@@ -146,8 +146,9 @@ export default function Header() {
                   <ul className="pl-4 pb-2 grid gap-1 text-sm text-neutral-600">
                     {n.children.map((c) => (
                       <li key={c.href}>
-                        <Link href={c.href} className="block py-1.5">
-                          ㄴ {c.label}
+                        <Link href={c.href} className="flex items-center gap-2 py-1.5">
+                          <svg className="w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4v10a4 4 0 0 0 4 4h12" /><path d="M16 14l4 4-4 4" /></svg>
+                          {c.label}
                         </Link>
                       </li>
                     ))}

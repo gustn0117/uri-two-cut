@@ -33,13 +33,13 @@ export default function Hero() {
         <div className="mt-12 flex flex-wrap gap-3">
           <a
             href="#rental-inquiry"
-            className="px-7 py-3.5 rounded-full bg-[#0a0a0a] hover:bg-[#262626] text-white font-semibold transition-colors"
+            className="px-7 py-3.5 rounded-full bg-white text-[#0a0a0a] hover:bg-neutral-100 font-semibold transition-colors"
           >
             렌탈 문의하기
           </a>
           <a
             href="#purchase-inquiry"
-            className="px-7 py-3.5 rounded-full border border-white/40 hover:bg-white hover:text-neutral-900 transition-colors font-semibold backdrop-blur-sm"
+            className="px-7 py-3.5 rounded-full border border-white/50 hover:bg-white/10 transition-colors font-semibold backdrop-blur-sm"
           >
             구매 상담받기
           </a>
