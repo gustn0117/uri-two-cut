@@ -53,7 +53,7 @@ export default function RentalHubPage() {
               style={{ background: it.color }}
             >
               <div>
-                <span className="inline-block text-xs tracking-widest bg-white/15 px-3 py-1 rounded-full">
+                <span className="inline-block text-xs tracking-widest border border-white/40 px-3 py-1 rounded-full">
                   {it.chip}
                 </span>
                 <h3 className="mt-4 font-display font-bold text-2xl">{it.title}</h3>

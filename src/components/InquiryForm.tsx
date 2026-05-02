@@ -26,8 +26,12 @@ export default function InquiryForm({
   return (
     <section className="py-24 bg-white">
       <div className="mx-auto max-w-[900px] px-6 lg:px-10">
-        <p className="text-xs tracking-[0.4em] text-[#0a0a0a] font-bold text-center">OUR CONTACT</p>
-        <h2 className="mt-5 font-display font-black text-3xl md:text-5xl text-center">{title}</h2>
+        {title && (
+          <>
+            <p className="text-xs tracking-[0.4em] text-[#0a0a0a] font-bold text-center">OUR CONTACT</p>
+            <h2 className="mt-5 font-display font-black text-3xl md:text-5xl text-center">{title}</h2>
+          </>
+        )}
 
         {sent ? (
           <div className="mt-12 rounded-3xl border border-neutral-100 bg-neutral-50 p-12 text-center">

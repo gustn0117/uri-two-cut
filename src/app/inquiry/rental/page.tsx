@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageHero from "@/components/PageHero";
 import InquiryForm from "@/components/InquiryForm";
 
 export const metadata: Metadata = {
@@ -8,9 +9,15 @@ export const metadata: Metadata = {
 
 export default function RentalInquiryPage() {
   return (
-    <main className="pt-20">
-      <InquiryForm
+    <main>
+      <PageHero
+        eyebrow="RENTAL INQUIRY"
         title="포토부스 렌탈문의"
+        subtitle="행사 일정·장소·예산을 알려주시면 맞춤 견적을 보내드립니다."
+        breadcrumb={[{ label: "렌탈문의" }]}
+      />
+      <InquiryForm
+        title=""
         fields={[
           { type: "text", name: "company", label: "업체명/담당자명", required: true },
           { type: "email", name: "email", label: "이메일주소", required: true },

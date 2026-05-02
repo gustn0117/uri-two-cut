@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageHero from "@/components/PageHero";
 import InquiryForm from "@/components/InquiryForm";
 
 export const metadata: Metadata = {
@@ -8,9 +9,15 @@ export const metadata: Metadata = {
 
 export default function BuyInquiryPage() {
   return (
-    <main className="pt-20">
-      <InquiryForm
+    <main>
+      <PageHero
+        eyebrow="PURCHASE INQUIRY"
         title="포토부스 구매문의"
+        subtitle="용도·예산·일정·설치 환경을 알려주시면 맞춤 견적과 일정 상담을 보내드립니다."
+        breadcrumb={[{ label: "구매문의" }]}
+      />
+      <InquiryForm
+        title=""
         fields={[
           { type: "text", name: "company", label: "업체명/담당자명", required: true },
           { type: "email", name: "email", label: "이메일주소", required: true },

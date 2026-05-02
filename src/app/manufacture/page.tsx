@@ -45,7 +45,7 @@ export default function ManufactureHubPage() {
               className="group relative rounded-3xl overflow-hidden p-12 min-h-[360px] flex flex-col justify-between text-white transition-transform hover:-translate-y-1.5 shadow-lg"
               style={{ background: it.color }}
             >
-              <span className="inline-block w-fit text-xs tracking-widest bg-white/15 px-3 py-1 rounded-full">
+              <span className="inline-block w-fit text-xs tracking-widest border border-white/40 px-3 py-1 rounded-full">
                 {it.chip}
               </span>
               <div>
