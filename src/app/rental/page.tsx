@@ -27,7 +27,7 @@ const ITEMS = [
     href: "/rental/game",
     title: "게임키오스크 렌탈",
     desc: "룰렛·미니게임 등 인터랙티브 콘텐츠로 참여율을 끌어올립니다.",
-    color: "#0a0a0a",
+    color: "#404040",
     chip: "GAME",
   },
 ];
@@ -53,7 +53,7 @@ export default function RentalHubPage() {
               style={{ background: it.color }}
             >
               <div>
-                <span className="inline-block text-xs tracking-widest border border-white/40 px-3 py-1 rounded-full">
+                <span className="inline-block text-xs tracking-[0.3em] font-bold opacity-80">
                   {it.chip}
                 </span>
                 <h3 className="mt-4 font-display font-bold text-2xl">{it.title}</h3>

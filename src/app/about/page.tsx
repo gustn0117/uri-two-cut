@@ -170,11 +170,11 @@ export default function AboutPage() {
           }}
         />
         <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10 text-center">
-          <p className="font-display tracking-[0.4em] text-sm text-[#737373] font-bold">OUR PROJECT</p>
+          <p className="font-display tracking-[0.4em] text-sm text-white/70 font-bold">OUR PROJECT</p>
           <h2 className="mt-5 font-display font-black text-3xl md:text-4xl lg:text-5xl leading-tight">
             우리투컷과 함께한
             <br />
-            프로젝트 <span className="text-[#737373]">5000+</span>건의 노하우를 만나보세요.
+            프로젝트 <span className="text-white/70">5000+</span>건의 노하우를 만나보세요.
           </h2>
         </div>
         <AboutStats />
@@ -182,7 +182,7 @@ export default function AboutPage() {
           <div className="border-t border-white/10 pt-10 text-center">
             <p className="font-display font-bold text-lg md:text-2xl tracking-wide opacity-90">
               PHOTO, DESIGN, EXPERIENCE!{" "}
-              <span className="text-[#737373]">URI TWO CUT SELF PHOTO STUDIO</span>
+              <span className="text-white/70">URI TWO CUT SELF PHOTO STUDIO</span>
             </p>
           </div>
         </div>

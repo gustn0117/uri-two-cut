@@ -13,14 +13,14 @@ const ITEMS = [
     href: "/manufacture/booth",
     title: "포토부스 제작·구매",
     desc: "스튜디오·매장·라운지 운영을 위한 자체 보유용 포토부스 제작·구매.",
-    color: "#0a0a0a",
+    color: "#171717",
     chip: "BOOTH",
   },
   {
     href: "/manufacture/card",
     title: "포토카드 제작·구매",
     desc: "굿즈샵·팝업스토어 등에서 운영 가능한 포토카드 키오스크 구매.",
-    color: "#262626",
+    color: "#404040",
     chip: "CARD",
   },
 ];
@@ -45,7 +45,7 @@ export default function ManufactureHubPage() {
               className="group relative rounded-3xl overflow-hidden p-12 min-h-[360px] flex flex-col justify-between text-white transition-transform hover:-translate-y-1.5 shadow-lg"
               style={{ background: it.color }}
             >
-              <span className="inline-block w-fit text-xs tracking-widest border border-white/40 px-3 py-1 rounded-full">
+              <span className="inline-block w-fit text-xs tracking-[0.3em] font-bold opacity-80">
                 {it.chip}
               </span>
               <div>
