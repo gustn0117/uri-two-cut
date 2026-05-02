@@ -102,7 +102,7 @@ export default function RentalGamePage() {
           <TabletVisual bg="#0a0a0a">
             <div className="p-8 text-center w-full">
               <div className="font-display font-black text-2xl text-[#0a0a0a]">SPIN!</div>
-              <div className="mt-4 mx-auto w-40 h-40 rounded-full bg-gradient-conic from-yellow-300 via-pink-400 to-purple-500" style={{ background: "conic-gradient(#fde047 0 25%, #fda4af 25% 50%, #737373 50% 75%, #ffffff 75% 100%)" }} />
+              <div className="mt-4 mx-auto w-40 h-40 rounded-full" style={{ background: "conic-gradient(#fde047 0 25%, #fda4af 25% 50%, #737373 50% 75%, #404040 75% 100%)" }} />
               <p className="mt-4 text-xs text-neutral-500">룰렛 미니게임</p>
             </div>
           </TabletVisual>

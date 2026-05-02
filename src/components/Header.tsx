@@ -135,7 +135,7 @@ export default function Header() {
       </div>
 
       {open && (
-        <div className="lg:hidden bg-white border-t border-neutral-100 max-h-[80vh] overflow-y-auto">
+        <div className="lg:hidden bg-white text-neutral-900 border-t border-neutral-100 max-h-[80vh] overflow-y-auto">
           <ul className="px-6 py-4 grid gap-1 text-base">
             {NAV.map((n) => (
               <li key={n.href} className="border-b border-neutral-100 last:border-0">
