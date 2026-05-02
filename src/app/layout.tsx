@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import FloatingChat from "@/components/FloatingChat";
 
 export const metadata: Metadata = {
   title: "포토부스 렌탈, 제작 - 우리투컷",
@@ -29,7 +28,6 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
-        <FloatingChat />
       </body>
     </html>
   );

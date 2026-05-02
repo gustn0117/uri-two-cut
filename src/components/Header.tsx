@@ -61,10 +61,7 @@ export default function Header() {
       }`}
     >
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10 h-20 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 shrink-0">
-          <span className="grid place-items-center w-9 h-9 rounded-lg bg-[#1A6DFF] text-white font-display font-bold">
-            2
-          </span>
+        <Link href="/" className="flex items-center shrink-0">
           <span className="flex flex-col leading-none">
             <span className="text-[10px] tracking-[0.2em] opacity-70">SELF PHOTO STUDIO</span>
             <span className="text-lg font-display font-bold">우리투컷</span>
