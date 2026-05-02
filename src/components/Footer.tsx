@@ -6,10 +6,7 @@ export default function Footer() {
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10 py-20">
         <div className="grid lg:grid-cols-3 gap-12">
           <div>
-            <Link href="/" className="flex items-center gap-3 mb-5">
-              <span className="grid place-items-center w-10 h-10 rounded-lg bg-[#1A6DFF] font-display font-bold">
-                2
-              </span>
+            <Link href="/" className="flex items-center mb-5">
               <span className="font-display font-bold text-xl">우리투컷</span>
             </Link>
             <p className="text-sm opacity-70 leading-relaxed max-w-xs">
@@ -25,7 +22,6 @@ export default function Footer() {
                 <li><Link href="/about" className="hover:opacity-100">회사소개</Link></li>
                 <li><Link href="/rental" className="hover:opacity-100">행사렌탈</Link></li>
                 <li><Link href="/manufacture" className="hover:opacity-100">제작구매</Link></li>
-                <li><Link href="/portfolio" className="hover:opacity-100">설치사례</Link></li>
               </ul>
             </div>
             <div>
