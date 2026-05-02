@@ -154,12 +154,14 @@ export default function InquiryForm({
               </label>
             </div>
 
-            <button
-              type="submit"
-              className="h-14 rounded-md bg-[#0a0a0a] hover:bg-[#262626] text-white font-bold text-lg transition w-full md:w-auto md:px-12 md:justify-self-center"
-            >
-              문의 보내기
-            </button>
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                className="h-14 rounded-md bg-[#0a0a0a] hover:bg-[#262626] text-white font-bold text-lg transition w-full md:w-auto md:px-12"
+              >
+                문의 보내기
+              </button>
+            </div>
           </form>
         )}
       </div>
