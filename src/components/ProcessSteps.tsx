@@ -41,19 +41,19 @@ export default function ProcessSteps({
   const heading = title ?? (variant === "rental" ? "렌탈 프로세스." : "제작 프로세스.");
 
   return (
-    <section className="py-24 lg:py-32" style={{ background: "#f5f3ff" }}>
+    <section className="py-24 lg:py-32" style={{ background: "#f5f5f5" }}>
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="text-center mb-16">
-          <p className="font-display tracking-[0.4em] text-sm text-[#7c3aed] font-bold">OUR PROCESS</p>
+          <p className="font-display tracking-[0.4em] text-sm text-[#0a0a0a] font-bold">OUR PROCESS</p>
           <h2 className="mt-4 font-display font-black text-4xl md:text-5xl">{heading}</h2>
         </div>
         <ol className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {steps.map((s) => (
             <li key={s.n} className="text-center">
-              <div className="mx-auto mb-5 w-28 h-28 rounded-full bg-white grid place-items-center shadow-md ring-2 ring-[#7c3aed]/20 text-[#7c3aed]">
+              <div className="mx-auto mb-5 w-28 h-28 rounded-full bg-white grid place-items-center shadow-md ring-2 ring-[#0a0a0a]/20 text-[#0a0a0a]">
                 <s.Icon className="w-12 h-12" />
               </div>
-              <p className="text-xs tracking-widest text-[#7c3aed] font-bold">{s.n}</p>
+              <p className="text-xs tracking-widest text-[#0a0a0a] font-bold">{s.n}</p>
               <p className="mt-2 font-display font-bold text-lg">{s.title}</p>
               <p className="mt-3 text-xs text-neutral-600 leading-relaxed whitespace-pre-line">
                 {s.desc}

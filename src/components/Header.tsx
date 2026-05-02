@@ -76,8 +76,8 @@ export default function Header() {
               <div key={n.href} className="relative group h-full flex items-center">
                 <Link
                   href={n.href}
-                  className={`hover:text-[#1A6DFF] transition-colors ${
-                    active ? "text-[#1A6DFF]" : ""
+                  className={`hover:text-[#0a0a0a] transition-colors ${
+                    active ? "text-[#0a0a0a]" : ""
                   }`}
                 >
                   {n.label}
@@ -89,8 +89,8 @@ export default function Header() {
                         <Link
                           key={c.href}
                           href={c.href}
-                          className={`block px-5 py-2.5 text-sm hover:bg-neutral-50 hover:text-[#1A6DFF] ${
-                            pathname === c.href ? "text-[#1A6DFF] font-semibold" : ""
+                          className={`block px-5 py-2.5 text-sm hover:bg-neutral-50 hover:text-[#0a0a0a] ${
+                            pathname === c.href ? "text-[#0a0a0a] font-semibold" : ""
                           }`}
                         >
                           {c.label}
@@ -105,8 +105,8 @@ export default function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-5 text-sm">
-          <Link href="#login" className="hover:text-[#1A6DFF]">Login</Link>
-          <Link href="#register" className="hover:text-[#1A6DFF]">Register</Link>
+          <Link href="#login" className="hover:text-[#0a0a0a]">Login</Link>
+          <Link href="#register" className="hover:text-[#0a0a0a]">Register</Link>
           <span aria-hidden className="w-px h-4 bg-current opacity-30" />
           <button aria-label="Language" className="inline-flex items-center gap-1">
             <Globe className="w-4 h-4" />

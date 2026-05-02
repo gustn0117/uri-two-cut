@@ -15,7 +15,7 @@ export default function CtaBar({
   return (
     <section
       className="py-20 text-white"
-      style={{ background: "linear-gradient(120deg,#0b1531 0%,#1A6DFF 100%)" }}
+      style={{ background: "linear-gradient(120deg, #0a0a0a 0%, #262626 100%)" }}
     >
       <div className="mx-auto max-w-[1100px] px-6 lg:px-10 grid md:grid-cols-2 gap-8 items-center">
         <div>
@@ -25,7 +25,7 @@ export default function CtaBar({
         <div className="flex flex-wrap gap-3 md:justify-end">
           <Link
             href={primary.href}
-            className="px-7 py-3.5 rounded-full bg-white text-[#1A6DFF] font-semibold hover:bg-neutral-100"
+            className="px-7 py-3.5 rounded-full bg-white text-[#0a0a0a] font-semibold hover:bg-neutral-100"
           >
             {primary.label}
           </Link>

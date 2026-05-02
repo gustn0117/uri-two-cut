@@ -8,11 +8,14 @@ type Props = {
   variant?: "blue" | "dark" | "purple" | "green";
 };
 
+const MONO_GRADIENT =
+  "linear-gradient(120deg, #0a0a0a 0%, #1f1f1f 60%, #404040 120%)";
+
 const VARIANTS: Record<NonNullable<Props["variant"]>, string> = {
-  blue: "linear-gradient(120deg, #0b2461 0%, #1A6DFF 60%, #4f9bff 120%)",
-  dark: "linear-gradient(120deg, #0a0a0a 0%, #1f1f1f 60%, #3f3f3f 120%)",
-  purple: "linear-gradient(120deg, #2e1065 0%, #7c3aed 60%, #a78bfa 120%)",
-  green: "linear-gradient(120deg, #14532d 0%, #16a34a 60%, #4ade80 120%)",
+  blue: MONO_GRADIENT,
+  dark: MONO_GRADIENT,
+  purple: MONO_GRADIENT,
+  green: MONO_GRADIENT,
 };
 
 export default function PageHero({

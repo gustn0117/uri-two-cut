@@ -17,7 +17,7 @@ export default function ProductSpecs({
     <section className="py-24 lg:py-32 bg-white">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="text-center mb-16">
-          <p className="font-display tracking-[0.4em] text-sm text-[#7c3aed] font-bold">OUR PRODUCT</p>
+          <p className="font-display tracking-[0.4em] text-sm text-[#0a0a0a] font-bold">OUR PRODUCT</p>
           <h2 className="mt-4 font-display font-black text-4xl md:text-5xl">{title}</h2>
         </div>
 
@@ -29,7 +29,7 @@ export default function ProductSpecs({
             >
               <div className="relative aspect-[4/5] bg-white rounded-2xl mb-6 grid place-items-center overflow-hidden">
                 {m.badge && (
-                  <span className="absolute top-4 right-4 w-20 h-20 rounded-full bg-[#7c3aed] text-white text-xs font-bold grid place-items-center text-center leading-tight">
+                  <span className="absolute top-4 right-4 w-20 h-20 rounded-full bg-[#0a0a0a] text-white text-xs font-bold grid place-items-center text-center leading-tight">
                     {m.badge}
                   </span>
                 )}

@@ -37,7 +37,7 @@ export default function Footer() {
 
           <div className="text-sm">
             <p className="font-bold mb-4">CUSTOMER CENTER</p>
-            <p className="font-display font-bold text-3xl text-[#7dd3fc]">1833-7998</p>
+            <p className="font-display font-bold text-3xl text-[#ffffff]">1833-7998</p>
             <p className="opacity-70 mt-2">bs18337998@daum.net</p>
             <p className="opacity-50 text-xs mt-4 leading-relaxed">
               평일 10:00 ~ 18:00 / 점심 12:30 ~ 13:30

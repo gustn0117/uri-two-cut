@@ -20,7 +20,7 @@ export default function ProductFeatures({
     <section className="py-24 lg:py-32 bg-white">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="text-center mb-20">
-          <p className="font-display tracking-[0.4em] text-sm text-[#7c3aed] font-bold">OUR FUNCTION</p>
+          <p className="font-display tracking-[0.4em] text-sm text-[#0a0a0a] font-bold">OUR FUNCTION</p>
           <h2 className="mt-4 font-display font-black text-4xl md:text-5xl">{title}</h2>
           <p className="mt-5 text-neutral-500">{subtitle}</p>
         </div>
@@ -28,7 +28,7 @@ export default function ProductFeatures({
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {FEATURES.map((f, i) => (
             <article key={i} className="text-center">
-              <div className="mx-auto w-28 h-28 rounded-full bg-[#f5f3ff] grid place-items-center text-[#7c3aed] mb-5">
+              <div className="mx-auto w-28 h-28 rounded-full bg-[#f5f5f5] grid place-items-center text-[#0a0a0a] mb-5">
                 <f.Icon className="w-12 h-12" />
               </div>
               <h3 className="font-display font-bold text-base">

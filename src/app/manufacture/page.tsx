@@ -20,7 +20,7 @@ const ITEMS = [
     href: "/manufacture/card",
     title: "포토카드 제작·구매",
     desc: "굿즈샵·팝업스토어 등에서 운영 가능한 포토카드 키오스크 구매.",
-    color: "#16a34a",
+    color: "#262626",
     chip: "CARD",
   },
 ];
@@ -83,7 +83,7 @@ export default function ManufactureHubPage() {
                 key={s.n}
                 className="bg-white rounded-2xl p-5 border border-neutral-100 text-center"
               >
-                <p className="font-display text-[#1A6DFF] font-bold">{s.n}</p>
+                <p className="font-display text-[#0a0a0a] font-bold">{s.n}</p>
                 <p className="mt-2 font-semibold">{s.t}</p>
                 <p className="mt-1 text-xs text-neutral-500">{s.d}</p>
               </li>

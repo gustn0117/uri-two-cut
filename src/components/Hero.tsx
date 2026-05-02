@@ -33,7 +33,7 @@ export default function Hero() {
         <div className="mt-12 flex flex-wrap gap-3">
           <a
             href="#rental-inquiry"
-            className="px-7 py-3.5 rounded-full bg-[#1A6DFF] hover:bg-[#0b56e0] text-white font-semibold transition-colors"
+            className="px-7 py-3.5 rounded-full bg-[#0a0a0a] hover:bg-[#262626] text-white font-semibold transition-colors"
           >
             렌탈 문의하기
           </a>

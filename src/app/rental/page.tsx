@@ -20,14 +20,14 @@ const ITEMS = [
     href: "/rental/card",
     title: "포토카드 렌탈",
     desc: "현장에서 즉석 인쇄되는 브랜드 굿즈형 포토카드 키오스크.",
-    color: "#16a34a",
+    color: "#262626",
     chip: "CARD",
   },
   {
     href: "/rental/game",
     title: "게임키오스크 렌탈",
     desc: "룰렛·미니게임 등 인터랙티브 콘텐츠로 참여율을 끌어올립니다.",
-    color: "#7c3aed",
+    color: "#0a0a0a",
     chip: "GAME",
   },
 ];
@@ -91,7 +91,7 @@ export default function RentalHubPage() {
                 key={s.n}
                 className="bg-white rounded-2xl p-6 border border-neutral-100 text-center"
               >
-                <p className="font-display text-[#1A6DFF] font-bold">{s.n}</p>
+                <p className="font-display text-[#0a0a0a] font-bold">{s.n}</p>
                 <p className="mt-2 font-semibold">{s.t}</p>
                 <p className="mt-1 text-xs text-neutral-500">{s.d}</p>
               </li>

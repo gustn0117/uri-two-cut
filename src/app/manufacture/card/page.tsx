@@ -52,7 +52,7 @@ export default function ManufactureCardPage() {
         className="relative pt-40 pb-32 text-white overflow-hidden"
         style={{
           background:
-            "linear-gradient(120deg,#14532d 0%,#16a34a 60%,#86efac 120%)",
+            "linear-gradient(120deg, #0a0a0a 0%, #1f1f1f 60%, #404040 120%)",
         }}
       >
         <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
@@ -80,7 +80,7 @@ export default function ManufactureCardPage() {
         ctas={[{ label: "카드디자인 바로가기", href: "/inquiry/buy" }]}
         visual={
           <div className="grid grid-cols-3 gap-3 max-w-[480px] mx-auto">
-            {["#fde68a", "#fca5a5", "#a5b4fc", "#bbf7d0", "#fbcfe8", "#fcd34d"].map((c, i) => (
+            {["#ffffff", "#fca5a5", "#a5b4fc", "#bbf7d0", "#fbcfe8", "#fcd34d"].map((c, i) => (
               <div
                 key={i}
                 className="aspect-[3/4] rounded-md shadow-md grid place-items-center"

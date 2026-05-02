@@ -97,7 +97,7 @@ export default function ManufactureBoothPage() {
         visual={
           <TabletVisual>
             <div className="grid grid-cols-3 gap-1 p-3 w-full">
-              {["#1A6DFF", "#fde047", "#7c3aed", "#fda4af", "#34d399", "#f97316"].map((c, i) => (
+              {["#0a0a0a", "#fde047", "#0a0a0a", "#fda4af", "#34d399", "#f97316"].map((c, i) => (
                 <div key={i} className="aspect-[3/4] rounded" style={{ background: c }} />
               ))}
             </div>

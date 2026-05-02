@@ -7,7 +7,7 @@ export default function InquiryCTA() {
       className="py-28 lg:py-36 text-white"
       style={{
         background:
-          "linear-gradient(120deg, #0b1531 0%, #1A6DFF 60%, #7c3aed 120%)",
+          "linear-gradient(120deg, #0a0a0a 0%, #1f1f1f 60%, #404040 120%)",
       }}
     >
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
@@ -16,7 +16,7 @@ export default function InquiryCTA() {
           <h2 className="font-display font-bold text-3xl md:text-5xl leading-tight">
             지금 우리투컷과 함께
             <br />
-            <span className="text-[#fde68a]">브랜드 경험을 시작하세요.</span>
+            <span className="text-[#ffffff]">브랜드 경험을 시작하세요.</span>
           </h2>
           <p className="mt-6 text-lg opacity-85 max-w-lg leading-relaxed">
             행사 일정, 예산, 원하는 콘셉트를 알려주시면 가장 적합한 포토부스 솔루션을 제안해 드립니다.
@@ -56,7 +56,7 @@ export default function InquiryCTA() {
             <Field label="이메일" name="email" type="email" placeholder="hello@brand.com" />
             <div className="sm:col-span-2">
               <label className="block text-sm font-medium mb-2 text-neutral-700">서비스 종류</label>
-              <select className="w-full h-12 px-4 rounded-xl border border-neutral-200 bg-neutral-50 focus:border-[#1A6DFF] focus:bg-white outline-none transition">
+              <select className="w-full h-12 px-4 rounded-xl border border-neutral-200 bg-neutral-50 focus:border-[#0a0a0a] focus:bg-white outline-none transition">
                 <option>포토부스 렌탈</option>
                 <option>포토부스 제작 / 구매</option>
                 <option>포토카드 제작</option>
@@ -69,14 +69,14 @@ export default function InquiryCTA() {
               <textarea
                 rows={4}
                 placeholder="행사 일정, 장소, 예산, 원하시는 디자인 등을 자유롭게 적어주세요."
-                className="w-full p-4 rounded-xl border border-neutral-200 bg-neutral-50 focus:border-[#1A6DFF] focus:bg-white outline-none transition resize-none"
+                className="w-full p-4 rounded-xl border border-neutral-200 bg-neutral-50 focus:border-[#0a0a0a] focus:bg-white outline-none transition resize-none"
               />
             </div>
           </div>
 
           <button
             type="submit"
-            className="mt-6 w-full h-14 rounded-xl bg-[#1A6DFF] hover:bg-[#0b56e0] text-white font-bold text-lg transition"
+            className="mt-6 w-full h-14 rounded-xl bg-[#0a0a0a] hover:bg-[#262626] text-white font-bold text-lg transition"
           >
             무료 견적 받기
           </button>
@@ -106,14 +106,14 @@ function Field({
   return (
     <div>
       <label className="block text-sm font-medium mb-2 text-neutral-700">
-        {label} {required && <span className="text-[#1A6DFF]">*</span>}
+        {label} {required && <span className="text-[#0a0a0a]">*</span>}
       </label>
       <input
         name={name}
         type={type}
         placeholder={placeholder}
         required={required}
-        className="w-full h-12 px-4 rounded-xl border border-neutral-200 bg-neutral-50 focus:border-[#1A6DFF] focus:bg-white outline-none transition"
+        className="w-full h-12 px-4 rounded-xl border border-neutral-200 bg-neutral-50 focus:border-[#0a0a0a] focus:bg-white outline-none transition"
       />
     </div>
   );

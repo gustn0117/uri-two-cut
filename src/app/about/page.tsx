@@ -38,7 +38,7 @@ export default function AboutPage() {
         className="relative pt-40 pb-32 text-white overflow-hidden"
         style={{
           background:
-            "linear-gradient(135deg,#0b3fb8 0%,#1A6DFF 60%,#3a7eff 100%)",
+            "linear-gradient(135deg, #0a0a0a 0%, #1f1f1f 60%, #404040 100%)",
         }}
       >
         <div
@@ -62,7 +62,7 @@ export default function AboutPage() {
       {/* OUR SERVICE */}
       <section className="py-24 lg:py-32 bg-white">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <p className="text-xs tracking-[0.4em] text-[#7c3aed] font-bold">OUR SERVICE</p>
+          <p className="text-xs tracking-[0.4em] text-[#0a0a0a] font-bold">OUR SERVICE</p>
           <h2 className="mt-5 font-display font-black text-4xl md:text-5xl lg:text-6xl leading-[1.15]">
             브랜드를 경험으로, 공간을 자산으로
             <br />
@@ -72,19 +72,19 @@ export default function AboutPage() {
           <div className="mt-20 grid md:grid-cols-3 gap-8">
             {[
               {
-                img: "linear-gradient(135deg,#cbd5e1,#64748b)",
+                img: "linear-gradient(135deg, #404040, #0a0a0a)",
                 Icon: Store,
                 title: "다양한 종류의 부스 및 기계 보유",
                 desc: "전시·행사 맞춤형 키오스크\n다양한 타입의 부스를 직접 제작·보유합니다.",
               },
               {
-                img: "linear-gradient(135deg,#ddd6fe,#a78bfa)",
+                img: "linear-gradient(135deg, #525252, #171717)",
                 Icon: Laptop,
                 title: "자체 프로그램 개발",
                 desc: "AI·필터·기능 등 업체 브랜드에 맞는 커스텀 개발로\n브랜딩 효과를 높입니다.",
               },
               {
-                img: "linear-gradient(135deg,#fef3c7,#fbbf24)",
+                img: "linear-gradient(135deg, #737373, #262626)",
                 Icon: Tools,
                 title: "포토부스 제작부터 관리까지",
                 desc: "랩핑·백월·배경시트지까지 전부 제작해드립니다.",
@@ -108,21 +108,21 @@ export default function AboutPage() {
       </section>
 
       {/* 기술개발 및 안전성 */}
-      <section className="py-24 bg-[#f5f3ff]">
+      <section className="py-24 bg-[#f5f5f5]">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <h2 className="font-display font-black text-3xl md:text-4xl text-[#7c3aed]">
+          <h2 className="font-display font-black text-3xl md:text-4xl text-[#0a0a0a]">
             기술개발 및 안전성
           </h2>
           <p className="mt-5 text-neutral-700 max-w-3xl">
             우리투컷은 엄격한 품질 기준을 적용해 제품의 신뢰성을 높이고,{" "}
-            <strong className="text-[#7c3aed]">까다로운 검증을 통해 전자기기 인증을 통과</strong>
+            <strong className="text-[#0a0a0a]">까다로운 검증을 통해 전자기기 인증을 통과</strong>
             하여 고객 만족을 보장합니다.
           </p>
           <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
             {CERTS.map((c) => (
               <div
                 key={c.name}
-                className="bg-white rounded-2xl p-8 text-center border border-[#7c3aed]/10"
+                className="bg-white rounded-2xl p-8 text-center border border-[#0a0a0a]/10"
               >
                 <div className="font-display font-black text-5xl text-neutral-900">
                   {c.name}
@@ -137,12 +137,12 @@ export default function AboutPage() {
       {/* 국가별 카드결제 모듈 개발 */}
       <section className="py-24 bg-white">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <h2 className="font-display font-black text-3xl md:text-4xl text-[#7c3aed]">
+          <h2 className="font-display font-black text-3xl md:text-4xl text-[#0a0a0a]">
             국가별 카드결제 모듈 개발
           </h2>
           <p className="mt-5 text-neutral-700 max-w-3xl">
             우리투컷은 국가별 결제 플랫폼 구축,{" "}
-            <strong className="text-[#7c3aed]">전세계 46개국의 기업에서 사용 가능</strong> 합니다.
+            <strong className="text-[#0a0a0a]">전세계 46개국의 기업에서 사용 가능</strong> 합니다.
           </p>
 
           <div className="mt-12 rounded-3xl border border-neutral-200 p-8 md:p-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-4">
@@ -169,11 +169,11 @@ export default function AboutPage() {
           }}
         />
         <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10 text-center">
-          <p className="font-display tracking-[0.4em] text-sm text-[#a78bfa] font-bold">OUR PROJECT</p>
+          <p className="font-display tracking-[0.4em] text-sm text-[#737373] font-bold">OUR PROJECT</p>
           <h2 className="mt-5 font-display font-black text-3xl md:text-4xl lg:text-5xl leading-tight">
             우리투컷과 함께한
             <br />
-            프로젝트 <span className="text-[#a78bfa]">5000+</span>건의 노하우를 만나보세요.
+            프로젝트 <span className="text-[#737373]">5000+</span>건의 노하우를 만나보세요.
           </h2>
         </div>
         <AboutStats />
@@ -181,7 +181,7 @@ export default function AboutPage() {
           <div className="border-t border-white/10 pt-10 text-center">
             <p className="font-display font-bold text-lg md:text-2xl tracking-wide opacity-90">
               PHOTO, DESIGN, EXPERIENCE!{" "}
-              <span className="text-[#a78bfa]">URI TWO CUT SELF PHOTO STUDIO</span>
+              <span className="text-[#737373]">URI TWO CUT SELF PHOTO STUDIO</span>
             </p>
           </div>
         </div>
@@ -190,7 +190,7 @@ export default function AboutPage() {
       {/* OUR WORK */}
       <section className="py-24 bg-white">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <p className="font-display tracking-[0.4em] text-sm text-[#7c3aed] font-bold text-right">
+          <p className="font-display tracking-[0.4em] text-sm text-[#0a0a0a] font-bold text-right">
             OUR WORK
           </p>
           <h2 className="mt-4 font-display font-black text-3xl md:text-5xl text-right leading-tight">
@@ -201,12 +201,12 @@ export default function AboutPage() {
 
           <div className="mt-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             {[
-              { c: "#fda4af", t: "코닥" }, { c: "#1f2937", t: "Galaxy AI" },
-              { c: "#fef3c7", t: "PHOTO BOOTH" }, { c: "#7dd3fc", t: "쿠키런" },
-              { c: "#f59e0b", t: "EVENT" }, { c: "#3b82f6", t: "DPlus KIA" },
-              { c: "#0a0a0a", t: "Tik Tok" }, { c: "#1A6DFF", t: "카카오페이" },
-              { c: "#0ea5e9", t: "페스티벌" }, { c: "#dc2626", t: "버버리" },
-              { c: "#ef4444", t: "농심" }, { c: "#1f3a8a", t: "안랩" },
+              { c: "#0a0a0a", t: "코닥" }, { c: "#171717", t: "Galaxy AI" },
+              { c: "#262626", t: "PHOTO BOOTH" }, { c: "#404040", t: "쿠키런" },
+              { c: "#525252", t: "EVENT" }, { c: "#737373", t: "DPlus KIA" },
+              { c: "#0a0a0a", t: "Tik Tok" }, { c: "#262626", t: "카카오페이" },
+              { c: "#171717", t: "페스티벌" }, { c: "#404040", t: "버버리" },
+              { c: "#525252", t: "농심" }, { c: "#171717", t: "안랩" },
             ].map((p, i) => (
               <div
                 key={i}
@@ -223,7 +223,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-[#7c3aed] text-white">
+      <section className="py-20 bg-[#0a0a0a] text-white">
         <div className="mx-auto max-w-[1100px] px-6 lg:px-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <p className="text-xs tracking-[0.4em] opacity-80">CONTACT</p>
@@ -234,7 +234,7 @@ export default function AboutPage() {
           <div className="flex gap-3">
             <Link
               href="/inquiry/rental"
-              className="px-6 py-3 rounded-full bg-white text-[#7c3aed] font-bold"
+              className="px-6 py-3 rounded-full bg-white text-[#0a0a0a] font-bold"
             >
               렌탈 문의
             </Link>

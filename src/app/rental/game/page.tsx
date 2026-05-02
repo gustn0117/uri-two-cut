@@ -33,7 +33,7 @@ export default function RentalGamePage() {
         className="relative pt-40 pb-32 text-white overflow-hidden"
         style={{
           background:
-            "linear-gradient(120deg,#241248 0%,#7c3aed 60%,#c4b5fd 120%)",
+            "linear-gradient(120deg, #0a0a0a 0%, #1f1f1f 60%, #404040 120%)",
         }}
       >
         <div
@@ -61,15 +61,15 @@ export default function RentalGamePage() {
       <ProcessSteps variant="rental" />
 
       {/* OUR CREATOR */}
-      <section className="py-24 bg-[#f5f3ff] text-center">
+      <section className="py-24 bg-[#f5f5f5] text-center">
         <div className="mx-auto max-w-[1100px] px-6 lg:px-10">
-          <p className="font-display tracking-[0.4em] text-sm text-[#7c3aed] font-bold">
+          <p className="font-display tracking-[0.4em] text-sm text-[#0a0a0a] font-bold">
             OUR CREATOR
           </p>
           <h2 className="mt-5 font-display font-black text-4xl md:text-6xl">
             게임 커스터마이즈
             <br />
-            <span className="text-[#7c3aed]">기획 단계부터 함께.</span>
+            <span className="text-[#0a0a0a]">기획 단계부터 함께.</span>
           </h2>
           <p className="mt-6 text-neutral-600 text-lg leading-relaxed">
             즐거움과 참여를 더하는
@@ -86,7 +86,7 @@ export default function RentalGamePage() {
         highlight="랩핑디자인"
         description={"제품 외관에 브랜드 컬러와 메시지를 입혀\n현장에서도 강력한 브랜딩 효과를 누릴 수 있습니다."}
         ctas={[{ label: "랩핑디자인 바로가기", href: "/inquiry/rental" }]}
-        visual={<PaletteVisual colors={["#7c3aed", "#fde047", "#f97316", "#0ea5e9"]} />}
+        visual={<PaletteVisual colors={["#0a0a0a", "#fde047", "#f97316", "#0ea5e9"]} />}
       />
 
       {/* CUSTOMIZATION */}
@@ -99,10 +99,10 @@ export default function RentalGamePage() {
         description={"협력사의 필요를 파악하고 세심하게 분석하여\n전문적인 솔루션을 제공해 드립니다."}
         ctas={[{ label: "커스텀 UI 바로가기", href: "/inquiry/rental" }]}
         visual={
-          <TabletVisual bg="#7c3aed">
+          <TabletVisual bg="#0a0a0a">
             <div className="p-8 text-center w-full">
-              <div className="font-display font-black text-2xl text-[#7c3aed]">SPIN!</div>
-              <div className="mt-4 mx-auto w-40 h-40 rounded-full bg-gradient-conic from-yellow-300 via-pink-400 to-purple-500" style={{ background: "conic-gradient(#fde047 0 25%, #fda4af 25% 50%, #a78bfa 50% 75%, #7dd3fc 75% 100%)" }} />
+              <div className="font-display font-black text-2xl text-[#0a0a0a]">SPIN!</div>
+              <div className="mt-4 mx-auto w-40 h-40 rounded-full bg-gradient-conic from-yellow-300 via-pink-400 to-purple-500" style={{ background: "conic-gradient(#fde047 0 25%, #fda4af 25% 50%, #737373 50% 75%, #ffffff 75% 100%)" }} />
               <p className="mt-4 text-xs text-neutral-500">룰렛 미니게임</p>
             </div>
           </TabletVisual>
@@ -124,7 +124,7 @@ export default function RentalGamePage() {
                 {["룰렛", "뽑기", "퀴즈", "AR"].map((g) => (
                   <button
                     key={g}
-                    className="py-6 rounded-2xl bg-gradient-to-br from-[#7c3aed] to-[#a78bfa] text-white font-bold"
+                    className="py-6 rounded-2xl bg-gradient-to-br from-[#0a0a0a] to-[#737373] text-white font-bold"
                   >
                     {g}
                   </button>

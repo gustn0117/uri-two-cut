@@ -26,12 +26,12 @@ export default function InquiryForm({
   return (
     <section className="py-24 bg-white">
       <div className="mx-auto max-w-[900px] px-6 lg:px-10">
-        <p className="text-xs tracking-[0.4em] text-[#7c3aed] font-bold text-center">OUR CONTACT</p>
+        <p className="text-xs tracking-[0.4em] text-[#0a0a0a] font-bold text-center">OUR CONTACT</p>
         <h2 className="mt-5 font-display font-black text-3xl md:text-5xl text-center">{title}</h2>
 
         {sent ? (
           <div className="mt-12 rounded-3xl border border-neutral-100 bg-neutral-50 p-12 text-center">
-            <svg className="w-16 h-16 mx-auto text-[#1A6DFF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg className="w-16 h-16 mx-auto text-[#0a0a0a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="9" />
               <path d="M8 12l3 3 5-6" />
             </svg>
@@ -63,7 +63,7 @@ export default function InquiryForm({
               >
                 <label className="font-bold text-neutral-900 pt-2.5">
                   {f.label}
-                  {f.required && <span className="text-[#1A6DFF] ml-1">*</span>}
+                  {f.required && <span className="text-[#0a0a0a] ml-1">*</span>}
                 </label>
                 <div>
                   {f.type === "textarea" ? (
@@ -72,7 +72,7 @@ export default function InquiryForm({
                       required={f.required}
                       rows={6}
                       placeholder={f.placeholder}
-                      className="w-full p-4 rounded-md border border-neutral-200 focus:border-[#1A6DFF] outline-none transition resize-none"
+                      className="w-full p-4 rounded-md border border-neutral-200 focus:border-[#0a0a0a] outline-none transition resize-none"
                     />
                   ) : f.type === "phone3" ? (
                     <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr] gap-2 items-center">
@@ -81,7 +81,7 @@ export default function InquiryForm({
                         required={f.required}
                         maxLength={3}
                         type="tel"
-                        className="h-11 px-3 rounded-md border border-neutral-200 focus:border-[#1A6DFF] outline-none text-center"
+                        className="h-11 px-3 rounded-md border border-neutral-200 focus:border-[#0a0a0a] outline-none text-center"
                       />
                       <span>-</span>
                       <input
@@ -89,7 +89,7 @@ export default function InquiryForm({
                         required={f.required}
                         maxLength={4}
                         type="tel"
-                        className="h-11 px-3 rounded-md border border-neutral-200 focus:border-[#1A6DFF] outline-none text-center"
+                        className="h-11 px-3 rounded-md border border-neutral-200 focus:border-[#0a0a0a] outline-none text-center"
                       />
                       <span>-</span>
                       <input
@@ -97,7 +97,7 @@ export default function InquiryForm({
                         required={f.required}
                         maxLength={4}
                         type="tel"
-                        className="h-11 px-3 rounded-md border border-neutral-200 focus:border-[#1A6DFF] outline-none text-center"
+                        className="h-11 px-3 rounded-md border border-neutral-200 focus:border-[#0a0a0a] outline-none text-center"
                       />
                     </div>
                   ) : f.type === "radio" ? (
@@ -109,7 +109,7 @@ export default function InquiryForm({
                             name={f.name}
                             value={o}
                             required={f.required}
-                            className="accent-[#1A6DFF]"
+                            className="accent-[#0a0a0a]"
                           />
                           <span>{o}</span>
                         </label>
@@ -121,7 +121,7 @@ export default function InquiryForm({
                       name={f.name}
                       required={f.required}
                       placeholder={f.placeholder}
-                      className="w-full h-11 px-4 rounded-md border border-neutral-200 focus:border-[#1A6DFF] outline-none transition"
+                      className="w-full h-11 px-4 rounded-md border border-neutral-200 focus:border-[#0a0a0a] outline-none transition"
                     />
                   )}
                 </div>
@@ -144,7 +144,7 @@ export default function InquiryForm({
                   type="checkbox"
                   checked={agreed}
                   onChange={(e) => setAgreed(e.target.checked)}
-                  className="accent-[#1A6DFF]"
+                  className="accent-[#0a0a0a]"
                 />
                 <span className="text-neutral-800 font-bold">위 내용에 동의합니다.</span>
               </label>
@@ -152,7 +152,7 @@ export default function InquiryForm({
 
             <button
               type="submit"
-              className="h-14 rounded-md bg-[#1A6DFF] hover:bg-[#0b56e0] text-white font-bold text-lg transition w-full md:w-auto md:px-12 md:mx-auto"
+              className="h-14 rounded-md bg-[#0a0a0a] hover:bg-[#262626] text-white font-bold text-lg transition w-full md:w-auto md:px-12 md:mx-auto"
             >
               문의 보내기
             </button>

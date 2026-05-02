@@ -53,7 +53,7 @@ export default function RentalBoothPage() {
         className="relative pt-40 pb-32 text-white overflow-hidden"
         style={{
           background:
-            "linear-gradient(120deg,#241248 0%,#5b21b6 60%,#a78bfa 120%)",
+            "linear-gradient(120deg, #0a0a0a 0%, #1f1f1f 60%, #404040 120%)",
         }}
       >
         <div
@@ -82,13 +82,13 @@ export default function RentalBoothPage() {
       <ProductFeatures />
 
       {/* OUR CREATOR */}
-      <section className="py-24 bg-[#f5f3ff] text-center">
+      <section className="py-24 bg-[#f5f5f5] text-center">
         <div className="mx-auto max-w-[1100px] px-6 lg:px-10">
-          <p className="font-display tracking-[0.4em] text-sm text-[#7c3aed] font-bold">
+          <p className="font-display tracking-[0.4em] text-sm text-[#0a0a0a] font-bold">
             OUR CREATOR
           </p>
           <h2 className="mt-5 font-display font-black text-4xl md:text-6xl">
-            우리투컷은 가능합니다<span className="text-[#7c3aed]">.</span>
+            우리투컷은 가능합니다<span className="text-[#0a0a0a]">.</span>
           </h2>
           <p className="mt-6 text-neutral-600 text-lg">
             행사에 감성을 더하는 단 하나의 선택, 우리투컷 포토부스 렌탈
@@ -109,7 +109,7 @@ export default function RentalBoothPage() {
         visual={
           <TabletVisual>
             <div className="grid grid-cols-3 gap-1 p-3 w-full">
-              {["#1A6DFF", "#fde047", "#7c3aed", "#fda4af", "#34d399", "#f97316"].map((c, i) => (
+              {["#0a0a0a", "#fde047", "#0a0a0a", "#fda4af", "#34d399", "#f97316"].map((c, i) => (
                 <div key={i} className="aspect-[3/4] rounded" style={{ background: c }} />
               ))}
             </div>
@@ -190,7 +190,7 @@ export default function RentalBoothPage() {
               { bg: "#dbeafe", label: "원본" },
               { bg: "linear-gradient(135deg,#fde047,#f97316)", label: "오늘의 주인공" },
               { bg: "linear-gradient(135deg,#bbf7d0,#0ea5e9)", label: "여행지" },
-              { bg: "linear-gradient(135deg,#7c3aed,#ec4899)", label: "축제" },
+              { bg: "linear-gradient(135deg,#0a0a0a,#ec4899)", label: "축제" },
             ].map((b, i) => (
               <div
                 key={i}
@@ -217,7 +217,7 @@ export default function RentalBoothPage() {
         visual={
           <TabletVisual bg="#1f1f1f">
             <div className="grid grid-cols-2 w-full h-full">
-              <div style={{ background: "linear-gradient(135deg,#a78bfa,#ec4899)" }} />
+              <div style={{ background: "linear-gradient(135deg,#737373,#ec4899)" }} />
               <div style={{ background: "linear-gradient(135deg,#fde047,#f59e0b)" }} />
             </div>
           </TabletVisual>
@@ -233,7 +233,7 @@ export default function RentalBoothPage() {
         ctas={[{ label: "백월·현수막디자인 바로가기", href: "/inquiry/rental" }]}
         visual={
           <TabletVisual bg="#0ea5e9">
-            <div className="w-full h-full p-6 grid place-items-center" style={{ background: "repeating-linear-gradient(45deg,#1A6DFF,#1A6DFF 20px,#3a7eff 20px,#3a7eff 40px)" }}>
+            <div className="w-full h-full p-6 grid place-items-center" style={{ background: "repeating-linear-gradient(45deg,#0a0a0a,#0a0a0a 20px,#3a7eff 20px,#3a7eff 40px)" }}>
               <div className="text-center text-white">
                 <div className="flex justify-center gap-1 text-yellow-300">
                   {[0, 1, 2, 3].map((i) => (

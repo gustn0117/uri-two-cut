@@ -31,13 +31,13 @@ export default function ImageTextRow({
           }`}
         >
           <div>
-            <p className="text-xs tracking-[0.4em] text-[#7c3aed] font-bold">{eyebrow}</p>
+            <p className="text-xs tracking-[0.4em] text-[#0a0a0a] font-bold">{eyebrow}</p>
             <h2 className="mt-5 font-display font-black text-3xl md:text-4xl lg:text-5xl leading-[1.2]">
               {title}
               {highlight && (
                 <>
                   <br />
-                  <span className="text-[#7c3aed]">{highlight}</span>
+                  <span className="text-[#0a0a0a]">{highlight}</span>
                 </>
               )}
             </h2>
@@ -52,7 +52,7 @@ export default function ImageTextRow({
                     href={c.href}
                     className={`inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition ${
                       i === 0
-                        ? "bg-[#7c3aed] text-white hover:bg-[#6d28d9]"
+                        ? "bg-[#0a0a0a] text-white hover:bg-[#262626]"
                         : "border border-neutral-300 text-neutral-700 hover:bg-neutral-50"
                     }`}
                   >

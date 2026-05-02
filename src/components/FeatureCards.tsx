@@ -44,7 +44,7 @@ const CARDS = [
     Icon: CameraIcon,
   },
   {
-    bg: "#16a34a",
+    bg: "#171717",
     fg: "#ffffff",
     eyebrow: "브랜드에 딱 맞는",
     title: "차별화된 포토카드",
@@ -52,7 +52,7 @@ const CARDS = [
     Icon: CardIcon,
   },
   {
-    bg: "#1A6DFF",
+    bg: "#262626",
     fg: "#ffffff",
     eyebrow: "고객 참여율을 높이는",
     title: "게임 키오스크",
@@ -60,7 +60,7 @@ const CARDS = [
     Icon: GameIcon,
   },
   {
-    bg: "#7c3aed",
+    bg: "#404040",
     fg: "#ffffff",
     eyebrow: "직관적인 정보전달",
     title: "스탠드 키오스크",
@@ -77,7 +77,7 @@ export default function FeatureCards() {
           <h2 className="font-display font-bold text-3xl md:text-5xl lg:text-6xl leading-tight">
             포토부스 · 포토카드 · 게임 · DID
             <br />
-            <span className="text-[#1A6DFF]">키오스크의 새로운 기준</span>
+            <span className="text-[#0a0a0a]">키오스크의 새로운 기준</span>
           </h2>
           <p className="mt-6 text-lg text-neutral-500">브랜드를 경험으로, 공간을 자산으로</p>
         </div>
