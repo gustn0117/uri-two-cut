@@ -60,7 +60,7 @@ function Counter({ label, target }: { label: string; target: number }) {
       <p className="text-sm tracking-widest opacity-80 mb-4">{label}</p>
       <p className="font-display font-black text-6xl md:text-7xl text-white">
         {n.toLocaleString()}
-        <span className="text-[#737373] ml-1">건+</span>
+        <span className="text-white/50 ml-1">건+</span>
       </p>
     </div>
   );
