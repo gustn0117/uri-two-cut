@@ -43,7 +43,7 @@ export default function ManufactureHubPage() {
               key={it.href}
               href={it.href}
               className="group relative rounded-3xl overflow-hidden p-12 min-h-[360px] flex flex-col justify-between text-white transition-transform hover:-translate-y-1.5 shadow-lg"
-              style={{ background: it.color }}
+              style={{ background: it.color, color: "#ffffff" }}
             >
               <span className="inline-block w-fit text-xs tracking-[0.3em] font-bold opacity-80">
                 {it.chip}

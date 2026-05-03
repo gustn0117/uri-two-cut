@@ -50,7 +50,7 @@ export default function RentalHubPage() {
               key={it.href}
               href={it.href}
               className="group relative rounded-3xl overflow-hidden p-10 min-h-[360px] flex flex-col justify-between text-white transition-transform hover:-translate-y-1.5 shadow-lg"
-              style={{ background: it.color }}
+              style={{ background: it.color, color: "#ffffff" }}
             >
               <div>
                 <span className="inline-block text-xs tracking-[0.3em] font-bold opacity-80">
