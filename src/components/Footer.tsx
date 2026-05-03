@@ -37,8 +37,9 @@ export default function Footer() {
 
           <div className="text-sm">
             <p className="font-bold mb-4">CUSTOMER CENTER</p>
-            <p className="font-display font-bold text-3xl text-[#ffffff]">1833-7998</p>
-            <p className="opacity-70 mt-2">bs18337998@daum.net</p>
+            <p className="font-display font-bold text-3xl text-[#ffffff]">1234-5678</p>
+            <p className="opacity-70 mt-2">contact@example.com</p>
+            <p className="opacity-70 mt-2">서울특별시 OO구 OO로 123, 4층</p>
             <p className="opacity-50 text-xs mt-4 leading-relaxed">
               평일 10:00 ~ 18:00 / 점심 12:30 ~ 13:30
               <br />주말 및 공휴일 휴무

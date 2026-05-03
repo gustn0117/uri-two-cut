@@ -24,18 +24,18 @@ export default function InquiryCTA() {
 
           <div className="mt-10 grid sm:grid-cols-2 gap-5 max-w-lg">
             <a
-              href="tel:1833-7998"
+              href="tel:1234-5678"
               className="rounded-2xl border border-white/30 backdrop-blur px-6 py-5 hover:bg-white/10 transition"
             >
               <p className="text-xs tracking-widest opacity-80">전화 문의</p>
-              <p className="font-display font-bold text-2xl mt-2">1833-7998</p>
+              <p className="font-display font-bold text-2xl mt-2">1234-5678</p>
             </a>
             <a
-              href="mailto:bs18337998@daum.net"
+              href="mailto:contact@example.com"
               className="rounded-2xl border border-white/30 backdrop-blur px-6 py-5 hover:bg-white/10 transition"
             >
               <p className="text-xs tracking-widest opacity-80">이메일</p>
-              <p className="font-bold text-base mt-2 break-all">bs18337998@daum.net</p>
+              <p className="font-bold text-base mt-2 break-all">contact@example.com</p>
             </a>
           </div>
         </div>

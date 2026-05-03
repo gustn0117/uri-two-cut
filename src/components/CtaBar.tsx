@@ -37,11 +37,11 @@ export default function CtaBar({
             {secondary.label}
           </Link>
           <a
-            href="tel:1833-7998"
+            href="tel:1234-5678"
             className="px-7 py-3.5 rounded-full border border-white/40 hover:bg-white/10 font-display font-bold inline-flex items-center gap-2"
           >
             <Phone className="w-5 h-5" />
-            1833-7998
+            1234-5678
           </a>
         </div>
       </div>
