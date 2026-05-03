@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Search, Globe, ChevronDown } from "@/components/icons";
 
 type NavItem = {
   label: string;
@@ -103,16 +102,6 @@ export default function Header() {
             );
           })}
         </nav>
-
-        <div className="hidden lg:flex items-center gap-5 text-sm">
-          <button aria-label="Language" className="inline-flex items-center gap-1">
-            <Globe className="w-4 h-4" />
-            <ChevronDown className="w-3 h-3" />
-          </button>
-          <button aria-label="Search">
-            <Search className="w-5 h-5" />
-          </button>
-        </div>
 
         <button
           aria-label="Menu"
