@@ -13,15 +13,17 @@ type Field = {
   placeholder?: string;
 };
 
-export default function InquiryForm({
-  title,
-  fields,
-}: {
+type Props = {
   title: string;
   fields: Field[];
-}) {
+  inquiryType: "rental" | "buy";
+};
+
+export default function InquiryForm({ title, fields, inquiryType }: Props) {
   const [agreed, setAgreed] = useState(false);
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   return (
     <section className="py-24 bg-white">
@@ -42,7 +44,10 @@ export default function InquiryForm({
             <h3 className="mt-5 font-display font-bold text-2xl">문의가 접수되었습니다</h3>
             <p className="mt-3 text-neutral-500">담당자가 영업일 기준 1일 이내 연락드립니다.</p>
             <button
-              onClick={() => setSent(false)}
+              onClick={() => {
+                setSent(false);
+                setErrorMsg(null);
+              }}
               className="mt-6 px-6 py-2.5 rounded-full border border-neutral-300 text-sm hover:bg-white"
             >
               새 문의 작성
@@ -51,13 +56,54 @@ export default function InquiryForm({
         ) : (
           <form
             className="mt-14 grid gap-7"
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault();
               if (!agreed) {
-                alert("개인정보 수집 및 이용에 동의해 주세요.");
+                setErrorMsg("개인정보 수집 및 이용에 동의해 주세요.");
                 return;
               }
-              setSent(true);
+              setErrorMsg(null);
+              setSubmitting(true);
+
+              const fd = new FormData(e.currentTarget);
+              const phone1 = String(fd.get("phone1") ?? "");
+              const phone2 = String(fd.get("phone2") ?? "");
+              const phone3 = String(fd.get("phone3") ?? "");
+              const phone = [phone1, phone2, phone3].filter(Boolean).join("-");
+
+              const qtyRaw = fd.get("qty");
+              const quantity = qtyRaw ? Number(qtyRaw) : null;
+
+              const payload = {
+                type: inquiryType,
+                company_name: String(fd.get("company") ?? ""),
+                email: String(fd.get("email") ?? ""),
+                phone,
+                setup_date: (fd.get("setup") as string) || null,
+                pickup_date: (fd.get("pickup") as string) || null,
+                address: (fd.get("address") as string) || null,
+                quantity: Number.isFinite(quantity) ? quantity : null,
+                memo: (fd.get("memo") as string) || null,
+                channel: (fd.get("channel") as string) || null,
+              };
+
+              try {
+                const res = await fetch("/api/inquiry", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(payload),
+                });
+                const json = await res.json();
+                if (!res.ok) {
+                  throw new Error(json.error || "submission failed");
+                }
+                setSent(true);
+              } catch (err) {
+                const msg = err instanceof Error ? err.message : "submission failed";
+                setErrorMsg(msg + " — 다시 시도해 주세요.");
+              } finally {
+                setSubmitting(false);
+              }
             }}
           >
             {fields.map((f) => (
@@ -154,13 +200,18 @@ export default function InquiryForm({
               </label>
             </div>
 
+            {errorMsg && (
+              <p className="text-sm text-red-600 text-center -mb-3">{errorMsg}</p>
+            )}
+
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="h-14 rounded-md bg-[#0a0a0a] hover:bg-[#262626] font-bold text-lg transition w-full md:w-auto md:px-12"
+                disabled={submitting}
+                className="h-14 rounded-md bg-[#0a0a0a] hover:bg-[#262626] font-bold text-lg transition w-full md:w-auto md:px-12 disabled:opacity-60"
                 style={{ color: "#ffffff" }}
               >
-                문의 보내기
+                {submitting ? "전송 중..." : "문의 보내기"}
               </button>
             </div>
           </form>

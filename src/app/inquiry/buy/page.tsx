@@ -18,6 +18,7 @@ export default function BuyInquiryPage() {
       />
       <InquiryForm
         title=""
+        inquiryType="buy"
         fields={[
           { type: "text", name: "company", label: "업체명/담당자명", required: true },
           { type: "email", name: "email", label: "이메일주소", required: true },

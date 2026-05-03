@@ -1,6 +1,9 @@
 "use client";
 
+import { useState } from "react";
+
 export default function InquiryCTA() {
+  const [submitting, setSubmitting] = useState(false);
   return (
     <section
       id="rental-inquiry"
@@ -43,9 +46,40 @@ export default function InquiryCTA() {
         <form
           id="purchase-inquiry"
           className="bg-white text-neutral-900 rounded-3xl p-8 md:p-10 shadow-2xl"
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
-            alert("문의가 접수되었습니다. 빠른 시일 내 연락드리겠습니다.");
+            const form = e.currentTarget;
+            const fd = new FormData(form);
+            const name = String(fd.get("name") ?? "");
+            const company = String(fd.get("company") ?? "");
+            const service = String(fd.get("service") ?? "");
+            const message = String(fd.get("message") ?? "");
+            const inquiryType = service.includes("구매") || service.includes("제작") ? "buy" : "rental";
+            const payload = {
+              type: inquiryType,
+              company_name: company ? `${name} (${company})` : name,
+              email: String(fd.get("email") ?? "") || "noreply@example.com",
+              phone: String(fd.get("phone") ?? ""),
+              memo: `[서비스 종류: ${service}]\n${message}`,
+              channel: "homepage_inline_form",
+            };
+            setSubmitting(true);
+            try {
+              const res = await fetch("/api/inquiry", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+              });
+              const json = await res.json();
+              if (!res.ok) throw new Error(json.error || "submission failed");
+              alert("문의가 접수되었습니다. 빠른 시일 내 연락드리겠습니다.");
+              form.reset();
+            } catch (err) {
+              const msg = err instanceof Error ? err.message : "submission failed";
+              alert("문의 접수 실패: " + msg);
+            } finally {
+              setSubmitting(false);
+            }
           }}
         >
           <h3 className="font-display font-bold text-2xl mb-6">빠른 견적 문의</h3>
@@ -56,7 +90,7 @@ export default function InquiryCTA() {
             <Field label="이메일" name="email" type="email" placeholder="hello@brand.com" />
             <div className="sm:col-span-2">
               <label className="block text-sm font-medium mb-2 text-neutral-700">서비스 종류</label>
-              <select className="w-full h-12 px-4 rounded-xl border border-neutral-200 bg-neutral-50 focus:border-[#0a0a0a] focus:bg-white outline-none transition">
+              <select name="service" defaultValue="포토부스 렌탈" className="w-full h-12 px-4 rounded-xl border border-neutral-200 bg-neutral-50 focus:border-[#0a0a0a] focus:bg-white outline-none transition">
                 <option>포토부스 렌탈</option>
                 <option>포토부스 제작 / 구매</option>
                 <option>포토카드 제작</option>
@@ -67,6 +101,7 @@ export default function InquiryCTA() {
             <div className="sm:col-span-2">
               <label className="block text-sm font-medium mb-2 text-neutral-700">문의 내용</label>
               <textarea
+                name="message"
                 rows={4}
                 placeholder="행사 일정, 장소, 예산, 원하시는 디자인 등을 자유롭게 적어주세요."
                 className="w-full p-4 rounded-xl border border-neutral-200 bg-neutral-50 focus:border-[#0a0a0a] focus:bg-white outline-none transition resize-none"
@@ -76,10 +111,11 @@ export default function InquiryCTA() {
 
           <button
             type="submit"
-            className="mt-6 w-full h-14 rounded-xl bg-[#0a0a0a] hover:bg-[#262626] font-bold text-lg transition"
+            disabled={submitting}
+            className="mt-6 w-full h-14 rounded-xl bg-[#0a0a0a] hover:bg-[#262626] font-bold text-lg transition disabled:opacity-60"
             style={{ color: "#ffffff" }}
           >
-            무료 견적 받기
+            {submitting ? "전송 중..." : "무료 견적 받기"}
           </button>
 
           <p className="mt-3 text-xs text-neutral-400 text-center">
