@@ -52,9 +52,10 @@ export default function ImageTextRow({
                     href={c.href}
                     className={`inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition ${
                       i === 0
-                        ? "bg-[#0a0a0a] text-white hover:bg-[#262626]"
-                        : "border border-neutral-300 text-neutral-700 hover:bg-neutral-50"
+                        ? "bg-[#0a0a0a] hover:bg-[#262626]"
+                        : "border border-neutral-300 hover:bg-neutral-50"
                     }`}
+                    style={{ color: i === 0 ? "#ffffff" : "#404040" }}
                   >
                     <Search className="w-4 h-4" />
                     {c.label}

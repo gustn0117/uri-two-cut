@@ -30,7 +30,10 @@ export default function ProductSpecs({
               <div className="relative aspect-[4/5] bg-white rounded-2xl mb-6 grid place-items-center overflow-hidden">
                 <KioskIllustration code={m.code} />
                 {m.badge && (
-                  <span className="absolute top-4 right-4 z-10 w-20 h-20 rounded-full bg-[#0a0a0a] text-white text-xs font-bold grid place-items-center text-center leading-tight">
+                  <span
+                    className="absolute top-4 right-4 z-10 w-20 h-20 rounded-full bg-[#0a0a0a] text-xs font-bold grid place-items-center text-center leading-tight"
+                    style={{ color: "#ffffff" }}
+                  >
                     {m.badge}
                   </span>
                 )}

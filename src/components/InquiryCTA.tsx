@@ -76,7 +76,8 @@ export default function InquiryCTA() {
 
           <button
             type="submit"
-            className="mt-6 w-full h-14 rounded-xl bg-[#0a0a0a] hover:bg-[#262626] text-white font-bold text-lg transition"
+            className="mt-6 w-full h-14 rounded-xl bg-[#0a0a0a] hover:bg-[#262626] font-bold text-lg transition"
+            style={{ color: "#ffffff" }}
           >
             무료 견적 받기
           </button>
