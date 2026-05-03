@@ -105,9 +105,6 @@ export default function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-5 text-sm">
-          <Link href="#login" className="hover:opacity-70 transition-opacity">Login</Link>
-          <Link href="#register" className="hover:opacity-70 transition-opacity">Register</Link>
-          <span aria-hidden className="w-px h-4 bg-current opacity-30" />
           <button aria-label="Language" className="inline-flex items-center gap-1">
             <Globe className="w-4 h-4" />
             <ChevronDown className="w-3 h-3" />
@@ -156,10 +153,6 @@ export default function Header() {
                 )}
               </li>
             ))}
-            <li className="flex gap-4 pt-3">
-              <Link href="#login">Login</Link>
-              <Link href="#register">Register</Link>
-            </li>
           </ul>
         </div>
       )}
