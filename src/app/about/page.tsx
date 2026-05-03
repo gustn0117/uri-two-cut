@@ -235,7 +235,8 @@ export default function AboutPage() {
           <div className="flex gap-3">
             <Link
               href="/inquiry/rental"
-              className="px-6 py-3 rounded-full bg-white text-[#0a0a0a] font-bold"
+              className="px-6 py-3 rounded-full bg-white font-bold"
+              style={{ color: "#0a0a0a" }}
             >
               렌탈 문의
             </Link>

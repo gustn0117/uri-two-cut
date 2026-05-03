@@ -25,7 +25,8 @@ export default function CtaBar({
         <div className="flex flex-wrap gap-3 md:justify-end">
           <Link
             href={primary.href}
-            className="px-7 py-3.5 rounded-full bg-white text-[#0a0a0a] font-semibold hover:bg-neutral-100"
+            className="px-7 py-3.5 rounded-full bg-white font-semibold hover:bg-neutral-100"
+            style={{ color: "#0a0a0a" }}
           >
             {primary.label}
           </Link>
