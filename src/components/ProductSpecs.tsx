@@ -28,12 +28,12 @@ export default function ProductSpecs({
               className="bg-[#fafafa] rounded-3xl p-8 border border-neutral-100"
             >
               <div className="relative aspect-[4/5] bg-white rounded-2xl mb-6 grid place-items-center overflow-hidden">
+                <KioskIllustration code={m.code} />
                 {m.badge && (
-                  <span className="absolute top-4 right-4 w-20 h-20 rounded-full bg-[#0a0a0a] text-white text-xs font-bold grid place-items-center text-center leading-tight">
+                  <span className="absolute top-4 right-4 z-10 w-20 h-20 rounded-full bg-[#0a0a0a] text-white text-xs font-bold grid place-items-center text-center leading-tight">
                     {m.badge}
                   </span>
                 )}
-                <KioskIllustration code={m.code} />
               </div>
               <p className="text-xs tracking-widest text-neutral-500">{m.code}</p>
               <h3 className="mt-1 font-display font-black text-3xl">{m.name}</h3>
