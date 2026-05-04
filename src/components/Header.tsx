@@ -38,6 +38,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const isHome = pathname === "/";
+  const isAdmin = pathname?.startsWith("/admin");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -47,6 +48,8 @@ export default function Header() {
   }, []);
 
   useEffect(() => setOpen(false), [pathname]);
+
+  if (isAdmin) return null;
 
   const transparent = isHome && !scrolled && !open;
 
