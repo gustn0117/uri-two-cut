@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AboutStats from "@/components/AboutStats";
+import AboutProjectGrid from "@/components/AboutProjectGrid";
 import { Store, Laptop, Tools } from "@/components/icons";
 import FlagBadge from "@/components/FlagBadge";
 
@@ -200,26 +201,7 @@ export default function AboutPage() {
             국내 · 해외로 커스텀 키오스크를 개발합니다.
           </h2>
 
-          <div className="mt-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            {[
-              { c: "#0a0a0a", t: "코닥" }, { c: "#171717", t: "Galaxy AI" },
-              { c: "#262626", t: "PHOTO BOOTH" }, { c: "#404040", t: "쿠키런" },
-              { c: "#525252", t: "EVENT" }, { c: "#737373", t: "DPlus KIA" },
-              { c: "#0a0a0a", t: "Tik Tok" }, { c: "#262626", t: "카카오페이" },
-              { c: "#171717", t: "페스티벌" }, { c: "#404040", t: "버버리" },
-              { c: "#525252", t: "농심" }, { c: "#171717", t: "안랩" },
-            ].map((p, i) => (
-              <div
-                key={i}
-                className="aspect-[4/5] rounded-2xl relative overflow-hidden grid place-items-center"
-                style={{ background: p.c }}
-              >
-                <span className="text-white/90 font-display font-bold text-xs tracking-wider text-center px-2">
-                  {p.t}
-                </span>
-              </div>
-            ))}
-          </div>
+          <AboutProjectGrid />
         </div>
       </section>
 

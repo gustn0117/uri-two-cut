@@ -22,7 +22,6 @@ export default function Footer() {
                 <li><Link href="/about" className="hover:opacity-100">회사소개</Link></li>
                 <li><Link href="/rental" className="hover:opacity-100">행사렌탈</Link></li>
                 <li><Link href="/manufacture" className="hover:opacity-100">제작구매</Link></li>
-                <li><Link href="/portfolio" className="hover:opacity-100">프로젝트</Link></li>
               </ul>
             </div>
             <div>
