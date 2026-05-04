@@ -29,6 +29,7 @@ const NAV: NavItem[] = [
       { label: "포토카드", href: "/manufacture/card" },
     ],
   },
+  { label: "프로젝트", href: "/portfolio" },
   { label: "렌탈문의", href: "/inquiry/rental" },
   { label: "구매문의", href: "/inquiry/buy" },
 ];
