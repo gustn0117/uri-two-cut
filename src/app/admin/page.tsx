@@ -464,26 +464,70 @@ function InquiriesView({
   );
 }
 
+type DbProject = Project & { editable: true };
+type StaticProject = Project & { editable: false };
+type AnyProject = DbProject | StaticProject;
+
+const VALID_CATEGORIES = [
+  "기업·관공서",
+  "교육·학교",
+  "페스티벌·축제",
+  "학회·컨퍼런스",
+  "스포츠",
+  "팝업·브랜드",
+  "엔터·미디어",
+  "교회",
+  "웨딩",
+];
+
 function ProjectsView({ projects }: { projects: Project[] }) {
   const [active, setActive] = useState<string>("전체");
   const [q, setQ] = useState("");
   const [openId, setOpenId] = useState<string | null>(null);
+  const [showAdd, setShowAdd] = useState(false);
+  const [dbProjects, setDbProjects] = useState<DbProject[]>([]);
+
+  const loadDb = useCallback(async () => {
+    const res = await fetch("/api/admin/projects", { cache: "no-store" });
+    if (!res.ok) return;
+    const j = await res.json();
+    setDbProjects(
+      (j.projects ?? []).map((p: Record<string, unknown>) => ({
+        id: p.id as string,
+        date: (p.event_date as string | null) ?? null,
+        title: p.title as string,
+        category: p.category as string,
+        cover: (p.cover as string | null) ?? "",
+        photos: (p.photos as string[]) ?? [],
+        editable: true as const,
+      }))
+    );
+  }, []);
+
+  useEffect(() => {
+    loadDb();
+  }, [loadDb]);
+
+  const merged: AnyProject[] = useMemo(() => {
+    const staticOnes: StaticProject[] = projects.map((p) => ({ ...p, editable: false as const }));
+    return [...dbProjects, ...staticOnes];
+  }, [dbProjects, projects]);
 
   const categories = useMemo(() => {
     const set = new Set<string>();
-    projects.forEach((p) => set.add(p.category));
+    merged.forEach((p) => set.add(p.category));
     return ["전체", ...Array.from(set)];
-  }, [projects]);
+  }, [merged]);
 
   const visible = useMemo(() => {
-    return projects.filter((p) => {
+    return merged.filter((p) => {
       if (active !== "전체" && p.category !== active) return false;
       if (q && !p.title.toLowerCase().includes(q.toLowerCase())) return false;
       return true;
     });
-  }, [projects, active, q]);
+  }, [merged, active, q]);
 
-  const open = projects.find((p) => p.id === openId) || null;
+  const open = merged.find((p) => p.id === openId) || null;
 
   // Esc to close lightbox
   useEffect(() => {
@@ -495,22 +539,47 @@ function ProjectsView({ projects }: { projects: Project[] }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [openId]);
 
+  async function deleteDbProject(id: string) {
+    if (!confirm("이 프로젝트를 삭제할까요? 업로드된 사진도 함께 삭제됩니다.")) return;
+    const res = await fetch("/api/admin/projects", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
+    if (!res.ok) {
+      const j = await res.json().catch(() => ({}));
+      alert("삭제 실패: " + (j.error || "unknown"));
+      return;
+    }
+    setOpenId(null);
+    await loadDb();
+  }
+
   return (
     <section className="px-5 lg:px-10 py-8 max-w-[1400px] mx-auto">
       <header className="flex items-end justify-between gap-4 flex-wrap mb-6">
         <div>
           <h2 className="font-display font-bold text-2xl">프로젝트 아카이브</h2>
           <p className="text-sm text-neutral-500 mt-1">
-            전체 {projects.length}건 · 표시 {visible.length}건
+            등록 {dbProjects.length}건 · 아카이브 {projects.length}건 · 표시 {visible.length}건
           </p>
         </div>
-        <input
-          type="text"
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
-          placeholder="이벤트 검색..."
-          className="h-9 px-3 rounded-md border border-neutral-300 text-sm w-full sm:w-64"
-        />
+        <div className="flex gap-2 w-full sm:w-auto">
+          <input
+            type="text"
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder="이벤트 검색..."
+            className="h-10 px-3 rounded-md border border-neutral-300 text-sm flex-1 sm:w-64"
+          />
+          <button
+            onClick={() => setShowAdd(true)}
+            className="h-10 px-4 rounded-md bg-[#0a0a0a] hover:bg-[#262626] text-sm font-semibold whitespace-nowrap"
+            style={{ color: "#ffffff" }}
+          >
+            + 새 프로젝트
+          </button>
+        </div>
       </header>
 
       <div className="flex flex-wrap gap-2 mb-6">
@@ -521,6 +590,16 @@ function ProjectsView({ projects }: { projects: Project[] }) {
         ))}
       </div>
 
+      {showAdd && (
+        <AddProjectModal
+          onClose={() => setShowAdd(false)}
+          onCreated={async () => {
+            setShowAdd(false);
+            await loadDb();
+          }}
+        />
+      )}
+
       {visible.length === 0 ? (
         <p className="text-center text-sm text-neutral-500 py-16">조건에 맞는 이벤트가 없습니다.</p>
       ) : (
@@ -529,15 +608,24 @@ function ProjectsView({ projects }: { projects: Project[] }) {
             <button
               key={p.id}
               onClick={() => setOpenId(p.id)}
-              className="group text-left rounded-lg overflow-hidden bg-white border border-neutral-200 hover:shadow-md transition"
+              className="group text-left rounded-lg overflow-hidden bg-white border border-neutral-200 hover:shadow-md transition relative"
             >
+              {p.editable && (
+                <span className="absolute top-2 right-2 z-10 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-bold border border-emerald-200">
+                  등록
+                </span>
+              )}
               <div className="aspect-[4/3] bg-neutral-100 overflow-hidden">
-                <img
-                  src={p.cover}
-                  alt={p.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+                {p.cover ? (
+                  <img
+                    src={p.cover}
+                    alt={p.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="w-full h-full grid place-items-center text-xs text-neutral-400">no cover</div>
+                )}
               </div>
               <div className="p-3">
                 <p className="text-[10px] tracking-widest text-neutral-500">{p.category}</p>
@@ -567,19 +655,29 @@ function ProjectsView({ projects }: { projects: Project[] }) {
             className="mx-auto max-w-[1100px] p-6 lg:p-10"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="text-white mb-6">
-              <p className="text-xs tracking-[0.4em] opacity-70">{open.category}</p>
-              <h3 className="font-display font-bold text-2xl md:text-3xl mt-2">{open.title}</h3>
-              <p className="text-sm opacity-60 mt-1">{open.date ?? ""}</p>
+            <div className="text-white mb-6 flex items-start justify-between gap-4">
+              <div>
+                <p className="text-xs tracking-[0.4em] opacity-70">{open.category}</p>
+                <h3 className="font-display font-bold text-2xl md:text-3xl mt-2">{open.title}</h3>
+                <p className="text-sm opacity-60 mt-1">{open.date ?? ""}</p>
+              </div>
+              {open.editable && (
+                <button
+                  onClick={() => deleteDbProject(open.id)}
+                  className="h-9 px-4 rounded-md text-sm border border-red-300/50 text-red-200 hover:bg-red-500/20 whitespace-nowrap"
+                >
+                  삭제
+                </button>
+              )}
             </div>
             <div className="grid gap-4">
-              <img src={open.cover} alt={open.title} className="w-full rounded-md" />
+              {open.cover && <img src={open.cover} alt={open.title} className="w-full rounded-md" />}
               {open.photos.map((src) => (
                 <img key={src} src={src} alt={open.title} loading="lazy" className="w-full rounded-md" />
               ))}
             </div>
             <p className="text-center text-xs text-white/50 mt-6">
-              총 {1 + open.photos.length}장 — Esc 또는 배경 클릭으로 닫기
+              총 {(open.cover ? 1 : 0) + open.photos.length}장 — Esc 또는 배경 클릭으로 닫기
             </p>
           </div>
         </div>
@@ -609,5 +707,172 @@ function Chip({
     >
       {children}
     </button>
+  );
+}
+
+function AddProjectModal({
+  onClose,
+  onCreated,
+}: {
+  onClose: () => void;
+  onCreated: () => void | Promise<void>;
+}) {
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [coverPreview, setCoverPreview] = useState<string | null>(null);
+  const [photosPreview, setPhotosPreview] = useState<string[]>([]);
+
+  // Esc to close
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && !submitting) onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose, submitting]);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm grid place-items-center p-4"
+      onClick={() => !submitting && onClose()}
+    >
+      <form
+        onClick={(e) => e.stopPropagation()}
+        onSubmit={async (e) => {
+          e.preventDefault();
+          setError(null);
+          setSubmitting(true);
+          try {
+            const fd = new FormData(e.currentTarget);
+            const res = await fetch("/api/admin/projects", {
+              method: "POST",
+              body: fd,
+            });
+            const json = await res.json();
+            if (!res.ok) throw new Error(json.error || "upload failed");
+            await onCreated();
+          } catch (err) {
+            const msg = err instanceof Error ? err.message : "upload failed";
+            setError(msg);
+          } finally {
+            setSubmitting(false);
+          }
+        }}
+        className="w-full max-w-2xl bg-white rounded-xl shadow-2xl max-h-[90vh] overflow-y-auto"
+      >
+        <header className="sticky top-0 bg-white border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
+          <h3 className="font-display font-bold text-lg">새 프로젝트 등록</h3>
+          <button
+            type="button"
+            onClick={() => !submitting && onClose()}
+            className="w-8 h-8 grid place-items-center rounded-md hover:bg-neutral-100"
+          >
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <path d="M6 6l12 12M18 6l-12 12" />
+            </svg>
+          </button>
+        </header>
+
+        <div className="p-6 grid gap-5">
+          <div className="grid gap-1.5">
+            <label className="text-xs font-bold text-neutral-700">제목 *</label>
+            <input
+              name="title"
+              required
+              maxLength={200}
+              placeholder="예: LG전자 플래그십 D5 포토부스 납품"
+              className="h-11 px-3 rounded-md border border-neutral-300 focus:border-[#0a0a0a] outline-none text-sm"
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div className="grid gap-1.5">
+              <label className="text-xs font-bold text-neutral-700">카테고리 *</label>
+              <select
+                name="category"
+                required
+                defaultValue=""
+                className="h-11 px-3 rounded-md border border-neutral-300 focus:border-[#0a0a0a] outline-none text-sm bg-white"
+              >
+                <option value="" disabled>선택...</option>
+                {VALID_CATEGORIES.map((c) => (
+                  <option key={c} value={c}>{c}</option>
+                ))}
+              </select>
+            </div>
+            <div className="grid gap-1.5">
+              <label className="text-xs font-bold text-neutral-700">행사 일자</label>
+              <input
+                type="date"
+                name="event_date"
+                className="h-11 px-3 rounded-md border border-neutral-300 focus:border-[#0a0a0a] outline-none text-sm"
+              />
+            </div>
+          </div>
+
+          <div className="grid gap-1.5">
+            <label className="text-xs font-bold text-neutral-700">커버 이미지 * <span className="font-normal text-neutral-500">(JPG/PNG/WebP, 최대 10MB)</span></label>
+            <input
+              type="file"
+              name="cover"
+              required
+              accept="image/jpeg,image/png,image/webp"
+              onChange={(e) => {
+                const f = e.target.files?.[0];
+                if (f) setCoverPreview(URL.createObjectURL(f));
+                else setCoverPreview(null);
+              }}
+              className="text-sm file:mr-3 file:px-4 file:py-2 file:rounded-md file:border-0 file:bg-neutral-100 file:text-sm file:font-semibold hover:file:bg-neutral-200 cursor-pointer"
+            />
+            {coverPreview && (
+              <img src={coverPreview} alt="cover preview" className="mt-2 rounded-md max-h-48 object-cover" />
+            )}
+          </div>
+
+          <div className="grid gap-1.5">
+            <label className="text-xs font-bold text-neutral-700">추가 사진 <span className="font-normal text-neutral-500">(여러 장 선택 가능)</span></label>
+            <input
+              type="file"
+              name="photos"
+              multiple
+              accept="image/jpeg,image/png,image/webp"
+              onChange={(e) => {
+                const files = Array.from(e.target.files || []);
+                setPhotosPreview(files.map((f) => URL.createObjectURL(f)));
+              }}
+              className="text-sm file:mr-3 file:px-4 file:py-2 file:rounded-md file:border-0 file:bg-neutral-100 file:text-sm file:font-semibold hover:file:bg-neutral-200 cursor-pointer"
+            />
+            {photosPreview.length > 0 && (
+              <div className="mt-2 grid grid-cols-3 gap-2">
+                {photosPreview.map((src, i) => (
+                  <img key={i} src={src} alt={`preview ${i}`} className="rounded-md aspect-square object-cover" />
+                ))}
+              </div>
+            )}
+          </div>
+
+          {error && <p className="text-xs text-red-600">{error}</p>}
+        </div>
+
+        <footer className="sticky bottom-0 bg-white border-t border-neutral-200 px-6 py-4 flex justify-end gap-2">
+          <button
+            type="button"
+            onClick={() => !submitting && onClose()}
+            disabled={submitting}
+            className="h-10 px-4 rounded-md border border-neutral-300 text-sm hover:bg-neutral-50 disabled:opacity-60"
+          >
+            취소
+          </button>
+          <button
+            type="submit"
+            disabled={submitting}
+            className="h-10 px-5 rounded-md bg-[#0a0a0a] hover:bg-[#262626] text-sm font-semibold disabled:opacity-60"
+            style={{ color: "#ffffff" }}
+          >
+            {submitting ? "업로드 중..." : "등록"}
+          </button>
+        </footer>
+      </form>
+    </div>
   );
 }
