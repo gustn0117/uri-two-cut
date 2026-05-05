@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import ProductSpecs from "@/components/ProductSpecs";
 import ProcessSteps from "@/components/ProcessSteps";
 import ProductFeatures from "@/components/ProductFeatures";
-import ImageTextRow, { TabletVisual, PaletteVisual } from "@/components/ImageTextRow";
+import ImageTextRow from "@/components/ImageTextRow";
+import Comparison from "@/components/Comparison";
+import FaqAccordion from "@/components/FaqAccordion";
 import CtaBar from "@/components/CtaBar";
 
 export const metadata: Metadata = {
@@ -12,35 +14,39 @@ export const metadata: Metadata = {
 
 const MODELS = [
   {
-    code: "PHOTO-S-215IB",
-    name: "미니스탠드",
+    code: "PHOTO-S-215IA",
+    name: "스탠드 (일자형)",
     badge: "렌탈가능 모델",
+    image: "/products/stand.jpg",
+    price: "1일 350,000원~",
     specs: [
       { label: "모니터", value: "21.5인치 정전식 터치모니터" },
       { label: "프린터", value: "염료승화 포토프린터" },
       { label: "카메라", value: "캐논 DSLR / 4K 카메라" },
-      { label: "결제", value: "무료, 카드" },
+      { label: "결제", value: "무료 / 카드 / 쿠폰" },
       { label: "소비전력", value: "350W" },
-      { label: "전원", value: "220V, 50/60HZ" },
+      { label: "전원", value: "220V, 50/60Hz" },
       { label: "케이스", value: "스틸" },
-      { label: "무게", value: "80kg" },
-      { label: "규격", value: "W670 x D460 x H1810mm(인화지출력구 포함)" },
+      { label: "무게", value: "150kg" },
+      { label: "규격", value: "W800 x D550 x H2025 (mm)" },
     ],
   },
   {
     code: "PHOTO-B-215O",
-    name: "부스",
+    name: "부스 (박스형)",
     badge: "렌탈가능 모델",
+    image: "/products/booth.jpg",
+    price: "1일 500,000원~",
     specs: [
       { label: "모니터", value: "21.5인치 정전식 터치모니터" },
       { label: "프린터", value: "염료승화 포토프린터" },
       { label: "카메라", value: "캐논 DSLR / 4K 카메라" },
-      { label: "결제", value: "무료, 지폐, 카드" },
+      { label: "결제", value: "무료 / 지폐 / 카드 / 쿠폰" },
       { label: "소비전력", value: "350W" },
-      { label: "전원", value: "220V, 50/60HZ" },
+      { label: "전원", value: "220V, 50/60Hz" },
       { label: "케이스", value: "스틸" },
       { label: "무게", value: "300kg" },
-      { label: "규격", value: "W1400 x D1000 x H2010mm" },
+      { label: "규격", value: "W1400 x D1000 x H2010 (mm)" },
     ],
   },
 ];
@@ -48,12 +54,11 @@ const MODELS = [
 export default function RentalBoothPage() {
   return (
     <main>
-      {/* Hero - full bleed gradient */}
+      {/* Hero */}
       <section
         className="relative pt-40 pb-32 text-white overflow-hidden"
         style={{
-          background:
-            "linear-gradient(120deg, #0a0a0a 0%, #1f1f1f 60%, #404040 120%)",
+          background: "linear-gradient(120deg, #0a0a0a 0%, #1f1f1f 60%, #404040 120%)",
         }}
       >
         <div
@@ -77,9 +82,12 @@ export default function RentalBoothPage() {
         </div>
       </section>
 
-      <ProductSpecs models={MODELS} />
-      <ProcessSteps variant="rental" />
+      {/* PRICING + SPECS at top */}
+      <div id="pricing" className="scroll-mt-24" />
+      <ProductSpecs models={MODELS} title="제품 라인업 · 렌탈 비용" showPricing />
+
       <ProductFeatures />
+      <ProcessSteps variant="rental" />
 
       {/* OUR CREATOR */}
       <section className="py-24 bg-[#f5f5f5] text-center">
@@ -102,18 +110,11 @@ export default function RentalBoothPage() {
         title={<>브랜드 맞춤 프레임으로<br />행사 퀄리티 UP</>}
         highlight="프레임디자인"
         description={"다양한 컬러·디자인 프레임을 제공하여\n기업/기관의 행사 목적과 브랜드 아이덴티티에\n최적화된 촬영 경험을 제공합니다."}
-        ctas={[
-          { label: "프레임디자인 바로가기", href: "/inquiry/rental" },
-          { label: "사이즈 자세히보기", href: "/inquiry/rental" },
-        ]}
+        ctas={[{ label: "프레임디자인 바로가기", href: "/inquiry/rental" }]}
         visual={
-          <TabletVisual>
-            <div className="grid grid-cols-3 gap-1 p-3 w-full">
-              {["#0a0a0a", "#fde047", "#0a0a0a", "#fda4af", "#34d399", "#f97316"].map((c, i) => (
-                <div key={i} className="aspect-[3/4] rounded" style={{ background: c }} />
-              ))}
-            </div>
-          </TabletVisual>
+          <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
+            <img src="/products/frames.jpg" alt="프레임 디자인 샘플" className="w-full h-auto" />
+          </div>
         }
       />
 
@@ -126,169 +127,126 @@ export default function RentalBoothPage() {
         highlight="랩핑디자인"
         description={"전면·측면·후면 모두 원하는 비주얼로 커스터마이징 가능해,\n포토존을 브랜드 홍보 매체로 탈바꿈시킵니다."}
         ctas={[{ label: "랩핑디자인 바로가기", href: "/inquiry/rental" }]}
-        visual={<PaletteVisual colors={["#fda4af", "#bfdbfe", "#fde047", "#a7f3d0"]} />}
-      />
-
-      {/* USER INTERFACE */}
-      <ImageTextRow
-        eyebrow="USER INTERFACE"
-        title={<>고객을 위한<br />직관적인 포토키오스크 UI</>}
-        highlight="우리투컷 UI"
-        description={"심플한 화면 구성과 쉬운 흐름으로\n남녀노소 누구나 바로 사용할 수 있습니다."}
-        ctas={[{ label: "프로세서 바로보기", href: "/inquiry/rental" }]}
         visual={
-          <TabletVisual bg="#3f3f46">
-            <div className="text-center p-6">
-              <div className="font-display font-bold text-lg text-neutral-700">우리투컷</div>
-              <div className="mt-2 text-xs text-neutral-400 tracking-widest">TOUCH ME</div>
-              <div className="mt-6 grid grid-cols-4 gap-2">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="aspect-square rounded bg-neutral-200" />
-                ))}
-              </div>
-            </div>
-          </TabletVisual>
-        }
-      />
-
-      {/* SOLUTION */}
-      <ImageTextRow
-        bg="#fafafa"
-        reverse
-        eyebrow="SOLUTION"
-        title={<>캠페인, 프로모션,<br />팝업스토어에 맞는<br />UI 커스터마이징</>}
-        highlight="맞춤형 캠페인 솔루션"
-        description={"MBTI·YES/NO 이벤트 등 사용자 참여를 유도하고\n선택 결과는 사진과 함께 인화되어 콘텐츠로 활용됩니다."}
-        ctas={[{ label: "커스텀 UI디자인 바로가기", href: "/inquiry/rental" }]}
-        visual={
-          <TabletVisual bg="#0ea5e9">
-            <div className="p-8 text-center">
-              <div className="font-display font-black text-2xl text-[#0ea5e9]">MBTI</div>
-              <p className="mt-2 text-xs text-neutral-500">나의 성격은 어떤 유형일까?</p>
-              <div className="mt-6 grid grid-cols-4 gap-1.5">
-                {["E/I", "S/N", "T/F", "J/P"].map((t) => (
-                  <div key={t} className="aspect-square rounded bg-[#bae6fd] grid place-items-center text-xs font-bold">
-                    {t}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </TabletVisual>
-        }
-      />
-
-      {/* AI */}
-      <ImageTextRow
-        eyebrow="ARTIFICIAL INTELLIGENCE"
-        title={<>원하는 배경으로<br />간편하게</>}
-        highlight="AI 배경 변경 필터"
-        description={"AI로 촬영한 사진의 배경을 제거하여\n원하는 배경으로 간편하게 교체가 가능합니다."}
-        ctas={[{ label: "AI 배경 필터 바로가기", href: "/inquiry/rental" }]}
-        visual={
-          <div className="grid grid-cols-2 gap-3 max-w-[480px] mx-auto">
-            {[
-              { bg: "#dbeafe", label: "원본" },
-              { bg: "linear-gradient(135deg,#fde047,#f97316)", label: "오늘의 주인공" },
-              { bg: "linear-gradient(135deg,#bbf7d0,#0ea5e9)", label: "여행지" },
-              { bg: "linear-gradient(135deg,#0a0a0a,#ec4899)", label: "축제" },
-            ].map((b, i) => (
-              <div
-                key={i}
-                className="aspect-[4/5] rounded-2xl overflow-hidden relative"
-                style={{ background: b.bg as string }}
-              >
-                <span className="absolute bottom-2 left-2 text-xs font-bold text-white bg-black/40 px-2 py-1 rounded">
-                  {b.label}
-                </span>
-              </div>
-            ))}
+          <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
+            <img src="/products/wrapping.jpg" alt="랩핑 디자인 샘플" className="w-full h-auto" />
           </div>
         }
       />
 
-      {/* 배경 시트지 */}
+      {/* AI FILTER */}
+      <ImageTextRow
+        eyebrow="AI FILTER"
+        title={<>SNS에서 확산되는<br />AI 필터 마케팅</>}
+        highlight="AI 필터 / 배경 합성"
+        description={"스케치, 카툰 스타일, 배경 제거·합성 등 다양한 AI 필터로\n참여형 콘텐츠를 만들어 SNS 확산을 유도합니다."}
+        ctas={[{ label: "AI 필터 바로가기", href: "/inquiry/rental" }]}
+        visual={
+          <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
+            <img src="/products/ai-filter.jpg" alt="AI 필터 예시" className="w-full h-auto" />
+          </div>
+        }
+      />
+
+      {/* USER INTERFACE */}
       <ImageTextRow
         bg="#fafafa"
         reverse
+        eyebrow="USER INTERFACE"
+        title={<>고객을 위한<br />직관적인 포토키오스크 UI</>}
+        highlight="우리투컷 UI"
+        description={"심플한 화면 구성과 쉬운 흐름으로\n남녀노소 누구나 바로 사용할 수 있습니다.\n색상·디자인·다국어까지 풀 커스터마이징 가능합니다."}
+        ctas={[{ label: "프로세스 바로보기", href: "/inquiry/rental" }]}
+        visual={
+          <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
+            <img src="/products/ui.jpg" alt="UI 샘플" className="w-full h-auto" />
+          </div>
+        }
+      />
+
+      {/* CAMPAIGN SOLUTION */}
+      <ImageTextRow
+        eyebrow="CAMPAIGN"
+        title={<>이벤트·캠페인에 맞춘<br />맞춤형 미니게임</>}
+        highlight="캠페인 솔루션"
+        description={"MBTI·룰렛·뽑기·퀴즈 등 참여형 미니게임을 결합해\n브랜드 메시지를 자연스럽게 전달합니다."}
+        ctas={[{ label: "캠페인 솔루션 바로가기", href: "/inquiry/rental" }]}
+        visual={
+          <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
+            <img src="/products/campaign.jpg" alt="캠페인 솔루션" className="w-full h-auto" />
+          </div>
+        }
+      />
+
+      {/* AI BACKGROUND */}
+      <ImageTextRow
+        bg="#fafafa"
+        reverse
+        eyebrow="AI BACKGROUND"
+        title={<>원하는 배경으로<br />간편하게</>}
+        highlight="AI 배경 변경 필터"
+        description={"AI로 촬영한 사진의 배경을 제거하여\n원하는 배경으로 간편하게 교체할 수 있습니다."}
+        ctas={[{ label: "AI 배경 필터 바로가기", href: "/inquiry/rental" }]}
+        visual={
+          <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
+            <img src="/products/ai-bg.jpg" alt="AI 배경 합성" className="w-full h-auto" />
+          </div>
+        }
+      />
+
+      {/* BACKGROUND SHEET */}
+      <ImageTextRow
         eyebrow="BACKGROUND SHEET"
         title={<>브랜드 감성을 살리는</>}
         highlight="배경 시트지"
         description={"브랜드 감성과 행사 분위기를 표현하는\n맞춤형 배경 시트지 디자인 (부스 타입만 가능)"}
         visual={
-          <TabletVisual bg="#1f1f1f">
-            <div className="grid grid-cols-2 w-full h-full">
-              <div style={{ background: "linear-gradient(135deg,#737373,#ec4899)" }} />
-              <div style={{ background: "linear-gradient(135deg,#fde047,#f59e0b)" }} />
-            </div>
-          </TabletVisual>
+          <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
+            <img src="/products/background-sheet.jpg" alt="배경 시트지" className="w-full h-auto" />
+          </div>
         }
       />
 
-      {/* PHOTH WALL */}
+      {/* PHOTO WALL */}
       <ImageTextRow
+        bg="#fafafa"
+        reverse
         eyebrow="PHOTO WALL"
         title={<>고객 맞춤 디자인<br />분위기를 바꿔주는</>}
         highlight="백월 · 현수막"
         description={"고객 맞춤 디자인으로 현장의 분위기를 바꿔주는\n백월 및 현수막을 제작해드립니다."}
-        ctas={[{ label: "백월·현수막디자인 바로가기", href: "/inquiry/rental" }]}
+        ctas={[{ label: "백월·현수막 바로가기", href: "/inquiry/rental" }]}
         visual={
-          <TabletVisual bg="#0ea5e9">
-            <div className="w-full h-full p-6 grid place-items-center" style={{ background: "repeating-linear-gradient(45deg,#0a0a0a,#0a0a0a 20px,#3a7eff 20px,#3a7eff 40px)" }}>
-              <div className="text-center text-white">
-                <div className="flex justify-center gap-1 text-yellow-300">
-                  {[0, 1, 2, 3].map((i) => (
-                    <svg key={i} className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2v1.3h6V16.7c0-.8.4-1.5 1-2A7 7 0 0 0 12 2zM10 21h4v1H10z" />
-                    </svg>
-                  ))}
-                </div>
-                <div className="mt-3 font-bold">우리투컷</div>
-              </div>
-            </div>
-          </TabletVisual>
-        }
-      />
-
-      {/* LIVE VIEW */}
-      <ImageTextRow
-        bg="#fafafa"
-        reverse
-        eyebrow="LIVE VIEW"
-        title={<>특별한 네컷을 원한다면<br />옆에 있는 듯 즐기는</>}
-        highlight="라이브뷰 촬영"
-        description={"스페셜한 프레임을 원한다면, 라이브뷰 촬영을 추천드립니다.\n마치 함께 있는 듯 자연스럽게 찰칵!"}
-        visual={
-          <TabletVisual bg="#0a0a0a">
-            <div className="grid grid-cols-2 gap-1 p-3 w-full bg-red-900">
-              {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                <div key={i} className="aspect-square rounded bg-neutral-300" />
-              ))}
-            </div>
-          </TabletVisual>
+          <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
+            <img src="/products/photo-wall.jpg" alt="백월 / 현수막" className="w-full h-auto" />
+          </div>
         }
       />
 
       {/* BIGSIZE 4CUT */}
-      <ImageTextRow
-        eyebrow="BIGSIZE 4CUT"
-        title={<>대세는 빅사이즈!</>}
-        highlight="종류별로 다양하게~"
-        description={"기존의 4컷 사이즈를 넘어, 더 크고 임팩트 있는\n빅사이즈 4컷으로 행사의 분위기를 한층 끌어올립니다."}
-        visual={
-          <div className="rounded-2xl bg-neutral-900 p-6 max-w-[480px] mx-auto">
-            <div className="text-white">
-              <p className="font-display font-black text-3xl">BIGSIZE</p>
-              <p className="font-display font-black text-3xl">4CUT</p>
-              <p className="mt-2 text-xs opacity-60">20cm</p>
-            </div>
-            <div className="mt-4 grid grid-cols-2 gap-2">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="aspect-square bg-neutral-700 rounded" />
-              ))}
-            </div>
+      <section className="py-24 bg-white">
+        <div className="mx-auto max-w-[1100px] px-6 lg:px-10 text-center">
+          <p className="font-display tracking-[0.4em] text-sm text-[#0a0a0a] font-bold">BIGSIZE 4CUT</p>
+          <h2 className="mt-4 font-display font-black text-4xl md:text-5xl">대세는 빅사이즈!</h2>
+          <p className="mt-5 text-neutral-600 leading-relaxed">
+            기존의 4컷 사이즈를 넘어, 더 크고 임팩트 있는<br />
+            빅사이즈 4컷으로 행사의 분위기를 한층 끌어올립니다.
+          </p>
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-[700px] mx-auto">
+            {["10cm", "15cm", "20cm", "25cm"].map((s) => (
+              <div key={s} className="aspect-[3/4] rounded-md bg-neutral-900 grid place-items-end p-4">
+                <span className="text-white font-display font-bold">{s}</span>
+              </div>
+            ))}
           </div>
-        }
-      />
+        </div>
+      </section>
+
+      {/* COMPARISON 자사 vs 타사 */}
+      <Comparison />
+
+      {/* FAQ */}
+      <FaqAccordion title="포토부스 렌탈 FAQ" />
 
       <CtaBar
         title="포토부스 렌탈, 지금 바로 견적 받기"

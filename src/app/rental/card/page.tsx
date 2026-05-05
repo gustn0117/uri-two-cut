@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import ProductSpecs from "@/components/ProductSpecs";
 import ProcessSteps from "@/components/ProcessSteps";
 import ProductFeatures from "@/components/ProductFeatures";
-import ImageTextRow, { TabletVisual, PaletteVisual } from "@/components/ImageTextRow";
+import ImageTextRow from "@/components/ImageTextRow";
+import Comparison from "@/components/Comparison";
+import FaqAccordion from "@/components/FaqAccordion";
 import CtaBar from "@/components/CtaBar";
 
 export const metadata: Metadata = {
@@ -13,34 +15,38 @@ export const metadata: Metadata = {
 const MODELS = [
   {
     code: "PHOTO-S-215IA",
-    name: "스탠드",
+    name: "스탠드 (일자형)",
     badge: "렌탈가능 모델",
+    image: "/products/stand.jpg",
+    price: "1일 320,000원~",
     specs: [
       { label: "모니터", value: "21.5인치 정전식 터치모니터" },
       { label: "프린터", value: "염료승화 카드프린터" },
       { label: "카메라", value: "캐논 DSLR / 4K 카메라" },
-      { label: "결제", value: "무료, 지폐, 카드" },
+      { label: "결제", value: "무료 / 지폐 / 카드 / 쿠폰" },
       { label: "소비전력", value: "350W" },
-      { label: "전원", value: "220V, 50/60HZ" },
+      { label: "전원", value: "220V, 50/60Hz" },
       { label: "케이스", value: "스틸" },
       { label: "무게", value: "120kg" },
-      { label: "규격", value: "W800 x D550 x H2025mm" },
+      { label: "규격", value: "W800 x D550 x H2025 (mm)" },
     ],
   },
   {
     code: "PHOTO-B-215O",
-    name: "부스",
+    name: "부스 (박스형)",
     badge: "렌탈가능 모델",
+    image: "/products/booth.jpg",
+    price: "1일 480,000원~",
     specs: [
       { label: "모니터", value: "21.5인치 정전식 터치모니터" },
       { label: "프린터", value: "염료승화 카드프린터" },
       { label: "카메라", value: "캐논 DSLR / 4K 카메라" },
-      { label: "결제", value: "무료, 지폐, 카드" },
+      { label: "결제", value: "무료 / 지폐 / 카드 / 쿠폰" },
       { label: "소비전력", value: "350W" },
-      { label: "전원", value: "220V, 50/60HZ" },
+      { label: "전원", value: "220V, 50/60Hz" },
       { label: "케이스", value: "스틸" },
       { label: "무게", value: "300kg" },
-      { label: "규격", value: "W1400 x D1000 x H2015mm" },
+      { label: "규격", value: "W1400 x D1000 x H2015 (mm)" },
     ],
   },
 ];
@@ -48,12 +54,10 @@ const MODELS = [
 export default function RentalCardPage() {
   return (
     <main>
-      {/* Hero */}
       <section
         className="relative pt-40 pb-32 text-white overflow-hidden"
         style={{
-          background:
-            "linear-gradient(120deg, #0a0a0a 0%, #1f1f1f 60%, #404040 120%)",
+          background: "linear-gradient(120deg, #0a0a0a 0%, #1f1f1f 60%, #404040 120%)",
         }}
       >
         <div
@@ -77,8 +81,10 @@ export default function RentalCardPage() {
         </div>
       </section>
 
+      <div id="pricing" className="scroll-mt-24" />
+      <ProductSpecs models={MODELS} title="제품 라인업 · 렌탈 비용" showPricing />
+
       <ProductFeatures />
-      <ProductSpecs models={MODELS} />
       <ProcessSteps variant="rental" />
 
       {/* CARD DESIGN */}
@@ -89,16 +95,8 @@ export default function RentalCardPage() {
         description={"기업/기관/팬덤 굿즈에 어울리는 카드 디자인을\n현장 콘셉트에 맞춰 풀커스텀으로 제작합니다."}
         ctas={[{ label: "카드디자인 바로가기", href: "/inquiry/rental" }]}
         visual={
-          <div className="grid grid-cols-3 gap-3 max-w-[480px] mx-auto">
-            {["#ffffff", "#fca5a5", "#a5b4fc", "#bbf7d0", "#fbcfe8", "#fcd34d"].map((c, i) => (
-              <div
-                key={i}
-                className="aspect-[3/4] rounded-md shadow-md grid place-items-center"
-                style={{ background: c }}
-              >
-                <div className="w-3/4 h-3/4 rounded-sm bg-white/40" />
-              </div>
-            ))}
+          <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
+            <img src="/products/frames.jpg" alt="카드 디자인 샘플" className="w-full h-auto" />
           </div>
         }
       />
@@ -112,30 +110,62 @@ export default function RentalCardPage() {
         highlight="랩핑디자인"
         description={"전면·측면·후면 모두 원하는 비주얼로 커스터마이징 가능해,\n포토존을 브랜드 홍보 매체로 탈바꿈시킵니다."}
         ctas={[{ label: "랩핑디자인 바로가기", href: "/inquiry/rental" }]}
-        visual={<PaletteVisual colors={["#fda4af", "#bfdbfe", "#fde047", "#a7f3d0"]} />}
+        visual={
+          <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
+            <img src="/products/wrapping.jpg" alt="랩핑 디자인 샘플" className="w-full h-auto" />
+          </div>
+        }
+      />
+
+      {/* AI FILTER */}
+      <ImageTextRow
+        eyebrow="AI FILTER"
+        title={<>SNS에서 확산되는<br />AI 필터 마케팅</>}
+        highlight="AI 필터"
+        description={"스케치, 카툰 스타일, 배경 합성 등 다양한 AI 필터로\nSNS 확산형 콘텐츠를 만들 수 있습니다."}
+        ctas={[{ label: "AI 필터 바로가기", href: "/inquiry/rental" }]}
+        visual={
+          <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
+            <img src="/products/ai-filter.jpg" alt="AI 필터 예시" className="w-full h-auto" />
+          </div>
+        }
       />
 
       {/* USER INTERFACE */}
       <ImageTextRow
+        bg="#fafafa"
+        reverse
         eyebrow="USER INTERFACE"
         title={<>고객을 위한<br />직관적인 카드 키오스크 UI</>}
         highlight="우리투컷 UI"
         description={"심플한 화면 구성과 쉬운 흐름으로\n남녀노소 누구나 바로 사용할 수 있습니다."}
-        ctas={[{ label: "프로세서 바로보기", href: "/inquiry/rental" }]}
+        ctas={[{ label: "프로세스 바로보기", href: "/inquiry/rental" }]}
         visual={
-          <TabletVisual bg="#3f3f46">
-            <div className="text-center p-6">
-              <div className="font-display font-bold text-lg text-neutral-700">우리투컷</div>
-              <div className="mt-2 text-xs text-neutral-400 tracking-widest">CARD KIOSK</div>
-              <div className="mt-6 grid grid-cols-3 gap-1.5">
-                {[1, 2, 3, 4, 5, 6].map((i) => (
-                  <div key={i} className="aspect-[3/4] rounded bg-neutral-200" />
-                ))}
-              </div>
-            </div>
-          </TabletVisual>
+          <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
+            <img src="/products/ui.jpg" alt="UI 샘플" className="w-full h-auto" />
+          </div>
         }
       />
+
+      {/* CAMPAIGN */}
+      <ImageTextRow
+        eyebrow="CAMPAIGN"
+        title={<>이벤트 캠페인에<br />최적화된 솔루션</>}
+        highlight="맞춤 캠페인"
+        description={"이벤트 목적과 메시지에 맞춰\n참여형 미니게임 / UI / 카드 디자인을 통합 제공합니다."}
+        ctas={[{ label: "캠페인 솔루션 바로가기", href: "/inquiry/rental" }]}
+        visual={
+          <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
+            <img src="/products/campaign.jpg" alt="캠페인 솔루션" className="w-full h-auto" />
+          </div>
+        }
+      />
+
+      {/* COMPARISON */}
+      <Comparison />
+
+      {/* FAQ */}
+      <FaqAccordion title="포토카드 렌탈 FAQ" />
 
       <CtaBar
         title="포토카드 렌탈 견적 문의"

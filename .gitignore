@@ -7,3 +7,6 @@ next-env.d.ts
 
 # Source photo archive — only curated/resized copies live in public/portfolio/
 alsdream/
+
+# Source product photos — only optimized copies live in public/products/
+제작구매 사진/

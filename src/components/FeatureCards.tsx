@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 function CameraIcon({ className = "w-16 h-16" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -36,6 +38,7 @@ function MonitorIcon({ className = "w-16 h-16" }: { className?: string }) {
 
 const CARDS = [
   {
+    href: "/rental/booth",
     bg: "#0a0a0a",
     fg: "#ffffff",
     eyebrow: "프리미엄 키오스크",
@@ -44,6 +47,7 @@ const CARDS = [
     Icon: CameraIcon,
   },
   {
+    href: "/rental/card",
     bg: "#171717",
     fg: "#ffffff",
     eyebrow: "브랜드에 딱 맞는",
@@ -52,6 +56,7 @@ const CARDS = [
     Icon: CardIcon,
   },
   {
+    href: "/rental/game",
     bg: "#262626",
     fg: "#ffffff",
     eyebrow: "고객 참여율을 높이는",
@@ -60,6 +65,7 @@ const CARDS = [
     Icon: GameIcon,
   },
   {
+    href: "/manufacture/booth",
     bg: "#404040",
     fg: "#ffffff",
     eyebrow: "직관적인 정보전달",
@@ -84,8 +90,9 @@ export default function FeatureCards() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
           {CARDS.map((c) => (
-            <article
+            <Link
               key={c.title}
+              href={c.href}
               className="group relative rounded-3xl overflow-hidden p-8 min-h-[420px] flex flex-col justify-between transition-transform hover:-translate-y-1.5 shadow-lg"
               style={{ background: c.bg, color: c.fg }}
             >
@@ -102,7 +109,7 @@ export default function FeatureCards() {
                 className="absolute -right-10 -top-10 w-40 h-40 rounded-full opacity-20"
                 style={{ background: "white" }}
               />
-            </article>
+            </Link>
           ))}
         </div>
       </div>
