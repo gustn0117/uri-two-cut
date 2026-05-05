@@ -10,7 +10,7 @@ export default function Hero() {
 
       {/* Strong overlay so the marquee stays subtle behind the headline */}
       <div
-        className="absolute inset-0 -z-10 pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
         style={{
           background:
             "linear-gradient(180deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.72) 50%, rgba(0,0,0,0.92) 100%)",

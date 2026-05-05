@@ -13,7 +13,7 @@ const TRACK = [...COVERS, ...COVERS];
 
 export default function HeroBackgroundSlider() {
   return (
-    <div className="absolute inset-0 -z-10 overflow-hidden bg-neutral-950">
+    <div className="absolute inset-0 overflow-hidden bg-neutral-950">
       <div className="hero-marquee flex h-full">
         {TRACK.map((src, i) => (
           <div
