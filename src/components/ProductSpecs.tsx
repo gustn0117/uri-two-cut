@@ -31,12 +31,12 @@ export default function ProductSpecs({
               key={m.code}
               className="bg-[#fafafa] rounded-3xl p-8 border border-neutral-100"
             >
-              <div className="relative aspect-[4/5] bg-white rounded-2xl mb-6 grid place-items-center overflow-hidden">
+              <div className="relative aspect-square bg-white rounded-2xl mb-6 grid place-items-center overflow-hidden">
                 {m.image ? (
                   <img
                     src={m.image}
                     alt={m.name}
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-cover"
                   />
                 ) : (
                   <div className="w-32 h-56 bg-neutral-100 rounded-md" />
