@@ -33,7 +33,7 @@ export default function Hero() {
 
         <div className="mt-12 flex flex-wrap gap-3">
           <a
-            href="#rental-inquiry"
+            href="/inquiry/rental"
             className="px-7 py-3.5 rounded-full bg-white hover:bg-neutral-100 font-semibold transition-colors"
             style={{ color: "#0a0a0a" }}
           >
@@ -44,6 +44,12 @@ export default function Hero() {
             className="px-7 py-3.5 rounded-full border border-white/50 hover:bg-white/10 transition-colors font-semibold backdrop-blur-sm"
           >
             렌탈비용 보기
+          </a>
+          <a
+            href="/inquiry/buy"
+            className="px-7 py-3.5 rounded-full border border-white/50 hover:bg-white/10 transition-colors font-semibold backdrop-blur-sm"
+          >
+            판매 문의하기
           </a>
         </div>
       </div>
