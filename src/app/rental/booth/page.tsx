@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ProductSpecs from "@/components/ProductSpecs";
+import PricingTable from "@/components/PricingTable";
 import ProcessSteps from "@/components/ProcessSteps";
 import ProductFeatures from "@/components/ProductFeatures";
 import ImageTextRow from "@/components/ImageTextRow";
@@ -14,11 +15,10 @@ export const metadata: Metadata = {
 
 const MODELS = [
   {
-    code: "PHOTO-S-215IA",
-    name: "스탠드 (일자형)",
+    code: "PHOTO-S-215IB",
+    name: "미니스탠드",
     badge: "렌탈가능 모델",
-    image: "/products/stand.jpg",
-    price: "1일 350,000원~",
+    image: "/products/mini-stand.jpg",
     specs: [
       { label: "모니터", value: "21.5인치 정전식 터치모니터" },
       { label: "프린터", value: "염료승화 포토프린터" },
@@ -27,16 +27,15 @@ const MODELS = [
       { label: "소비전력", value: "350W" },
       { label: "전원", value: "220V, 50/60Hz" },
       { label: "케이스", value: "스틸" },
-      { label: "무게", value: "150kg" },
-      { label: "규격", value: "W800 x D550 x H2025 (mm)" },
+      { label: "무게", value: "100kg" },
+      { label: "규격", value: "W570 x D460 x H1710 (mm)" },
     ],
   },
   {
     code: "PHOTO-B-215O",
-    name: "부스 (박스형)",
+    name: "부스",
     badge: "렌탈가능 모델",
     image: "/products/booth.jpg",
-    price: "1일 500,000원~",
     specs: [
       { label: "모니터", value: "21.5인치 정전식 터치모니터" },
       { label: "프린터", value: "염료승화 포토프린터" },
@@ -51,10 +50,71 @@ const MODELS = [
   },
 ];
 
+const PRICING_MODELS = [
+  { name: "미니스탠드", code: "PHOTO-S-215IB" },
+  { name: "부스", code: "PHOTO-B-215O" },
+];
+
+const NORMAL_PRICING_ROWS = [
+  {
+    label: "4시간\n(1~4월, 6~8월만 가능)",
+    values: ["500,000", "600,000"],
+  },
+  { label: "1일", values: ["800,000", "1,000,000"] },
+  { label: "2일", values: ["1,300,000", "1,500,000"] },
+  { label: "3일", values: ["1,800,000", "2,000,000"] },
+  { label: "4일", values: ["2,300,000", "2,500,000"] },
+  { label: "5일", values: ["2,800,000", "3,000,000"] },
+  { label: "6일~1개월", values: ["3,300,000", "3,500,000"] },
+  { label: "랩핑", values: ["400,000", "500,000"] },
+  {
+    label: "인화지",
+    values: ["700장 기본 제공"],
+    sub: "추가 시 700장 140,000",
+  },
+  {
+    label: "백월",
+    values: ["흰색, 검정, 분홍색 (택1) 50,000\n현수막 100,000", "X"],
+  },
+  {
+    label: "소품",
+    values: ["50,000 / 15종"],
+    sub: "머리띠, 모자, 안경, 가발 외 랜덤",
+  },
+];
+
+const AI_PRICING_ROWS = [
+  { label: "1일", values: ["1,200,000"] },
+  { label: "2일", values: ["1,700,000"] },
+  { label: "3일", values: ["2,200,000"] },
+  { label: "4일", values: ["2,750,000"] },
+  { label: "5일", values: ["3,250,000"] },
+  { label: "6일", values: ["3,750,000"] },
+  {
+    label: "1개월",
+    values: ["5,000,000"],
+    sub: "1컷으로 진행시 4,200,000",
+  },
+  { label: "랩핑", values: ["400,000", "500,000"] },
+  {
+    label: "인화지",
+    values: ["700장 기본 제공"],
+    sub: "추가 시 700장 140,000",
+  },
+  {
+    label: "백월",
+    values: ["흰색, 검정, 분홍색 (택1) 50,000\n현수막 100,000", "X"],
+  },
+  {
+    label: "소품",
+    values: ["50,000 / 15종"],
+    sub: "머리띠, 모자, 안경, 가발 외 랜덤",
+  },
+];
+
 export default function RentalBoothPage() {
   return (
     <main>
-      {/* Hero */}
       <section
         className="relative pt-40 pb-32 text-white overflow-hidden"
         style={{
@@ -82,9 +142,24 @@ export default function RentalBoothPage() {
         </div>
       </section>
 
-      {/* PRICING + SPECS at top */}
+      {/* PRODUCT + SPECS */}
       <div id="pricing" className="scroll-mt-24" />
-      <ProductSpecs models={MODELS} title="제품 라인업 · 렌탈 비용" showPricing />
+      <ProductSpecs models={MODELS} title="제품 라인업" />
+
+      {/* PRICING TABLES */}
+      <PricingTable
+        title="일반 포토부스 렌탈비용"
+        models={PRICING_MODELS}
+        rows={NORMAL_PRICING_ROWS}
+        footnote="* 모든금액 vat별도"
+      />
+      <PricingTable
+        title="AI 포토부스 렌탈비용"
+        models={PRICING_MODELS}
+        rows={AI_PRICING_ROWS}
+        footnote="* 모든금액 vat별도"
+      />
+      <div className="h-12 bg-white" />
 
       <ProductFeatures />
       <ProcessSteps variant="rental" />
@@ -104,7 +179,6 @@ export default function RentalBoothPage() {
         </div>
       </section>
 
-      {/* FRAME */}
       <ImageTextRow
         eyebrow="FRAME"
         title={<>브랜드 맞춤 프레임으로<br />행사 퀄리티 UP</>}
@@ -118,7 +192,6 @@ export default function RentalBoothPage() {
         }
       />
 
-      {/* WRAPPING */}
       <ImageTextRow
         bg="#fafafa"
         reverse
@@ -134,7 +207,6 @@ export default function RentalBoothPage() {
         }
       />
 
-      {/* AI FILTER */}
       <ImageTextRow
         eyebrow="AI FILTER"
         title={<>SNS에서 확산되는<br />AI 필터 마케팅</>}
@@ -148,7 +220,6 @@ export default function RentalBoothPage() {
         }
       />
 
-      {/* USER INTERFACE */}
       <ImageTextRow
         bg="#fafafa"
         reverse
@@ -164,7 +235,6 @@ export default function RentalBoothPage() {
         }
       />
 
-      {/* CAMPAIGN SOLUTION */}
       <ImageTextRow
         eyebrow="CAMPAIGN"
         title={<>이벤트·캠페인에 맞춘<br />맞춤형 미니게임</>}
@@ -178,7 +248,6 @@ export default function RentalBoothPage() {
         }
       />
 
-      {/* AI BACKGROUND */}
       <ImageTextRow
         bg="#fafafa"
         reverse
@@ -194,7 +263,6 @@ export default function RentalBoothPage() {
         }
       />
 
-      {/* BACKGROUND SHEET */}
       <ImageTextRow
         eyebrow="BACKGROUND SHEET"
         title={<>브랜드 감성을 살리는</>}
@@ -207,7 +275,6 @@ export default function RentalBoothPage() {
         }
       />
 
-      {/* PHOTO WALL */}
       <ImageTextRow
         bg="#fafafa"
         reverse
@@ -223,7 +290,6 @@ export default function RentalBoothPage() {
         }
       />
 
-      {/* BIGSIZE 4CUT */}
       <section className="py-24 bg-white">
         <div className="mx-auto max-w-[1100px] px-6 lg:px-10 text-center">
           <p className="font-display tracking-[0.4em] text-sm text-[#0a0a0a] font-bold">BIGSIZE 4CUT</p>
@@ -242,10 +308,7 @@ export default function RentalBoothPage() {
         </div>
       </section>
 
-      {/* COMPARISON 자사 vs 타사 */}
       <Comparison />
-
-      {/* FAQ */}
       <FaqAccordion title="포토부스 렌탈 FAQ" />
 
       <CtaBar
