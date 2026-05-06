@@ -16,29 +16,27 @@ export const metadata: Metadata = {
 
 const MODELS = [
   {
-    code: "PHOTO-S-215IA",
-    name: "스탠드 (일자형)",
+    code: "PHOTO-S-215IB",
+    name: "미니스탠드",
     badge: "렌탈가능 모델",
-    image: "/products/stand.jpg",
-    price: "1일 320,000원~",
+    image: "/products/mini-stand.jpg",
     specs: [
       { label: "모니터", value: "21.5인치 정전식 터치모니터" },
       { label: "프린터", value: "염료승화 카드프린터" },
       { label: "카메라", value: "캐논 DSLR / 4K 카메라" },
-      { label: "결제", value: "무료 / 지폐 / 카드 / 쿠폰" },
+      { label: "결제", value: "무료 / 카드 / 쿠폰" },
       { label: "소비전력", value: "350W" },
       { label: "전원", value: "220V, 50/60Hz" },
       { label: "케이스", value: "스틸" },
-      { label: "무게", value: "120kg" },
-      { label: "규격", value: "W800 x D550 x H2025 (mm)" },
+      { label: "무게", value: "100kg" },
+      { label: "규격", value: "W570 x D460 x H1710 (mm)" },
     ],
   },
   {
     code: "PHOTO-B-215O",
-    name: "부스 (박스형)",
+    name: "부스",
     badge: "렌탈가능 모델",
     image: "/products/booth.jpg",
-    price: "1일 480,000원~",
     specs: [
       { label: "모니터", value: "21.5인치 정전식 터치모니터" },
       { label: "프린터", value: "염료승화 카드프린터" },
@@ -84,7 +82,7 @@ export default function RentalCardPage() {
       </section>
 
       <div id="pricing" className="scroll-mt-24" />
-      <ProductSpecs models={MODELS} title="제품 라인업 · 렌탈 비용" showPricing />
+      <ProductSpecs models={MODELS} title="제품 라인업" />
 
       <ProductFeatures />
       <ProcessSteps variant="rental" />
