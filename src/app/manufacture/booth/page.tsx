@@ -132,7 +132,6 @@ export default function ManufactureBoothPage() {
         title={<>SNS에서 확산되는<br />AI 필터 마케팅</>}
         highlight="AI 필터 / 배경 합성"
         description={"스케치, 카툰 스타일, 배경 제거·합성 등 다양한 AI 필터로\n참여형 콘텐츠를 만들어 SNS 확산을 유도합니다."}
-        ctas={[{ label: "AI 필터 바로가기", href: "/inquiry/buy" }]}
         visual={
           <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
             <img src="/products/ai-filter.jpg" alt="AI 필터 예시" className="w-full h-auto" />
@@ -147,7 +146,6 @@ export default function ManufactureBoothPage() {
         title={<>고객을 위한<br />직관적인 포토키오스크 UI</>}
         highlight="우리투컷 UI"
         description={"심플한 화면 구성과 쉬운 흐름으로\n남녀노소 누구나 바로 사용할 수 있습니다."}
-        ctas={[{ label: "프로세스 바로보기", href: "/inquiry/buy" }]}
         visual={<UIShowcase />}
       />
 
@@ -156,7 +154,6 @@ export default function ManufactureBoothPage() {
         title={<>맞춤형 캠페인 솔루션</>}
         highlight="이벤트 통합 운영"
         description={"기획 단계부터 함께. 미니게임·UI·디자인을 결합한\n매장형 통합 솔루션으로 고객 경험을 만듭니다."}
-        ctas={[{ label: "캠페인 솔루션 바로가기", href: "/inquiry/buy" }]}
         visual={
           <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
             <img src="/products/campaign.jpg" alt="캠페인 솔루션" className="w-full h-auto" />

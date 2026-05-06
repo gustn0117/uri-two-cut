@@ -215,7 +215,6 @@ export default function RentalBoothPage() {
         title={<>SNS에서 확산되는<br />AI 필터 마케팅</>}
         highlight="AI 필터 / 배경 합성"
         description={"스케치, 카툰 스타일, 배경 제거·합성 등 다양한 AI 필터로\n참여형 콘텐츠를 만들어 SNS 확산을 유도합니다."}
-        ctas={[{ label: "AI 필터 바로가기", href: "/inquiry/rental" }]}
         visual={
           <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
             <img src="/products/ai-filter.jpg" alt="AI 필터 예시" className="w-full h-auto" />
@@ -230,7 +229,6 @@ export default function RentalBoothPage() {
         title={<>고객을 위한<br />직관적인 포토키오스크 UI</>}
         highlight="우리투컷 UI"
         description={"심플한 화면 구성과 쉬운 흐름으로\n남녀노소 누구나 바로 사용할 수 있습니다.\n색상·디자인·다국어까지 풀 커스터마이징 가능합니다."}
-        ctas={[{ label: "프로세스 바로보기", href: "/inquiry/rental" }]}
         visual={<UIShowcase />}
       />
 
@@ -239,7 +237,6 @@ export default function RentalBoothPage() {
         title={<>이벤트·캠페인에 맞춘<br />맞춤형 미니게임</>}
         highlight="캠페인 솔루션"
         description={"MBTI·룰렛·뽑기·퀴즈 등 참여형 미니게임을 결합해\n브랜드 메시지를 자연스럽게 전달합니다."}
-        ctas={[{ label: "캠페인 솔루션 바로가기", href: "/inquiry/rental" }]}
         visual={
           <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
             <img src="/products/campaign.jpg" alt="캠페인 솔루션" className="w-full h-auto" />
@@ -254,7 +251,6 @@ export default function RentalBoothPage() {
         title={<>원하는 배경으로<br />간편하게</>}
         highlight="AI 배경 변경 필터"
         description={"AI로 촬영한 사진의 배경을 제거하여\n원하는 배경으로 간편하게 교체할 수 있습니다."}
-        ctas={[{ label: "AI 배경 필터 바로가기", href: "/inquiry/rental" }]}
         visual={
           <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
             <img src="/products/ai-bg.jpg" alt="AI 배경 합성" className="w-full h-auto" />
@@ -281,7 +277,6 @@ export default function RentalBoothPage() {
         title={<>고객 맞춤 디자인<br />분위기를 바꿔주는</>}
         highlight="백월 · 현수막"
         description={"고객 맞춤 디자인으로 현장의 분위기를 바꿔주는\n백월 및 현수막을 제작해드립니다."}
-        ctas={[{ label: "백월·현수막 바로가기", href: "/inquiry/rental" }]}
         visual={<PhotoWallShowcase />}
       />
 
