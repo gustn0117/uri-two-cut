@@ -292,13 +292,18 @@ export default function RentalBoothPage() {
             기존의 4컷 사이즈를 넘어, 더 크고 임팩트 있는<br />
             빅사이즈 4컷으로 행사의 분위기를 한층 끌어올립니다.
           </p>
-          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-[700px] mx-auto">
-            {["10cm", "15cm", "20cm", "25cm"].map((s) => (
-              <div key={s} className="aspect-[3/4] rounded-md bg-neutral-900 grid place-items-end p-4">
-                <span className="text-white font-display font-bold">{s}</span>
+          <div className="mt-14 flex justify-center items-end gap-3 sm:gap-5 max-w-[760px] mx-auto px-2">
+            {[10, 15, 20, 25].map((cm) => (
+              <div
+                key={cm}
+                className="aspect-[3/4] rounded-md bg-neutral-900 grid place-items-end p-2 sm:p-3 shadow-md"
+                style={{ width: `clamp(${cm * 4}px, ${cm * 1.4}vw, ${cm * 8}px)` }}
+              >
+                <span className="text-white font-display font-bold text-xs sm:text-sm">{cm}cm</span>
               </div>
             ))}
           </div>
+          <p className="mt-6 text-xs text-neutral-400 tracking-wider">실제 인화 사이즈 비율</p>
         </div>
       </section>
 
