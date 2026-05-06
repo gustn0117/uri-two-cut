@@ -4,6 +4,8 @@ import PricingTable from "@/components/PricingTable";
 import ProcessSteps from "@/components/ProcessSteps";
 import ProductFeatures from "@/components/ProductFeatures";
 import ImageTextRow from "@/components/ImageTextRow";
+import UIShowcase from "@/components/showcases/UIShowcase";
+import PhotoWallShowcase from "@/components/showcases/PhotoWallShowcase";
 import Comparison from "@/components/Comparison";
 import FaqAccordion from "@/components/FaqAccordion";
 import CtaBar from "@/components/CtaBar";
@@ -228,11 +230,7 @@ export default function RentalBoothPage() {
         highlight="우리투컷 UI"
         description={"심플한 화면 구성과 쉬운 흐름으로\n남녀노소 누구나 바로 사용할 수 있습니다.\n색상·디자인·다국어까지 풀 커스터마이징 가능합니다."}
         ctas={[{ label: "프로세스 바로보기", href: "/inquiry/rental" }]}
-        visual={
-          <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
-            <img src="/products/ui.jpg" alt="UI 샘플" className="w-full h-auto" />
-          </div>
-        }
+        visual={<UIShowcase />}
       />
 
       <ImageTextRow
@@ -283,11 +281,7 @@ export default function RentalBoothPage() {
         highlight="백월 · 현수막"
         description={"고객 맞춤 디자인으로 현장의 분위기를 바꿔주는\n백월 및 현수막을 제작해드립니다."}
         ctas={[{ label: "백월·현수막 바로가기", href: "/inquiry/rental" }]}
-        visual={
-          <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
-            <img src="/products/photo-wall.jpg" alt="백월 / 현수막" className="w-full h-auto" />
-          </div>
-        }
+        visual={<PhotoWallShowcase />}
       />
 
       <section className="py-24 bg-white">

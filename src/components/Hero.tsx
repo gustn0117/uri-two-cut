@@ -8,12 +8,12 @@ export default function Hero() {
     >
       <HeroBackgroundSlider />
 
-      {/* Strong overlay so the marquee stays subtle behind the headline */}
+      {/* Overlay so marquee stays subtle behind headline — eased on mobile so photos are visible */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(180deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.72) 50%, rgba(0,0,0,0.92) 100%)",
+            "linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.85) 100%)",
         }}
       />
 
