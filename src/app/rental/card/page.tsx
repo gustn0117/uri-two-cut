@@ -4,6 +4,7 @@ import ProcessSteps from "@/components/ProcessSteps";
 import ProductFeatures from "@/components/ProductFeatures";
 import ImageTextRow from "@/components/ImageTextRow";
 import UIShowcase from "@/components/showcases/UIShowcase";
+import { FRAMES_GALLERY, WRAPPING_GALLERY } from "@/lib/galleries";
 import Comparison from "@/components/Comparison";
 import FaqAccordion from "@/components/FaqAccordion";
 import CtaBar from "@/components/CtaBar";
@@ -94,7 +95,7 @@ export default function RentalCardPage() {
         title={<>브랜드 아이덴티티를 담은</>}
         highlight="카드디자인"
         description={"기업/기관/팬덤 굿즈에 어울리는 카드 디자인을\n현장 콘셉트에 맞춰 풀커스텀으로 제작합니다."}
-        ctas={[{ label: "카드디자인 바로가기", href: "/inquiry/rental" }]}
+        ctas={[{ label: "카드디자인 갤러리", gallery: FRAMES_GALLERY, galleryTitle: "카드 디자인" }]}
         visual={
           <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
             <img src="/products/frames.jpg" alt="카드 디자인 샘플" className="w-full h-auto" />
@@ -110,7 +111,7 @@ export default function RentalCardPage() {
         title={<>눈에 띄는 카드 키오스크,<br />강력한 브랜딩 효과</>}
         highlight="랩핑디자인"
         description={"전면·측면·후면 모두 원하는 비주얼로 커스터마이징 가능해,\n포토존을 브랜드 홍보 매체로 탈바꿈시킵니다."}
-        ctas={[{ label: "랩핑디자인 바로가기", href: "/inquiry/rental" }]}
+        ctas={[{ label: "랩핑디자인 갤러리", gallery: WRAPPING_GALLERY, galleryTitle: "랩핑 디자인" }]}
         visual={
           <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
             <img src="/products/wrapping.jpg" alt="랩핑 디자인 샘플" className="w-full h-auto" />

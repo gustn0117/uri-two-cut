@@ -1,12 +1,17 @@
 import Link from "next/link";
 import { Search } from "@/components/icons";
+import GalleryButton from "@/components/GalleryButton";
+
+export type Cta =
+  | { label: string; href: string }
+  | { label: string; gallery: string[]; galleryTitle?: string };
 
 type Props = {
   eyebrow: string;
   title: React.ReactNode;
   highlight?: string;
   description: string;
-  ctas?: { label: string; href: string }[];
+  ctas?: Cta[];
   reverse?: boolean;
   visual: React.ReactNode;
   bg?: string;
@@ -46,21 +51,34 @@ export default function ImageTextRow({
             </p>
             {ctas && (
               <div className="mt-8 flex flex-wrap gap-3">
-                {ctas.map((c, i) => (
-                  <Link
-                    key={c.href}
-                    href={c.href}
-                    className={`inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition ${
-                      i === 0
-                        ? "bg-[#0a0a0a] hover:bg-[#262626]"
-                        : "border border-neutral-300 hover:bg-neutral-50"
-                    }`}
-                    style={{ color: i === 0 ? "#ffffff" : "#404040" }}
-                  >
-                    <Search className="w-4 h-4" />
-                    {c.label}
-                  </Link>
-                ))}
+                {ctas.map((c, i) => {
+                  if ("gallery" in c) {
+                    return (
+                      <GalleryButton
+                        key={`${c.label}-${i}`}
+                        label={c.label}
+                        images={c.gallery}
+                        galleryTitle={c.galleryTitle}
+                        primary={i === 0}
+                      />
+                    );
+                  }
+                  return (
+                    <Link
+                      key={c.href}
+                      href={c.href}
+                      className={`inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition ${
+                        i === 0
+                          ? "bg-[#0a0a0a] hover:bg-[#262626]"
+                          : "border border-neutral-300 hover:bg-neutral-50"
+                      }`}
+                      style={{ color: i === 0 ? "#ffffff" : "#404040" }}
+                    >
+                      <Search className="w-4 h-4" />
+                      {c.label}
+                    </Link>
+                  );
+                })}
               </div>
             )}
           </div>
