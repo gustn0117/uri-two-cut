@@ -469,6 +469,7 @@ type StaticProject = Project & { editable: false };
 type AnyProject = DbProject | StaticProject;
 
 const VALID_CATEGORIES = [
+  "설치사례",
   "기업·관공서",
   "교육·학교",
   "페스티벌·축제",

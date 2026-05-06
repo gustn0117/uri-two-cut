@@ -5,6 +5,7 @@ import crypto from "crypto";
 
 const BUCKET = "uri-two-cut-projects";
 const VALID_CATEGORIES = [
+  "설치사례",
   "기업·관공서",
   "교육·학교",
   "페스티벌·축제",
