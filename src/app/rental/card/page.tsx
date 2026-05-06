@@ -19,7 +19,7 @@ const MODELS = [
     code: "PHOTO-S-215IB",
     name: "미니스탠드",
     badge: "렌탈가능 모델",
-    image: "/products/mini-stand.jpg",
+    image: "/products/linear-booth.jpg",
     specs: [
       { label: "모니터", value: "21.5인치 정전식 터치모니터" },
       { label: "프린터", value: "염료승화 카드프린터" },
@@ -36,7 +36,7 @@ const MODELS = [
     code: "PHOTO-B-215O",
     name: "부스",
     badge: "렌탈가능 모델",
-    image: "/products/booth.jpg",
+    image: "/products/box-booth.jpg",
     specs: [
       { label: "모니터", value: "21.5인치 정전식 터치모니터" },
       { label: "프린터", value: "염료승화 카드프린터" },

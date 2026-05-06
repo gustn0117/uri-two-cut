@@ -19,7 +19,7 @@ const MODELS = [
     code: "PHOTO-S-215IB",
     name: "미니스탠드",
     badge: "구매가능 모델",
-    image: "/products/mini-stand.jpg",
+    image: "/products/linear-booth.jpg",
     price: "별도 문의",
     specs: [
       { label: "모니터", value: "21.5인치 정전식 터치모니터" },
@@ -37,7 +37,7 @@ const MODELS = [
     code: "PHOTO-S-215IA",
     name: "스탠드 (일자형)",
     badge: "구매가능 모델",
-    image: "/products/stand.jpg",
+    image: "/products/linear-booth.jpg",
     price: "별도 문의",
     specs: [
       { label: "모니터", value: "21.5인치 정전식 터치모니터" },
@@ -55,7 +55,7 @@ const MODELS = [
     code: "PHOTO-B-215O",
     name: "부스 (박스형)",
     badge: "구매가능 모델",
-    image: "/products/booth.jpg",
+    image: "/products/box-booth.jpg",
     price: "별도 문의",
     specs: [
       { label: "모니터", value: "21.5인치 정전식 터치모니터" },
