@@ -18,7 +18,7 @@ export default function Hero() {
       />
 
       <div className="relative z-10 mx-auto max-w-[1400px] w-full px-6 lg:px-10 pb-24 pt-40">
-        <div className="grid lg:grid-cols-[minmax(0,1fr)_440px] gap-10 items-end">
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_520px] gap-10 items-end">
           <div>
             <p className="text-sm md:text-base tracking-wide opacity-80 mb-6 animate-float-up">
               브랜드를 경험으로, 공간을 자산으로

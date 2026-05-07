@@ -134,6 +134,26 @@ export async function POST(req: Request) {
   }
 }
 
+export async function PATCH(req: Request) {
+  if (!(await isAuthenticated())) {
+    return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  }
+  const body = (await req.json()) as { id?: string; hero_featured?: boolean };
+  if (!body.id) return NextResponse.json({ error: "id required" }, { status: 400 });
+
+  const updates: Record<string, unknown> = {};
+  if (typeof body.hero_featured === "boolean") {
+    updates.hero_featured = body.hero_featured;
+  }
+  if (Object.keys(updates).length === 0) {
+    return NextResponse.json({ error: "no valid fields to update" }, { status: 400 });
+  }
+
+  const { error } = await supabaseAdmin.from("projects").update(updates).eq("id", body.id);
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  return NextResponse.json({ ok: true });
+}
+
 export async function DELETE(req: Request) {
   if (!(await isAuthenticated())) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });

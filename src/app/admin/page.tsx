@@ -464,8 +464,8 @@ function InquiriesView({
   );
 }
 
-type DbProject = Project & { editable: true };
-type StaticProject = Project & { editable: false };
+type DbProject = Project & { editable: true; hero_featured: boolean };
+type StaticProject = Project & { editable: false; hero_featured: false };
 type AnyProject = DbProject | StaticProject;
 
 const VALID_CATEGORIES = [
@@ -500,6 +500,7 @@ function ProjectsView({ projects }: { projects: Project[] }) {
         category: p.category as string,
         cover: (p.cover as string | null) ?? "",
         photos: (p.photos as string[]) ?? [],
+        hero_featured: Boolean(p.hero_featured),
         editable: true as const,
       }))
     );
@@ -510,9 +511,29 @@ function ProjectsView({ projects }: { projects: Project[] }) {
   }, [loadDb]);
 
   const merged: AnyProject[] = useMemo(() => {
-    const staticOnes: StaticProject[] = projects.map((p) => ({ ...p, editable: false as const }));
+    const staticOnes: StaticProject[] = projects.map((p) => ({ ...p, editable: false as const, hero_featured: false as const }));
     return [...dbProjects, ...staticOnes];
   }, [dbProjects, projects]);
+
+  const featuredCount = dbProjects.filter((p) => p.hero_featured).length;
+
+  async function toggleHeroFeatured(id: string, next: boolean) {
+    if (next && featuredCount >= 6) {
+      alert("Hero에 노출할 수 있는 프로젝트는 최대 6개입니다. 다른 항목을 먼저 해제해 주세요.");
+      return;
+    }
+    const prev = dbProjects;
+    setDbProjects((rows) => rows.map((r) => (r.id === id ? { ...r, hero_featured: next } : r)));
+    const res = await fetch("/api/admin/projects", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, hero_featured: next }),
+    });
+    if (!res.ok) {
+      setDbProjects(prev);
+      alert("Hero 노출 상태 변경 실패");
+    }
+  }
 
   const categories = useMemo(() => {
     const set = new Set<string>();
@@ -563,6 +584,8 @@ function ProjectsView({ projects }: { projects: Project[] }) {
           <h2 className="font-display font-bold text-2xl">프로젝트 아카이브</h2>
           <p className="text-sm text-neutral-500 mt-1">
             등록 {dbProjects.length}건 · 아카이브 {projects.length}건 · 표시 {visible.length}건
+            {" · "}
+            <span className="text-amber-700 font-semibold">Hero 노출 {featuredCount}/6</span>
           </p>
         </div>
         <div className="flex gap-2 w-full sm:w-auto">
@@ -606,16 +629,35 @@ function ProjectsView({ projects }: { projects: Project[] }) {
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {visible.map((p) => (
-            <button
+            <div
               key={p.id}
-              onClick={() => setOpenId(p.id)}
-              className="group text-left rounded-lg overflow-hidden bg-white border border-neutral-200 hover:shadow-md transition relative"
+              className="group rounded-lg overflow-hidden bg-white border border-neutral-200 hover:shadow-md transition relative"
             >
+              {p.editable && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleHeroFeatured(p.id, !p.hero_featured);
+                  }}
+                  title={p.hero_featured ? "Hero 노출 해제" : "Hero 노출 등록"}
+                  className={`absolute top-2 left-2 z-10 w-8 h-8 grid place-items-center rounded-full text-base font-bold transition shadow-sm ${
+                    p.hero_featured
+                      ? "bg-amber-400 text-amber-950 hover:bg-amber-300"
+                      : "bg-white/90 text-neutral-400 hover:bg-white hover:text-amber-500"
+                  }`}
+                >
+                  {p.hero_featured ? "★" : "☆"}
+                </button>
+              )}
               {p.editable && (
                 <span className="absolute top-2 right-2 z-10 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-bold border border-emerald-200">
                   등록
                 </span>
               )}
+              <button
+                onClick={() => setOpenId(p.id)}
+                className="block w-full text-left"
+              >
               <div className="aspect-[4/3] bg-neutral-100 overflow-hidden">
                 {p.cover ? (
                   <img
@@ -633,7 +675,8 @@ function ProjectsView({ projects }: { projects: Project[] }) {
                 <h4 className="text-sm font-bold leading-snug mt-1 line-clamp-2 min-h-[2.5em]">{p.title}</h4>
                 <p className="text-[11px] text-neutral-400 mt-1">{p.date ?? ""}</p>
               </div>
-            </button>
+              </button>
+            </div>
           ))}
         </div>
       )}
