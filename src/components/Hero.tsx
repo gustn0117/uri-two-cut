@@ -1,4 +1,5 @@
 import HeroBackgroundSlider from "@/components/HeroBackgroundSlider";
+import HeroFeaturedCases from "@/components/HeroFeaturedCases";
 
 export default function Hero() {
   return (
@@ -8,7 +9,6 @@ export default function Hero() {
     >
       <HeroBackgroundSlider />
 
-      {/* Overlay so marquee stays subtle behind headline — eased on mobile so photos are visible */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -18,39 +18,45 @@ export default function Hero() {
       />
 
       <div className="relative z-10 mx-auto max-w-[1400px] w-full px-6 lg:px-10 pb-24 pt-40">
-        <p className="text-sm md:text-base tracking-wide opacity-80 mb-6 animate-float-up">
-          브랜드를 경험으로, 공간을 자산으로
-        </p>
-        <h1 className="font-display font-black leading-[0.9] text-[18vw] md:text-[10vw] lg:text-[160px] tracking-tight animate-float-up drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
-          우리투컷
-        </h1>
-        <p className="font-display font-bold text-2xl md:text-4xl lg:text-5xl mt-4 opacity-95 animate-float-up drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
-          프리미엄 포토부스
-        </p>
-        <p className="mt-8 max-w-2xl text-base md:text-lg opacity-90 animate-float-up">
-          맞춤형 포토 키오스크 <strong>제작 · 구매 · 렌탈</strong> 서비스 우리투컷
-        </p>
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_440px] gap-10 items-end">
+          <div>
+            <p className="text-sm md:text-base tracking-wide opacity-80 mb-6 animate-float-up">
+              브랜드를 경험으로, 공간을 자산으로
+            </p>
+            <h1 className="font-display font-black leading-[0.9] text-[18vw] md:text-[10vw] lg:text-[140px] tracking-tight animate-float-up drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
+              우리투컷
+            </h1>
+            <p className="font-display font-bold text-2xl md:text-4xl lg:text-5xl mt-4 opacity-95 animate-float-up drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
+              프리미엄 포토부스
+            </p>
+            <p className="mt-8 max-w-2xl text-base md:text-lg opacity-90 animate-float-up">
+              맞춤형 포토 키오스크 <strong>제작 · 구매 · 렌탈</strong> 서비스 우리투컷
+            </p>
 
-        <div className="mt-12 flex flex-wrap gap-3">
-          <a
-            href="/inquiry/rental"
-            className="px-7 py-3.5 rounded-full bg-white hover:bg-neutral-100 font-semibold transition-colors"
-            style={{ color: "#0a0a0a" }}
-          >
-            렌탈 문의하기
-          </a>
-          <a
-            href="/rental/booth#pricing"
-            className="px-7 py-3.5 rounded-full border border-white/50 hover:bg-white/10 transition-colors font-semibold backdrop-blur-sm"
-          >
-            렌탈비용 보기
-          </a>
-          <a
-            href="/inquiry/buy"
-            className="px-7 py-3.5 rounded-full border border-white/50 hover:bg-white/10 transition-colors font-semibold backdrop-blur-sm"
-          >
-            판매 문의하기
-          </a>
+            <div className="mt-12 flex flex-wrap gap-3">
+              <a
+                href="/inquiry/rental"
+                className="px-7 py-3.5 rounded-full bg-white hover:bg-neutral-100 font-semibold transition-colors"
+                style={{ color: "#0a0a0a" }}
+              >
+                렌탈 문의하기
+              </a>
+              <a
+                href="/rental/booth#pricing"
+                className="px-7 py-3.5 rounded-full border border-white/50 hover:bg-white/10 transition-colors font-semibold backdrop-blur-sm"
+              >
+                렌탈비용 보기
+              </a>
+              <a
+                href="/inquiry/buy"
+                className="px-7 py-3.5 rounded-full border border-white/50 hover:bg-white/10 transition-colors font-semibold backdrop-blur-sm"
+              >
+                판매 문의하기
+              </a>
+            </div>
+          </div>
+
+          <HeroFeaturedCases />
         </div>
       </div>
 
