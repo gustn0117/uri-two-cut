@@ -34,7 +34,7 @@ export default function HeroFeaturedCases() {
   const six = items.slice(0, 6);
 
   return (
-    <aside className="hidden lg:block w-full max-w-[520px]">
+    <aside className="w-full max-w-[520px] mt-10 lg:mt-0">
       <div className="flex items-end justify-between mb-5">
         <div>
           <p className="text-[10px] tracking-[0.4em] opacity-70 text-white">FEATURED</p>
