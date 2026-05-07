@@ -12,10 +12,12 @@ export default function ProductSpecs({
   title = "제품소개.",
   models,
   showPricing = false,
+  wrappable = false,
 }: {
   title?: string;
   models: Model[];
   showPricing?: boolean;
+  wrappable?: boolean;
 }) {
   return (
     <section className="py-24 lg:py-32 bg-white">
@@ -50,6 +52,14 @@ export default function ProductSpecs({
                   </span>
                 )}
               </div>
+              {wrappable && (
+                <p
+                  className="-mt-2 mb-3 text-center font-bold text-sm tracking-tight"
+                  style={{ color: "#dc2626" }}
+                >
+                  (포토부스 랩핑가능)
+                </p>
+              )}
               <p className="text-xs tracking-widest text-neutral-500">{m.code}</p>
               <h3 className="mt-1 font-display font-black text-3xl">{m.name}</h3>
               {showPricing && m.price && (

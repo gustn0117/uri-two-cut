@@ -138,12 +138,32 @@ export async function PATCH(req: Request) {
   if (!(await isAuthenticated())) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
-  const body = (await req.json()) as { id?: string; hero_featured?: boolean };
+  const body = (await req.json()) as {
+    id?: string;
+    hero_featured?: boolean;
+    title?: string;
+    category?: string;
+    event_date?: string | null;
+  };
   if (!body.id) return NextResponse.json({ error: "id required" }, { status: 400 });
 
   const updates: Record<string, unknown> = {};
   if (typeof body.hero_featured === "boolean") {
     updates.hero_featured = body.hero_featured;
+  }
+  if (typeof body.title === "string") {
+    const t = body.title.trim();
+    if (!t) return NextResponse.json({ error: "제목은 비울 수 없습니다" }, { status: 400 });
+    updates.title = t.slice(0, 200);
+  }
+  if (typeof body.category === "string") {
+    if (!VALID_CATEGORIES.includes(body.category)) {
+      return NextResponse.json({ error: "유효하지 않은 카테고리" }, { status: 400 });
+    }
+    updates.category = body.category;
+  }
+  if (body.event_date !== undefined) {
+    updates.event_date = body.event_date || null;
   }
   if (Object.keys(updates).length === 0) {
     return NextResponse.json({ error: "no valid fields to update" }, { status: 400 });

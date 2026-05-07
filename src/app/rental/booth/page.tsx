@@ -147,7 +147,7 @@ export default function RentalBoothPage() {
 
       {/* PRODUCT + SPECS */}
       <div id="pricing" className="scroll-mt-24" />
-      <ProductSpecs models={MODELS} title="제품 라인업" />
+      <ProductSpecs models={MODELS} title="제품 라인업" wrappable />
 
       {/* PRICING TABLES */}
       <PricingTable

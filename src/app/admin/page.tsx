@@ -488,6 +488,11 @@ function ProjectsView({ projects }: { projects: Project[] }) {
   const [showAdd, setShowAdd] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
   const [dbProjects, setDbProjects] = useState<DbProject[]>([]);
+  const [editing, setEditing] = useState(false);
+  const [editTitle, setEditTitle] = useState("");
+  const [editCategory, setEditCategory] = useState("");
+  const [editDate, setEditDate] = useState("");
+  const [savingEdit, setSavingEdit] = useState(false);
 
   const loadDb = useCallback(async () => {
     const res = await fetch("/api/admin/projects", { cache: "no-store" });
@@ -562,6 +567,11 @@ function ProjectsView({ projects }: { projects: Project[] }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [openId]);
 
+  // Reset edit state when lightbox closes or target changes
+  useEffect(() => {
+    setEditing(false);
+  }, [openId]);
+
   async function deleteDbProject(id: string) {
     if (!confirm("이 프로젝트를 삭제할까요? 업로드된 사진도 함께 삭제됩니다.")) return;
     const res = await fetch("/api/admin/projects", {
@@ -576,6 +586,30 @@ function ProjectsView({ projects }: { projects: Project[] }) {
     }
     setOpenId(null);
     await loadDb();
+  }
+
+  async function saveDbProject(
+    id: string,
+    fields: { title: string; category: string; event_date: string | null }
+  ) {
+    const res = await fetch("/api/admin/projects", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, ...fields }),
+    });
+    if (!res.ok) {
+      const j = await res.json().catch(() => ({}));
+      alert("수정 실패: " + (j.error || "unknown"));
+      return false;
+    }
+    setDbProjects((rows) =>
+      rows.map((r) =>
+        r.id === id
+          ? { ...r, title: fields.title, category: fields.category, date: fields.event_date }
+          : r
+      )
+    );
+    return true;
   }
 
   return (
@@ -778,19 +812,95 @@ function ProjectsView({ projects }: { projects: Project[] }) {
             className="mx-auto max-w-[1100px] p-6 lg:p-10"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="text-white mb-6 flex items-start justify-between gap-4">
-              <div>
-                <p className="text-xs tracking-[0.4em] opacity-70">{open.category}</p>
-                <h3 className="font-display font-bold text-2xl md:text-3xl mt-2">{open.title}</h3>
-                <p className="text-sm opacity-60 mt-1">{open.date ?? ""}</p>
-              </div>
+            <div className="text-white mb-6 flex items-start justify-between gap-4 flex-wrap">
+              {editing && open.editable ? (
+                <div className="flex-1 min-w-[260px] grid gap-2">
+                  <select
+                    value={editCategory}
+                    onChange={(e) => setEditCategory(e.target.value)}
+                    className="h-9 px-3 rounded-md bg-white/10 border border-white/30 text-white text-xs tracking-[0.2em]"
+                  >
+                    {VALID_CATEGORIES.map((c) => (
+                      <option key={c} value={c} className="text-black">
+                        {c}
+                      </option>
+                    ))}
+                  </select>
+                  <input
+                    type="text"
+                    value={editTitle}
+                    onChange={(e) => setEditTitle(e.target.value)}
+                    placeholder="제목"
+                    className="h-11 px-3 rounded-md bg-white/10 border border-white/30 text-white font-display font-bold text-xl"
+                  />
+                  <input
+                    type="date"
+                    value={editDate}
+                    onChange={(e) => setEditDate(e.target.value)}
+                    className="h-9 px-3 rounded-md bg-white/10 border border-white/30 text-white text-sm"
+                  />
+                </div>
+              ) : (
+                <div>
+                  <p className="text-xs tracking-[0.4em] opacity-70">{open.category}</p>
+                  <h3 className="font-display font-bold text-2xl md:text-3xl mt-2">{open.title}</h3>
+                  <p className="text-sm opacity-60 mt-1">{open.date ?? ""}</p>
+                </div>
+              )}
               {open.editable && (
-                <button
-                  onClick={() => deleteDbProject(open.id)}
-                  className="h-9 px-4 rounded-md text-sm border border-red-300/50 text-red-200 hover:bg-red-500/20 whitespace-nowrap"
-                >
-                  삭제
-                </button>
+                <div className="flex gap-2">
+                  {editing ? (
+                    <>
+                      <button
+                        disabled={savingEdit}
+                        onClick={async () => {
+                          if (!editTitle.trim()) {
+                            alert("제목을 입력해주세요.");
+                            return;
+                          }
+                          setSavingEdit(true);
+                          const ok = await saveDbProject(open.id, {
+                            title: editTitle.trim(),
+                            category: editCategory,
+                            event_date: editDate || null,
+                          });
+                          setSavingEdit(false);
+                          if (ok) setEditing(false);
+                        }}
+                        className="h-9 px-4 rounded-md text-sm bg-emerald-500 hover:bg-emerald-400 text-white font-semibold disabled:opacity-50 whitespace-nowrap"
+                      >
+                        {savingEdit ? "저장중..." : "저장"}
+                      </button>
+                      <button
+                        disabled={savingEdit}
+                        onClick={() => setEditing(false)}
+                        className="h-9 px-4 rounded-md text-sm border border-white/30 text-white hover:bg-white/10 whitespace-nowrap"
+                      >
+                        취소
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        onClick={() => {
+                          setEditTitle(open.title);
+                          setEditCategory(open.category);
+                          setEditDate(open.date ?? "");
+                          setEditing(true);
+                        }}
+                        className="h-9 px-4 rounded-md text-sm bg-white/10 hover:bg-white/20 text-white border border-white/30 whitespace-nowrap"
+                      >
+                        수정
+                      </button>
+                      <button
+                        onClick={() => deleteDbProject(open.id)}
+                        className="h-9 px-4 rounded-md text-sm border border-red-300/50 text-red-200 hover:bg-red-500/20 whitespace-nowrap"
+                      >
+                        삭제
+                      </button>
+                    </>
+                  )}
+                </div>
               )}
             </div>
             <div className="grid gap-4">

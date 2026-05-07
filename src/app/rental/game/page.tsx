@@ -57,7 +57,7 @@ export default function RentalGamePage() {
         </div>
       </section>
 
-      <ProductSpecs models={MODELS} />
+      <ProductSpecs models={MODELS} wrappable />
       <ProcessSteps variant="rental" />
 
       {/* OUR CREATOR */}
