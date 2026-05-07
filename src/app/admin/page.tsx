@@ -624,6 +624,71 @@ function ProjectsView({ projects }: { projects: Project[] }) {
         />
       )}
 
+      {/* Hero featured panel */}
+      <div className="bg-amber-50/50 rounded-2xl border border-amber-200 p-5 lg:p-6 mb-6">
+        <div className="flex items-end justify-between gap-3 mb-4 flex-wrap">
+          <div>
+            <p className="text-[10px] tracking-[0.4em] text-amber-700 font-bold">★ HERO 노출</p>
+            <h3 className="mt-1 font-display font-bold text-lg">메인 페이지 주요 설치사례</h3>
+            <p className="mt-1 text-xs text-neutral-500">
+              홈 화면 상단에 표시할 6개 프로젝트를 선택하세요.
+            </p>
+          </div>
+          <span className="text-sm font-semibold text-amber-700">
+            {featuredCount}/6 등록됨
+          </span>
+        </div>
+        <div className="grid grid-cols-3 sm:grid-cols-6 gap-2.5">
+          {Array.from({ length: 6 }).map((_, i) => {
+            const featured = dbProjects.filter((p) => p.hero_featured)[i];
+            if (featured) {
+              return (
+                <div
+                  key={featured.id}
+                  className="relative aspect-[4/3] rounded-lg overflow-hidden border-2 border-amber-300 bg-white group"
+                >
+                  {featured.cover && (
+                    <img
+                      src={featured.cover}
+                      alt={featured.title}
+                      className="w-full h-full object-cover"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                  <div className="absolute top-1 left-1 w-5 h-5 grid place-items-center rounded-full bg-amber-400 text-amber-950 text-[10px] font-bold">
+                    {i + 1}
+                  </div>
+                  <button
+                    onClick={() => toggleHeroFeatured(featured.id, false)}
+                    title="Hero 노출 해제"
+                    className="absolute top-1 right-1 w-7 h-7 grid place-items-center rounded-full bg-black/70 hover:bg-red-600 text-white text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    ×
+                  </button>
+                  <p className="absolute bottom-1 left-2 right-2 text-white text-[10px] font-bold leading-tight line-clamp-1 drop-shadow">
+                    {featured.title}
+                  </p>
+                </div>
+              );
+            }
+            return (
+              <div
+                key={`empty-${i}`}
+                className="aspect-[4/3] rounded-lg border-2 border-dashed border-amber-300/60 bg-white/40 grid place-items-center"
+              >
+                <div className="text-center text-amber-500/70">
+                  <p className="text-base font-bold">+</p>
+                  <p className="text-[9px] mt-0.5">슬롯 {i + 1}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <p className="mt-3 text-[11px] text-neutral-500">
+          ↓ 아래 프로젝트 카드의 <span className="text-amber-600 font-bold">★</span> 버튼으로 등록/해제할 수 있습니다.
+        </p>
+      </div>
+
       {visible.length === 0 ? (
         <p className="text-center text-sm text-neutral-500 py-16">조건에 맞는 이벤트가 없습니다.</p>
       ) : (
