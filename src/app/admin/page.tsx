@@ -489,6 +489,7 @@ function ProjectsView({ projects }: { projects: Project[] }) {
   const [showPicker, setShowPicker] = useState(false);
   const [dbProjects, setDbProjects] = useState<DbProject[]>([]);
   const [editing, setEditing] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [editTitle, setEditTitle] = useState("");
   const [editCategory, setEditCategory] = useState("");
   const [editDate, setEditDate] = useState("");
@@ -737,6 +738,21 @@ function ProjectsView({ projects }: { projects: Project[] }) {
         />
       )}
 
+      {editingId && (() => {
+        const target = dbProjects.find((p) => p.id === editingId);
+        if (!target) return null;
+        return (
+          <EditProjectModal
+            project={target}
+            onClose={() => setEditingId(null)}
+            onSave={async (fields) => {
+              const ok = await saveDbProject(target.id, fields);
+              if (ok) setEditingId(null);
+            }}
+          />
+        );
+      })()}
+
       {visible.length === 0 ? (
         <p className="text-center text-sm text-neutral-500 py-16">조건에 맞는 이벤트가 없습니다.</p>
       ) : (
@@ -789,6 +805,38 @@ function ProjectsView({ projects }: { projects: Project[] }) {
                 <p className="text-[11px] text-neutral-400 mt-1">{p.date ?? ""}</p>
               </div>
               </button>
+              {p.editable && (
+                <div className="flex border-t border-neutral-200">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setEditTitle(p.title);
+                      setEditCategory(p.category);
+                      setEditDate(p.date ?? "");
+                      setEditingId(p.id);
+                    }}
+                    className="flex-1 py-2.5 text-xs font-semibold text-neutral-700 hover:bg-neutral-50 transition flex items-center justify-center gap-1"
+                  >
+                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                    </svg>
+                    수정
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      deleteDbProject(p.id);
+                    }}
+                    className="flex-1 py-2.5 text-xs font-semibold text-red-600 hover:bg-red-50 transition border-l border-neutral-200 flex items-center justify-center gap-1"
+                  >
+                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                    </svg>
+                    삭제
+                  </button>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -1215,6 +1263,121 @@ function HeroPickerModal({
             </button>
           </footer>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function EditProjectModal({
+  project,
+  onClose,
+  onSave,
+}: {
+  project: DbProject;
+  onClose: () => void;
+  onSave: (fields: { title: string; category: string; event_date: string | null }) => Promise<void>;
+}) {
+  const [title, setTitle] = useState(project.title);
+  const [category, setCategory] = useState(project.category);
+  const [date, setDate] = useState(project.date ?? "");
+  const [saving, setSaving] = useState(false);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm overflow-y-auto"
+      onClick={() => !saving && onClose()}
+    >
+      <div
+        className="min-h-full flex items-start justify-center p-4 sm:p-8"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <form
+          onSubmit={async (e) => {
+            e.preventDefault();
+            if (!title.trim()) {
+              alert("제목을 입력해주세요.");
+              return;
+            }
+            setSaving(true);
+            await onSave({ title: title.trim(), category, event_date: date || null });
+            setSaving(false);
+          }}
+          className="bg-white rounded-2xl w-full max-w-lg shadow-2xl my-auto"
+        >
+          <header className="flex items-center justify-between px-5 py-4 border-b border-neutral-200">
+            <div>
+              <p className="text-[10px] tracking-[0.4em] text-neutral-500 font-bold">EDIT PROJECT</p>
+              <h3 className="font-display font-bold text-lg mt-0.5">프로젝트 수정</h3>
+            </div>
+            <button
+              type="button"
+              onClick={onClose}
+              disabled={saving}
+              className="w-8 h-8 grid place-items-center rounded-full hover:bg-neutral-100 text-neutral-500 disabled:opacity-50"
+              aria-label="닫기"
+            >
+              ×
+            </button>
+          </header>
+
+          <div className="p-5 grid gap-4">
+            {project.cover && (
+              <div className="aspect-[4/3] rounded-lg overflow-hidden bg-neutral-100">
+                <img src={project.cover} alt={project.title} className="w-full h-full object-cover" />
+              </div>
+            )}
+            <div className="grid gap-1.5">
+              <label className="text-xs font-semibold text-neutral-600">제목</label>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+                maxLength={200}
+                className="h-10 px-3 rounded-md border border-neutral-300 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-300"
+              />
+            </div>
+            <div className="grid gap-1.5">
+              <label className="text-xs font-semibold text-neutral-600">카테고리</label>
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="h-10 px-3 rounded-md border border-neutral-300 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-300"
+              >
+                {VALID_CATEGORIES.map((c) => (
+                  <option key={c} value={c}>{c}</option>
+                ))}
+              </select>
+            </div>
+            <div className="grid gap-1.5">
+              <label className="text-xs font-semibold text-neutral-600">진행일자 (선택)</label>
+              <input
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                className="h-10 px-3 rounded-md border border-neutral-300 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-300"
+              />
+            </div>
+          </div>
+
+          <footer className="px-5 py-3 border-t border-neutral-200 flex justify-end gap-2">
+            <button
+              type="button"
+              onClick={onClose}
+              disabled={saving}
+              className="h-9 px-4 rounded-md border border-neutral-300 hover:bg-neutral-50 text-sm font-semibold disabled:opacity-50"
+            >
+              취소
+            </button>
+            <button
+              type="submit"
+              disabled={saving}
+              className="h-9 px-5 rounded-md bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-semibold disabled:opacity-50"
+            >
+              {saving ? "저장 중..." : "저장"}
+            </button>
+          </footer>
+        </form>
       </div>
     </div>
   );
