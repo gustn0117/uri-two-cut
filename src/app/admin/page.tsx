@@ -486,6 +486,7 @@ function ProjectsView({ projects }: { projects: Project[] }) {
   const [q, setQ] = useState("");
   const [openId, setOpenId] = useState<string | null>(null);
   const [showAdd, setShowAdd] = useState(false);
+  const [showPicker, setShowPicker] = useState(false);
   const [dbProjects, setDbProjects] = useState<DbProject[]>([]);
 
   const loadDb = useCallback(async () => {
@@ -672,22 +673,35 @@ function ProjectsView({ projects }: { projects: Project[] }) {
               );
             }
             return (
-              <div
+              <button
                 key={`empty-${i}`}
-                className="aspect-[4/3] rounded-lg border-2 border-dashed border-amber-300/60 bg-white/40 grid place-items-center"
+                onClick={() => setShowPicker(true)}
+                className="aspect-[4/3] rounded-lg border-2 border-dashed border-amber-300 bg-white/60 hover:bg-amber-100 hover:border-amber-400 grid place-items-center transition cursor-pointer"
               >
-                <div className="text-center text-amber-500/70">
-                  <p className="text-base font-bold">+</p>
-                  <p className="text-[9px] mt-0.5">슬롯 {i + 1}</p>
+                <div className="text-center text-amber-600">
+                  <p className="text-2xl font-bold leading-none">+</p>
+                  <p className="text-[10px] mt-1 font-semibold">슬롯 {i + 1}</p>
+                  <p className="text-[9px] opacity-70">클릭해서 등록</p>
                 </div>
-              </div>
+              </button>
             );
           })}
         </div>
         <p className="mt-3 text-[11px] text-neutral-500">
-          ↓ 아래 프로젝트 카드의 <span className="text-amber-600 font-bold">★</span> 버튼으로 등록/해제할 수 있습니다.
+          빈 슬롯을 클릭하면 등록할 프로젝트를 고를 수 있습니다. 등록된 항목 위에 마우스를 올리면 <span className="text-red-500 font-bold">×</span> 버튼으로 해제할 수 있습니다.
         </p>
       </div>
+
+      {showPicker && (
+        <HeroPickerModal
+          dbProjects={dbProjects}
+          featuredCount={featuredCount}
+          onClose={() => setShowPicker(false)}
+          onPick={async (id) => {
+            await toggleHeroFeatured(id, true);
+          }}
+        />
+      )}
 
       {visible.length === 0 ? (
         <p className="text-center text-sm text-neutral-500 py-16">조건에 맞는 이벤트가 없습니다.</p>
@@ -982,6 +996,116 @@ function AddProjectModal({
           </button>
         </footer>
       </form>
+    </div>
+  );
+}
+
+function HeroPickerModal({
+  dbProjects,
+  featuredCount,
+  onClose,
+  onPick,
+}: {
+  dbProjects: DbProject[];
+  featuredCount: number;
+  onClose: () => void;
+  onPick: (id: string) => Promise<void>;
+}) {
+  const candidates = dbProjects.filter((p) => !p.hero_featured);
+  const slotsLeft = Math.max(0, 6 - featuredCount);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm overflow-y-auto"
+      onClick={onClose}
+    >
+      <div
+        className="min-h-full flex items-start justify-center p-4 sm:p-8"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="bg-white rounded-2xl w-full max-w-3xl shadow-2xl my-auto">
+          <header className="flex items-center justify-between px-5 py-4 border-b border-neutral-200">
+            <div>
+              <p className="text-[10px] tracking-[0.4em] text-amber-700 font-bold">★ HERO 노출 등록</p>
+              <h3 className="font-display font-bold text-lg mt-0.5">프로젝트 선택</h3>
+            </div>
+            <button
+              onClick={onClose}
+              className="w-8 h-8 grid place-items-center rounded-full hover:bg-neutral-100 text-neutral-500"
+              aria-label="닫기"
+            >
+              ×
+            </button>
+          </header>
+
+          <div className="px-5 py-3 bg-amber-50 border-b border-amber-100">
+            <p className="text-xs text-amber-800">
+              남은 슬롯 <span className="font-bold">{slotsLeft}</span>개 · 등록된 프로젝트 <span className="font-bold">{candidates.length}</span>개 중 선택
+            </p>
+          </div>
+
+          {candidates.length === 0 ? (
+            <div className="p-10 text-center text-sm text-neutral-500">
+              {dbProjects.length === 0 ? (
+                <>
+                  아직 등록된 프로젝트가 없습니다.
+                  <br />
+                  먼저 우측 상단 <span className="font-bold text-neutral-700">+ 새 프로젝트</span> 버튼으로 사진을 업로드해주세요.
+                </>
+              ) : (
+                <>
+                  모든 프로젝트가 이미 Hero에 노출 중입니다.
+                </>
+              )}
+            </div>
+          ) : (
+            <div className="p-5 grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-[60vh] overflow-y-auto">
+              {candidates.map((p) => (
+                <button
+                  key={p.id}
+                  onClick={async () => {
+                    await onPick(p.id);
+                    if (slotsLeft <= 1) onClose();
+                  }}
+                  disabled={slotsLeft === 0}
+                  className="group relative aspect-[4/3] rounded-lg overflow-hidden border-2 border-neutral-200 hover:border-amber-400 disabled:opacity-50 disabled:cursor-not-allowed transition"
+                >
+                  {p.cover ? (
+                    <img
+                      src={p.cover}
+                      alt={p.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-neutral-100" />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                  <div className="absolute inset-0 grid place-items-center bg-amber-500/0 group-hover:bg-amber-500/30 transition">
+                    <span className="opacity-0 group-hover:opacity-100 transition px-3 py-1.5 rounded-full bg-amber-400 text-amber-950 text-xs font-bold shadow-lg">
+                      ★ 등록
+                    </span>
+                  </div>
+                  <div className="absolute bottom-2 left-2 right-2 text-white text-left">
+                    <p className="text-[9px] tracking-[0.2em] opacity-75 uppercase">{p.category}</p>
+                    <p className="text-xs font-bold leading-tight line-clamp-2 mt-0.5 drop-shadow">
+                      {p.title}
+                    </p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
+
+          <footer className="px-5 py-3 border-t border-neutral-200 flex justify-end">
+            <button
+              onClick={onClose}
+              className="h-9 px-4 rounded-md border border-neutral-300 hover:bg-neutral-50 text-sm font-semibold"
+            >
+              닫기
+            </button>
+          </footer>
+        </div>
+      </div>
     </div>
   );
 }
