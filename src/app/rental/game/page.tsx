@@ -127,7 +127,6 @@ export default function RentalGamePage() {
         title={<>눈에 띄는 키오스크,<br />강력한 브랜딩 효과</>}
         highlight="랩핑디자인"
         description={"제품 외관에 브랜드 컬러와 메시지를 입혀\n현장에서도 강력한 브랜딩 효과를 누릴 수 있습니다."}
-        ctas={[{ label: "랩핑디자인 바로가기", href: "/inquiry/rental" }]}
         visual={<PhotoVisual src="/products/game/wrapping.jpg" alt="게임키오스크 랩핑디자인" />}
       />
 
@@ -139,7 +138,6 @@ export default function RentalGamePage() {
         title={<>기획 단계부터 함께<br />완벽한 솔루션</>}
         highlight="커스터 마이즈"
         description={"협력사의 필요를 파악하고 세심하게 분석하여\n전문적인 솔루션을 제공해 드립니다."}
-        ctas={[{ label: "커스텀 UI 바로가기", href: "/inquiry/rental" }]}
         visual={<PhotoVisual src="/products/game/customize.jpg" alt="게임키오스크 커스터마이즈" />}
       />
 
@@ -149,7 +147,6 @@ export default function RentalGamePage() {
         title={<>누구나 손쉽게</>}
         highlight="간편한 인터페이스"
         description={"단계별 흐름이 쉬운 설계로\n사용자 교육 없이도 바로 사용할 수 있어\n현장 운영자의 부담을 줄여드립니다."}
-        ctas={[{ label: "프로세서 바로보기", href: "/inquiry/rental" }]}
         visual={<PhotoVisual src="/products/game/interface.jpg" alt="게임키오스크 간편한 인터페이스" />}
       />
 
