@@ -15,7 +15,7 @@ const MODELS = [
     code: "DID",
     name: "게임 키오스크",
     badge: "렌탈가능 모델",
-    image: "/products/game/customize.jpg",
+    image: "/products/game/kiosk.jpg",
     specs: [
       { label: "모니터", value: "43인치 터치모니터" },
       { label: "소비전력", value: "350W" },
