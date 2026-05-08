@@ -6,20 +6,125 @@ type Project = { id: string; category: string; cover: string };
 
 const ALL = projectsData as Project[];
 
-const CATEGORIES = [
-  { name: "기업 행사", icon: "🏢" },
-  { name: "관공서", icon: "🏛️" },
-  { name: "학교", icon: "🎓" },
-  { name: "페스티벌", icon: "🎪" },
-  { name: "학회·컨퍼런스", icon: "🎤" },
-  { name: "스포츠", icon: "🏆" },
-  { name: "팝업스토어", icon: "🛍️" },
-  { name: "엔터·미디어", icon: "🎬" },
-  { name: "교회", icon: "⛪" },
-  { name: "웨딩", icon: "💍" },
-];
-
 const MARQUEE_COVERS = ALL.filter((p) => p.cover).slice(0, 24).map((p) => p.cover);
+
+const SVG_BASE = {
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 1.5,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+};
+
+const ICON_CLS = "w-9 h-9 md:w-10 md:h-10";
+
+function IconBuilding() {
+  return (
+    <svg className={ICON_CLS} {...SVG_BASE}>
+      <rect x="4" y="3" width="16" height="18" rx="1" />
+      <path d="M9 8h.01M12 8h.01M15 8h.01M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01" />
+      <path d="M10 21v-3h4v3" />
+    </svg>
+  );
+}
+function IconGov() {
+  return (
+    <svg className={ICON_CLS} {...SVG_BASE}>
+      <path d="M3 21h18" />
+      <path d="M5 21V11M9 21V11M12 21V11M15 21V11M19 21V11" />
+      <path d="M3 11h18" />
+      <path d="M12 3 3 9h18z" />
+    </svg>
+  );
+}
+function IconCap() {
+  return (
+    <svg className={ICON_CLS} {...SVG_BASE}>
+      <path d="M2 10l10-5 10 5-10 5z" />
+      <path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" />
+      <path d="M22 10v5" />
+    </svg>
+  );
+}
+function IconTent() {
+  return (
+    <svg className={ICON_CLS} {...SVG_BASE}>
+      <path d="M12 4 3 20h18z" />
+      <path d="M12 4v16" />
+      <path d="M9 20l3-6 3 6" />
+    </svg>
+  );
+}
+function IconMic() {
+  return (
+    <svg className={ICON_CLS} {...SVG_BASE}>
+      <rect x="9" y="3" width="6" height="11" rx="3" />
+      <path d="M5 11a7 7 0 0 0 14 0" />
+      <path d="M12 18v3" />
+      <path d="M9 21h6" />
+    </svg>
+  );
+}
+function IconTrophy() {
+  return (
+    <svg className={ICON_CLS} {...SVG_BASE}>
+      <path d="M8 3h8v5a4 4 0 0 1-8 0z" />
+      <path d="M8 5H4v2a3 3 0 0 0 3 3" />
+      <path d="M16 5h4v2a3 3 0 0 1-3 3" />
+      <path d="M10 14h4v3h-4z" />
+      <path d="M8 21h8" />
+      <path d="M12 17v4" />
+    </svg>
+  );
+}
+function IconBag() {
+  return (
+    <svg className={ICON_CLS} {...SVG_BASE}>
+      <path d="M5 8h14l-1 12H6z" />
+      <path d="M9 8V6a3 3 0 0 1 6 0v2" />
+    </svg>
+  );
+}
+function IconFilm() {
+  return (
+    <svg className={ICON_CLS} {...SVG_BASE}>
+      <rect x="3" y="4" width="18" height="16" rx="1.5" />
+      <path d="M7 4v16M17 4v16M3 8h4M3 12h4M3 16h4M17 8h4M17 12h4M17 16h4" />
+    </svg>
+  );
+}
+function IconChurch() {
+  return (
+    <svg className={ICON_CLS} {...SVG_BASE}>
+      <path d="M12 2v6" />
+      <path d="M9 5h6" />
+      <path d="M5 21V11l7-4 7 4v10" />
+      <path d="M10 21v-5h4v5" />
+    </svg>
+  );
+}
+function IconRing() {
+  return (
+    <svg className={ICON_CLS} {...SVG_BASE}>
+      <circle cx="12" cy="15" r="6" />
+      <path d="M9 5l3-2 3 2-1 4h-4z" />
+    </svg>
+  );
+}
+
+const CATEGORIES: { name: string; Icon: () => React.ReactElement }[] = [
+  { name: "기업 행사", Icon: IconBuilding },
+  { name: "관공서", Icon: IconGov },
+  { name: "학교", Icon: IconCap },
+  { name: "페스티벌", Icon: IconTent },
+  { name: "학회·컨퍼런스", Icon: IconMic },
+  { name: "스포츠", Icon: IconTrophy },
+  { name: "팝업스토어", Icon: IconBag },
+  { name: "엔터·미디어", Icon: IconFilm },
+  { name: "교회", Icon: IconChurch },
+  { name: "웨딩", Icon: IconRing },
+];
 
 export default function WhereUsed() {
   return (
@@ -50,16 +155,16 @@ export default function WhereUsed() {
         </div>
 
         <div className="mt-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
-          {CATEGORIES.map((c) => (
+          {CATEGORIES.map(({ name, Icon }) => (
             <div
-              key={c.name}
+              key={name}
               className="group relative rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 hover:border-amber-400/50 transition px-4 py-6 md:py-8 text-center"
             >
-              <div className="text-4xl md:text-5xl mb-3" aria-hidden>
-                {c.icon}
+              <div className="text-amber-400 grid place-items-center mb-3">
+                <Icon />
               </div>
               <p className="font-display font-black text-base md:text-xl text-white leading-tight">
-                {c.name}
+                {name}
               </p>
               <div className="mt-2 h-0.5 w-8 mx-auto bg-amber-400/0 group-hover:bg-amber-400 transition" />
             </div>
