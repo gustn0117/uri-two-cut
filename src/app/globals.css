@@ -66,6 +66,19 @@ a { color: inherit; text-decoration: none; }
   .hero-marquee { animation: none; }
 }
 
+/* Generic horizontal marquee for inline use */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-marquee-x {
+  animation: marquee-x 50s linear infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-x { animation: none; }
+}
+
 /* --------------------------------------------------------------------- */
 /* Defensive contrast guard rails (placed in @layer base so Tailwind      */
 /* utilities in @layer utilities still win when explicitly applied)      */
