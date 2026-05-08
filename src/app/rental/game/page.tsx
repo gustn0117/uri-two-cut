@@ -89,7 +89,7 @@ export default function RentalGamePage() {
       </section>
 
       <div id="pricing" className="scroll-mt-24" />
-      <ProductSpecs models={MODELS} wrappable />
+      <ProductSpecs models={MODELS} wrappable imageAspect="3/4" />
 
       {/* PRICING */}
       <PricingTable

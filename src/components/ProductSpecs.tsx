@@ -13,11 +13,13 @@ export default function ProductSpecs({
   models,
   showPricing = false,
   wrappable = false,
+  imageAspect = "4/3",
 }: {
   title?: string;
   models: Model[];
   showPricing?: boolean;
   wrappable?: boolean;
+  imageAspect?: "4/3" | "3/4" | "1/1";
 }) {
   return (
     <section className="py-24 lg:py-32 bg-white">
@@ -33,7 +35,13 @@ export default function ProductSpecs({
               key={m.code}
               className="bg-[#fafafa] rounded-3xl p-8 border border-neutral-100"
             >
-              <div className="relative aspect-[4/3] bg-white rounded-2xl mb-6 grid place-items-center overflow-hidden">
+              <div
+                className="relative bg-white rounded-2xl mb-6 grid place-items-center overflow-hidden"
+                style={{
+                  aspectRatio:
+                    imageAspect === "3/4" ? "3 / 4" : imageAspect === "1/1" ? "1 / 1" : "4 / 3",
+                }}
+              >
                 {m.image ? (
                   <img
                     src={m.image}
