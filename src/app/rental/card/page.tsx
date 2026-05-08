@@ -93,10 +93,10 @@ export default function RentalCardPage() {
         title={<>브랜드 아이덴티티를 담은</>}
         highlight="카드디자인"
         description={"기업/기관/팬덤 굿즈에 어울리는 카드 디자인을\n현장 콘셉트에 맞춰 풀커스텀으로 제작합니다."}
-        ctas={[{ label: "카드디자인 갤러리", gallery: FRAMES_GALLERY, galleryTitle: "카드 디자인" }]}
+        ctas={[{ label: "카드디자인 자세히 보기", gallery: ["/products/card-design-detail.jpg"], galleryTitle: "카드 디자인" }]}
         visual={
           <div className="rounded-2xl overflow-hidden bg-white shadow-lg max-w-[480px] mx-auto">
-            <img src="/products/frames.jpg" alt="카드 디자인 샘플" className="w-full h-auto" />
+            <img src="/products/card-design-thumb.jpg" alt="카드 디자인 샘플" className="w-full h-auto" />
           </div>
         }
       />

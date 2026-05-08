@@ -13,19 +13,24 @@ export default function GalleryButton({
   galleryTitle?: string;
   primary?: boolean;
 }) {
+  const single = images.length === 1;
   const [open, setOpen] = useState(false);
-  const [activeIdx, setActiveIdx] = useState<number | null>(null);
+  const [activeIdx, setActiveIdx] = useState<number | null>(single ? 0 : null);
 
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
+      if (single) {
+        setOpen(false);
+        return;
+      }
       if (activeIdx !== null) setActiveIdx(null);
       else setOpen(false);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [open, activeIdx]);
+  }, [open, activeIdx, single]);
 
   // Lock body scroll when modal open
   useEffect(() => {
@@ -73,67 +78,73 @@ export default function GalleryButton({
             </svg>
           </button>
 
-          <div
-            className="mx-auto max-w-[1200px] p-6 lg:p-10"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {galleryTitle && (
-              <div className="text-white mb-8 text-center">
-                <p className="text-xs tracking-[0.4em] opacity-70">DESIGN GALLERY</p>
-                <h3 className="font-display font-bold text-2xl md:text-3xl mt-2">{galleryTitle}</h3>
-                <p className="text-sm opacity-60 mt-1">총 {images.length}개 디자인 · 클릭하면 크게 볼 수 있습니다</p>
-              </div>
-            )}
+          {!single && (
+            <div
+              className="mx-auto max-w-[1200px] p-6 lg:p-10"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {galleryTitle && (
+                <div className="text-white mb-8 text-center">
+                  <p className="text-xs tracking-[0.4em] opacity-70">DESIGN GALLERY</p>
+                  <h3 className="font-display font-bold text-2xl md:text-3xl mt-2">{galleryTitle}</h3>
+                  <p className="text-sm opacity-60 mt-1">총 {images.length}개 디자인 · 클릭하면 크게 볼 수 있습니다</p>
+                </div>
+              )}
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-              {images.map((src, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveIdx(i)}
-                  className="aspect-square rounded-md overflow-hidden bg-neutral-900 hover:ring-2 hover:ring-white/40 transition group relative"
-                >
-                  <img
-                    src={src}
-                    alt={`${galleryTitle ?? "디자인"} ${i + 1}`}
-                    loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </button>
-              ))}
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+                {images.map((src, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveIdx(i)}
+                    className="aspect-square rounded-md overflow-hidden bg-neutral-900 hover:ring-2 hover:ring-white/40 transition group relative"
+                  >
+                    <img
+                      src={src}
+                      alt={`${galleryTitle ?? "디자인"} ${i + 1}`}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {activeIdx !== null && (
             <div
               className="fixed inset-0 z-50 bg-black/95 grid place-items-center p-6"
-              onClick={() => setActiveIdx(null)}
+              onClick={() => (single ? setOpen(false) : setActiveIdx(null))}
               role="dialog"
               aria-modal="true"
             >
-              <button
-                aria-label="이전"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveIdx((i) => (i! - 1 + images.length) % images.length);
-                }}
-                className="fixed left-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 grid place-items-center rounded-full bg-white/10 hover:bg-white/20 text-white"
-              >
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M15 6l-6 6 6 6" />
-                </svg>
-              </button>
-              <button
-                aria-label="다음"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveIdx((i) => (i! + 1) % images.length);
-                }}
-                className="fixed right-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 grid place-items-center rounded-full bg-white/10 hover:bg-white/20 text-white"
-              >
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 6l6 6-6 6" />
-                </svg>
-              </button>
+              {!single && (
+                <>
+                  <button
+                    aria-label="이전"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveIdx((i) => (i! - 1 + images.length) % images.length);
+                    }}
+                    className="fixed left-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 grid place-items-center rounded-full bg-white/10 hover:bg-white/20 text-white"
+                  >
+                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M15 6l-6 6 6 6" />
+                    </svg>
+                  </button>
+                  <button
+                    aria-label="다음"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveIdx((i) => (i! + 1) % images.length);
+                    }}
+                    className="fixed right-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 grid place-items-center rounded-full bg-white/10 hover:bg-white/20 text-white"
+                  >
+                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M9 6l6 6-6 6" />
+                    </svg>
+                  </button>
+                </>
+              )}
               <img
                 src={images[activeIdx]}
                 alt=""
@@ -141,7 +152,7 @@ export default function GalleryButton({
                 onClick={(e) => e.stopPropagation()}
               />
               <p className="fixed bottom-6 left-1/2 -translate-x-1/2 text-xs text-white/60">
-                {activeIdx + 1} / {images.length} · Esc 또는 배경 클릭으로 닫기
+                {single ? "Esc 또는 배경 클릭으로 닫기" : `${activeIdx + 1} / ${images.length} · Esc 또는 배경 클릭으로 닫기`}
               </p>
             </div>
           )}
