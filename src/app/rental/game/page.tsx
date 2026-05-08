@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import ProductSpecs from "@/components/ProductSpecs";
 import ProcessSteps from "@/components/ProcessSteps";
-import ImageTextRow, { TabletVisual, PaletteVisual } from "@/components/ImageTextRow";
+import ImageTextRow from "@/components/ImageTextRow";
+import PricingTable from "@/components/PricingTable";
 import CtaBar from "@/components/CtaBar";
 
 export const metadata: Metadata = {
@@ -14,6 +15,7 @@ const MODELS = [
     code: "DID",
     name: "게임 키오스크",
     badge: "렌탈가능 모델",
+    image: "/products/game/customize.jpg",
     specs: [
       { label: "모니터", value: "43인치 터치모니터" },
       { label: "소비전력", value: "350W" },
@@ -24,6 +26,35 @@ const MODELS = [
     ],
   },
 ];
+
+const PRICING_MODELS = [{ name: "게임 키오스크", code: "DID 43\"" }];
+
+const PRICING_ROWS = [
+  { label: "1일", values: ["1,000,000"] },
+  { label: "2일", values: ["1,200,000"] },
+  { label: "3일", values: ["1,400,000"] },
+  { label: "4일", values: ["1,600,000"] },
+  { label: "5일", values: ["1,800,000"] },
+  { label: "6일~1개월", values: ["2,000,000"] },
+  {
+    label: "랩핑",
+    values: ["300,000"],
+    sub: "랩핑 없을 시 기본 화이트 색상",
+  },
+  {
+    label: "포토부스 동반 렌탈",
+    values: ["게임키오스크 총액의 30% 할인"],
+    muted: true,
+  },
+];
+
+function PhotoVisual({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="relative mx-auto rounded-3xl overflow-hidden shadow-2xl max-w-[480px] bg-white">
+      <img src={src} alt={alt} className="w-full h-auto block" />
+    </div>
+  );
+}
 
 export default function RentalGamePage() {
   return (
@@ -57,7 +88,18 @@ export default function RentalGamePage() {
         </div>
       </section>
 
+      <div id="pricing" className="scroll-mt-24" />
       <ProductSpecs models={MODELS} wrappable />
+
+      {/* PRICING */}
+      <PricingTable
+        title="게임키오스크 렌탈비용"
+        models={PRICING_MODELS}
+        rows={PRICING_ROWS}
+        footnote="* 모든금액 vat별도 / 타업체 대비 착한 가격"
+      />
+      <div className="h-12 bg-white" />
+
       <ProcessSteps variant="rental" />
 
       {/* OUR CREATOR */}
@@ -86,7 +128,7 @@ export default function RentalGamePage() {
         highlight="랩핑디자인"
         description={"제품 외관에 브랜드 컬러와 메시지를 입혀\n현장에서도 강력한 브랜딩 효과를 누릴 수 있습니다."}
         ctas={[{ label: "랩핑디자인 바로가기", href: "/inquiry/rental" }]}
-        visual={<PaletteVisual colors={["#0a0a0a", "#fde047", "#f97316", "#0ea5e9"]} />}
+        visual={<PhotoVisual src="/products/game/wrapping.jpg" alt="게임키오스크 랩핑디자인" />}
       />
 
       {/* CUSTOMIZATION */}
@@ -98,15 +140,7 @@ export default function RentalGamePage() {
         highlight="커스터 마이즈"
         description={"협력사의 필요를 파악하고 세심하게 분석하여\n전문적인 솔루션을 제공해 드립니다."}
         ctas={[{ label: "커스텀 UI 바로가기", href: "/inquiry/rental" }]}
-        visual={
-          <TabletVisual bg="#0a0a0a">
-            <div className="p-8 text-center w-full">
-              <div className="font-display font-black text-2xl text-[#0a0a0a]">SPIN!</div>
-              <div className="mt-4 mx-auto w-40 h-40 rounded-full" style={{ background: "conic-gradient(#fde047 0 25%, #fda4af 25% 50%, #737373 50% 75%, #404040 75% 100%)" }} />
-              <p className="mt-4 text-xs text-neutral-500">룰렛 미니게임</p>
-            </div>
-          </TabletVisual>
-        }
+        visual={<PhotoVisual src="/products/game/customize.jpg" alt="게임키오스크 커스터마이즈" />}
       />
 
       {/* USER INTERFACE */}
@@ -116,23 +150,7 @@ export default function RentalGamePage() {
         highlight="간편한 인터페이스"
         description={"단계별 흐름이 쉬운 설계로\n사용자 교육 없이도 바로 사용할 수 있어\n현장 운영자의 부담을 줄여드립니다."}
         ctas={[{ label: "프로세서 바로보기", href: "/inquiry/rental" }]}
-        visual={
-          <TabletVisual bg="#3f3f46">
-            <div className="text-center p-8 w-full">
-              <div className="font-display font-bold text-lg text-neutral-700">우리투컷 GAME</div>
-              <div className="mt-6 grid grid-cols-2 gap-3">
-                {["룰렛", "뽑기", "퀴즈", "AR"].map((g) => (
-                  <button
-                    key={g}
-                    className="py-6 rounded-2xl bg-gradient-to-br from-[#0a0a0a] to-[#737373] text-white font-bold"
-                  >
-                    {g}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </TabletVisual>
-        }
+        visual={<PhotoVisual src="/products/game/interface.jpg" alt="게임키오스크 간편한 인터페이스" />}
       />
 
       <CtaBar
