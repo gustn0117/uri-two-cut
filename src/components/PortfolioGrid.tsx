@@ -18,6 +18,20 @@ export default function PortfolioGrid({ projects }: { projects: Project[] }) {
   const [page, setPage] = useState(1);
   const [openId, setOpenId] = useState<string | null>(null);
 
+  // Read ?category= from URL on mount and apply as initial filter
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const param = new URLSearchParams(window.location.search).get("category");
+    if (!param) return;
+    const decoded = decodeURIComponent(param);
+    const exists = projects.some((p) => p.category === decoded);
+    if (exists) {
+      setActive(decoded);
+      const el = document.getElementById("portfolio-filter");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [projects]);
+
   const categories = useMemo(() => {
     const set = new Set<string>();
     projects.forEach((p) => set.add(p.category));
@@ -53,7 +67,7 @@ export default function PortfolioGrid({ projects }: { projects: Project[] }) {
 
   return (
     <>
-      <section className="py-12 lg:py-16 bg-white border-b border-neutral-100">
+      <section id="portfolio-filter" className="py-12 lg:py-16 bg-white border-b border-neutral-100 scroll-mt-20">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10 flex flex-wrap justify-center gap-2">
           {categories.map((c) => (
             <button

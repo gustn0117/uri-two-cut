@@ -113,17 +113,17 @@ function IconRing() {
   );
 }
 
-const CATEGORIES: { name: string; Icon: () => React.ReactElement }[] = [
-  { name: "기업 행사", Icon: IconBuilding },
-  { name: "관공서", Icon: IconGov },
-  { name: "학교", Icon: IconCap },
-  { name: "페스티벌", Icon: IconTent },
-  { name: "학회·컨퍼런스", Icon: IconMic },
-  { name: "스포츠", Icon: IconTrophy },
-  { name: "팝업스토어", Icon: IconBag },
-  { name: "엔터·미디어", Icon: IconFilm },
-  { name: "교회", Icon: IconChurch },
-  { name: "웨딩", Icon: IconRing },
+const CATEGORIES: { name: string; filter: string; Icon: () => React.ReactElement }[] = [
+  { name: "기업 행사", filter: "기업·관공서", Icon: IconBuilding },
+  { name: "관공서", filter: "기업·관공서", Icon: IconGov },
+  { name: "학교", filter: "교육·학교", Icon: IconCap },
+  { name: "페스티벌", filter: "페스티벌·축제", Icon: IconTent },
+  { name: "학회·컨퍼런스", filter: "학회·컨퍼런스", Icon: IconMic },
+  { name: "스포츠", filter: "스포츠", Icon: IconTrophy },
+  { name: "팝업스토어", filter: "팝업·브랜드", Icon: IconBag },
+  { name: "엔터·미디어", filter: "엔터·미디어", Icon: IconFilm },
+  { name: "교회", filter: "교회", Icon: IconChurch },
+  { name: "웨딩", filter: "웨딩", Icon: IconRing },
 ];
 
 export default function WhereUsed() {
@@ -155,10 +155,11 @@ export default function WhereUsed() {
         </div>
 
         <div className="mt-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
-          {CATEGORIES.map(({ name, Icon }) => (
-            <div
+          {CATEGORIES.map(({ name, filter, Icon }) => (
+            <a
               key={name}
-              className="group relative rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 hover:border-amber-400/50 transition px-4 py-6 md:py-8 text-center"
+              href={`/portfolio?category=${encodeURIComponent(filter)}`}
+              className="group relative rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 hover:border-amber-400/50 transition px-4 py-6 md:py-8 text-center cursor-pointer"
             >
               <div className="text-amber-400 grid place-items-center mb-3">
                 <Icon />
@@ -167,7 +168,7 @@ export default function WhereUsed() {
                 {name}
               </p>
               <div className="mt-2 h-0.5 w-8 mx-auto bg-amber-400/0 group-hover:bg-amber-400 transition" />
-            </div>
+            </a>
           ))}
         </div>
 
