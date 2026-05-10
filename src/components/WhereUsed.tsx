@@ -143,7 +143,7 @@ export default function WhereUsed() {
             TRUSTED EVERYWHERE
           </p>
           <h2 className="mt-5 font-display font-black text-4xl md:text-6xl lg:text-7xl leading-[1.05]">
-            <span className="text-amber-400">웨딩</span>이든 <span className="text-amber-400">기업행사</span>든
+            <span className="text-amber-400">축제·이벤트</span>든 <span className="text-amber-400">기업행사</span>든
             <br />
             <span className="text-white">어디든 다 됩니다.</span>
           </h2>
