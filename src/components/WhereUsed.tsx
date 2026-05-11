@@ -17,7 +17,7 @@ const SVG_BASE = {
   strokeLinejoin: "round" as const,
 };
 
-const ICON_CLS = "w-9 h-9 md:w-10 md:h-10";
+const ICON_CLS = "w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10";
 
 function IconBuilding() {
   return (
@@ -139,32 +139,32 @@ export default function WhereUsed() {
 
       <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="text-center max-w-4xl mx-auto">
-          <p className="font-display tracking-[0.4em] text-xs text-amber-400 font-bold">
+          <p className="font-display tracking-[0.3em] sm:tracking-[0.4em] text-[10px] sm:text-xs text-amber-400 font-bold">
             TRUSTED EVERYWHERE
           </p>
-          <h2 className="mt-5 font-display font-black text-4xl md:text-6xl lg:text-7xl leading-[1.05]">
+          <h2 className="mt-5 font-display font-black text-3xl sm:text-4xl md:text-6xl lg:text-7xl leading-[1.1]">
             <span className="text-amber-400">축제·이벤트</span>든 <span className="text-amber-400">기업행사</span>든
             <br />
             <span className="text-white">어디든 다 됩니다.</span>
           </h2>
-          <p className="mt-7 text-lg md:text-2xl text-white/80 leading-relaxed font-medium">
+          <p className="mt-6 sm:mt-7 text-base sm:text-lg md:text-2xl text-white/80 leading-relaxed font-medium">
             우리투컷 포토부스는 행사 종류와 규모를 가리지 않습니다.
             <br className="hidden md:block" />
             <span className="text-white font-bold">10가지 분야 200+ 현장</span>에서 이미 검증되었습니다.
           </p>
         </div>
 
-        <div className="mt-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
+        <div className="mt-12 sm:mt-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3 md:gap-4">
           {CATEGORIES.map(({ name, filter, Icon }) => (
             <a
               key={name}
               href={`/portfolio?category=${encodeURIComponent(filter)}`}
-              className="group relative rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 hover:border-amber-400/50 transition px-4 py-6 md:py-8 text-center cursor-pointer"
+              className="group relative rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 hover:border-amber-400/50 transition px-2.5 py-5 sm:px-4 sm:py-6 md:py-8 text-center cursor-pointer min-w-0"
             >
-              <div className="text-amber-400 grid place-items-center mb-3">
+              <div className="text-amber-400 grid place-items-center mb-2.5 sm:mb-3">
                 <Icon />
               </div>
-              <p className="font-display font-black text-base md:text-xl text-white leading-tight">
+              <p className="font-display font-black text-sm sm:text-base md:text-xl text-white leading-tight break-keep">
                 {name}
               </p>
               <div className="mt-2 h-0.5 w-8 mx-auto bg-amber-400/0 group-hover:bg-amber-400 transition" />

@@ -34,11 +34,11 @@ export default function InquiryCTA() {
               <p className="font-display font-bold text-2xl mt-2">010-5819-0028</p>
             </a>
             <a
-              href="mailto:contact@example.com"
+              href="mailto:abckingka@naver.com"
               className="rounded-2xl border border-white/30 backdrop-blur px-6 py-5 hover:bg-white/10 transition"
             >
               <p className="text-xs tracking-widest opacity-80">이메일</p>
-              <p className="font-bold text-base mt-2 break-all">contact@example.com</p>
+              <p className="font-bold text-base mt-2 break-all">abckingka@naver.com</p>
             </a>
           </div>
         </div>

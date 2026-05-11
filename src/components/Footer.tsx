@@ -48,7 +48,7 @@ export default function Footer() {
             <p className="font-display font-bold text-2xl text-[#ffffff] mt-1">010-4244-2534</p>
             <p className="opacity-70 mt-3">(주)지에이치컴퍼니</p>
             <p className="opacity-70">경북 포항시 북구 천마로20</p>
-            <p className="opacity-70 mt-2">contact@example.com</p>
+            <p className="opacity-70 mt-2">abckingka@naver.com</p>
             <p className="opacity-50 text-xs mt-4 leading-relaxed">
               평일 10:00 ~ 18:00 / 점심 12:30 ~ 13:30
               <br />주말 및 공휴일 휴무

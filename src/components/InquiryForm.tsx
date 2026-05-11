@@ -55,7 +55,7 @@ export default function InquiryForm({ title, fields, inquiryType }: Props) {
           </div>
         ) : (
           <form
-            className="mt-14 grid gap-7"
+            className="mt-10 sm:mt-14 grid gap-4 sm:gap-7"
             onSubmit={async (e) => {
               e.preventDefault();
               if (!agreed) {
@@ -109,9 +109,9 @@ export default function InquiryForm({ title, fields, inquiryType }: Props) {
             {fields.map((f) => (
               <div
                 key={f.name}
-                className="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-2 md:gap-6 items-start border-b border-neutral-200 pb-7"
+                className="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-1.5 md:gap-6 items-start border-b border-neutral-200 pb-4 sm:pb-7"
               >
-                <label className="font-bold text-neutral-900 pt-2.5">
+                <label className="font-bold text-neutral-900 md:pt-2.5">
                   {f.label}
                   {f.required && <span className="text-[#0a0a0a] ml-1">*</span>}
                 </label>
@@ -125,29 +125,32 @@ export default function InquiryForm({ title, fields, inquiryType }: Props) {
                       className="w-full p-4 rounded-md border border-neutral-200 focus:border-[#0a0a0a] outline-none transition resize-none"
                     />
                   ) : f.type === "phone3" ? (
-                    <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr] gap-2 items-center">
+                    <div className="flex items-center gap-1.5 max-w-[320px]">
                       <input
                         name={`${f.name}1`}
                         required={f.required}
                         maxLength={3}
                         type="tel"
-                        className="h-11 px-3 rounded-md border border-neutral-200 focus:border-[#0a0a0a] outline-none text-center"
+                        inputMode="numeric"
+                        className="h-11 px-2 w-full min-w-0 rounded-md border border-neutral-200 focus:border-[#0a0a0a] outline-none text-center"
                       />
-                      <span>-</span>
+                      <span className="text-neutral-400 shrink-0">-</span>
                       <input
                         name={`${f.name}2`}
                         required={f.required}
                         maxLength={4}
                         type="tel"
-                        className="h-11 px-3 rounded-md border border-neutral-200 focus:border-[#0a0a0a] outline-none text-center"
+                        inputMode="numeric"
+                        className="h-11 px-2 w-full min-w-0 rounded-md border border-neutral-200 focus:border-[#0a0a0a] outline-none text-center"
                       />
-                      <span>-</span>
+                      <span className="text-neutral-400 shrink-0">-</span>
                       <input
                         name={`${f.name}3`}
                         required={f.required}
                         maxLength={4}
                         type="tel"
-                        className="h-11 px-3 rounded-md border border-neutral-200 focus:border-[#0a0a0a] outline-none text-center"
+                        inputMode="numeric"
+                        className="h-11 px-2 w-full min-w-0 rounded-md border border-neutral-200 focus:border-[#0a0a0a] outline-none text-center"
                       />
                     </div>
                   ) : f.type === "radio" ? (
